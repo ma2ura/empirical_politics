@@ -1,0 +1,59 @@
+# 回帰分析による統計的推定
+
+```{r}
+#| echo: FALSE
+library(tidyverse)
+library(ggthemes)
+mystyle <- list (#  ggplotのテーマ
+  theme_few(), # ggthemesパッケージ
+  theme(
+    text = element_text(
+      size=10,  #  フォントサイズ
+      family = "HiraKakuProN-W3" # ヒラギノフォント
+    )
+  )
+)
+set.seed(123)
+```
+
+## 単回帰による統計的推定
+
+### 単回帰モデル
+
+前章では，1つの説明変数$x$で応答変数$y$を回帰するモデルを単回帰モデルと呼びました。
+
+$$
+y_i = \beta _0 + \beta_1 x_i
+$$
+
+現実のデータで，1つの説明変数が応答変数を完全に説明できる(つまりモデル上にすべてのデータが載っている)ことはほとんどありません。単回帰モデルに誤差項$\epsilon_i$を加えたモデルを考えます。
+
+$$
+y_i = \beta _0 + \beta_ 1 x_i + \varepsilon_i
+$$
+
+このモデルを単回帰モデルと呼ぶこともありますが，本書では単回帰モデルとは$\varepsilon_i$が正規分布に従うと仮定したモデルを指します。
+
+図で書くと，次のようなモデルです。
+
+```{r}
+#| echo: FALSE
+
+x <- seq(-3, 3, length.out = 100)
+y <- 0.5 * x + rnorm(100, 0, 1)
+df <- data.frame(x, y)
+ggplot(df, aes(x, y)) + geom_point() + geom_smooth(method = "lm") + mystyle
+```
+
+ある$x_i$の値を所与としたときの誤差項の分布が正規分布にしたがう，ので，
+
+
+### 信頼区間と仮説検定
+
+## 重回帰分析による統計的推定
+
+### 重回帰モデル
+
+### 信頼区間と仮説検定
+
+
