@@ -1,0 +1,102 @@
+project:
+  type: book
+
+book:
+  title: "計量会計学ノート"
+  subtitle : "プレゼミ2023"
+  author: "Soichi Matsuura"
+  date: "6/7/2023"
+  reader-mode: true
+  language: "ja"
+  # lang: "ja"
+  sidebar:
+    alignment: left
+    style: "docked"
+    search: true
+    contents :
+      - section: "Basics"
+        contents:
+          - index.qmd
+      - section: "Layout"
+        contents:
+          - Empoli_Chap01.qmd
+    # collapse-level: 2
+  navbar:
+    search: true
+    background: "#a10000"
+#    logo: "img/rits_logo.pdf"
+    left:
+      - text: "はじめに"
+        file: index.qmd
+      - text: "1章 計量会計学とは？"
+        file: Empoli_Chap01.qmd
+      - text: "2章 研究テーマの選び方"
+        file: Empoli_Chap02.qmd
+      - text: "3章 理論と仮説"
+        file: Empoli_Chap03.qmd
+      - text: "4章 Rの使い方"
+        file: Empoli_Chap04.qmd
+      - text: "5章 Rによるデータ操作"
+        file: Empoli_Chap05.qmd
+      - text: "6章 記述統計と可視化"
+        file: Empoli_Chap06.qmd
+      - text: "7章 統計的推定"
+        file: Empoli_Chap07.qmd
+      - text: "8章 統計的仮説検定"
+        file: Empoli_Chap08.qmd
+      - text: "9章 変数間の関連性"
+        file: Empoli_Chap09.qmd
+      - text: "10章 回帰分析の基礎"
+        file: Empoli_Chap10.qmd
+      - text: "11章 回帰分析の統計的推定"
+        file: Empoli_Chap11.qmd
+      - text: "15章 ロジスティック回帰分析"
+        file: Empoli_Chap15.qmd
+    right:
+      - icon: house
+        href: https://so-ichi.com
+      - icon: github
+        href: https://github.com/
+        aria-label: GitHub
+      - icon: twitter
+        href: https://twitter.com/matsuura_rits
+        aria-label: Twitter
+  page-footer:
+    left: |
+      計量政治学のノート
+    right: |
+      本書は <a href="https://quarto.org/">Quarto</a> で作成されました。
+  cover-image: "img/empirical_politics.jpg"
+  favicon: favicon.ico
+  chapters:
+    - index.qmd
+    - Empoli_Chap01.qmd
+    - Empoli_Chap02.qmd
+    - Empoli_Chap03.qmd
+    - Empoli_Chap04.qmd
+    - Empoli_Chap05.qmd
+    - Empoli_Chap06.qmd
+    - Empoli_Chap07.qmd
+    - Empoli_Chap08.qmd
+    - Empoli_Chap09.qmd
+    - Empoli_Chap10.qmd
+    - Empoli_Chap11.qmd
+    - Empoli_Chap15.qmd
+format:
+  epub:
+    toc: true
+  html:
+    theme: cosmo
+    html-math-method: katex
+    grid:
+      sidebar-width: 200px
+      body-width: 1200px
+    #   margin-width: 70px
+  pdf:
+    documentclass: scrreprt
+
+execute:
+  message : false
+  warning: false
+  fig-width: 14
+  fig-height: 8
