@@ -27,8 +27,8 @@ mystyle <- list (#  ggplotのテーマ
   theme_few(),
   theme(
     text = element_text(
-      size=10  #  フォントサイズ
-#      family = "HiraKakuProN-W3" # ヒラギノフォント
+      size=10,  #  フォントサイズ
+     family = "HiraKakuProN-W3" # ヒラギノフォント
     )
   )
 )
@@ -406,8 +406,7 @@ df_year <- df_year %>%
 
 ```{r}
 ggplot(data = df_year, mapping = aes(x = 年度f, y = 平均ROE, group = 1)) +
-  geom_line() + geom_point() +
-  xlab("年度") + ylab("平均ROE")
+  geom_line() + geom_point() + xlab("年度") + ylab("平均ROE") + mystyle
 ```
 
 上のコードは，必要な引数を省略せずに書きましたが，省略できるものを省略しつつ，
