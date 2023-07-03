@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>計量会計学ノート - 5&nbsp; Rによるデータ操作</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Empoli_Chap06.html" rel="next">
+<link href="./Empoli_Chap04.html" rel="prev">
+<link href="./favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">計量会計学ノート</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">はじめに</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap01.html" rel="" target="">
+ <span class="menu-text">1章 計量会計学とは？</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap02.html" rel="" target="">
+ <span class="menu-text">2章 研究テーマの選び方</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap03.html" rel="" target="">
+ <span class="menu-text">3章 理論と仮説</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap04.html" rel="" target="">
+ <span class="menu-text">4章 Rの使い方</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap05.html" rel="" target="">
+ <span class="menu-text">5章 Rによるデータ操作</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap06.html" rel="" target="">
+ <span class="menu-text">6章 記述統計と可視化</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap07.html" rel="" target="">
+ <span class="menu-text">7章 統計的推定</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap08.html" rel="" target="">
+ <span class="menu-text">8章 統計的仮説検定</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap09.html" rel="" target="">
+ <span class="menu-text">9章 変数間の関連性</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap10.html" rel="" target="">
+ <span class="menu-text">10章 回帰分析の基礎</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap11.html" rel="" target="">
+ <span class="menu-text">11章 回帰分析の統計的推定</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap15.html" rel="" target="">
+ <span class="menu-text">15章 ロジスティック回帰分析</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://so-ichi.com" rel="" target=""><i class="bi bi-house" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/matsuura_rits" rel="" target=""><i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Empoli_Chap05.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">はじめに</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">計量会計学とは</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">研究テーマの選び方</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">理論と仮説</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Rの使い方</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap05.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">記述統計とデータの可視化・視覚化</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">統計的推定</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">統計的仮説検定</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">変数間の関連性</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析の基礎</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">回帰分析による統計的推定</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ロジスティック回帰分析</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#データの読み込み" id="toc-データの読み込み" class="nav-link active" data-scroll-target="#データの読み込み"><span class="header-section-number">5.1</span> データの読み込み</a>
+  <ul class="collapse">
+  <li><a href="#csvファイルの読み込み" id="toc-csvファイルの読み込み" class="nav-link" data-scroll-target="#csvファイルの読み込み"><span class="header-section-number">5.1.1</span> CSVファイルの読み込み</a></li>
+  <li><a href="#excelファイルの読み込み" id="toc-excelファイルの読み込み" class="nav-link" data-scroll-target="#excelファイルの読み込み"><span class="header-section-number">5.1.2</span> Excelファイルの読み込み</a></li>
+  </ul></li>
+  <li><a href="#読み込んだデータの確認" id="toc-読み込んだデータの確認" class="nav-link" data-scroll-target="#読み込んだデータの確認"><span class="header-section-number">5.2</span> 読み込んだデータの確認</a></li>
+  <li><a href="#データの整形" id="toc-データの整形" class="nav-link" data-scroll-target="#データの整形"><span class="header-section-number">5.3</span> データの整形</a>
+  <ul class="collapse">
+  <li><a href="#データ操作の基礎" id="toc-データ操作の基礎" class="nav-link" data-scroll-target="#データ操作の基礎"><span class="header-section-number">5.3.1</span> データ操作の基礎</a></li>
+  <li><a href="#パイプ演算子" id="toc-パイプ演算子" class="nav-link" data-scroll-target="#パイプ演算子"><span class="header-section-number">5.3.2</span> パイプ演算子</a></li>
+  <li><a href="#新しい変数を作成する-mutate" id="toc-新しい変数を作成する-mutate" class="nav-link" data-scroll-target="#新しい変数を作成する-mutate">新しい変数を作成する <code>mutate</code></a></li>
+  <li><a href="#データを抽出する-filter" id="toc-データを抽出する-filter" class="nav-link" data-scroll-target="#データを抽出する-filter">データを抽出する <code>filter</code></a></li>
+  <li><a href="#変数を選択する-select" id="toc-変数を選択する-select" class="nav-link" data-scroll-target="#変数を選択する-select">変数を選択する <code>select</code></a></li>
+  <li><a href="#データを並び替える-arrange" id="toc-データを並び替える-arrange" class="nav-link" data-scroll-target="#データを並び替える-arrange">データを並び替える <code>arrange</code></a></li>
+  <li><a href="#long形式とwide形式" id="toc-long形式とwide形式" class="nav-link" data-scroll-target="#long形式とwide形式"><span class="header-section-number">5.3.3</span> long形式とwide形式</a></li>
+  <li><a href="#ロングからワイド-pivot_wider" id="toc-ロングからワイド-pivot_wider" class="nav-link" data-scroll-target="#ロングからワイド-pivot_wider">ロングからワイド <code>pivot_wider</code></a></li>
+  <li><a href="#ワイドからロング-pivot_longer" id="toc-ワイドからロング-pivot_longer" class="nav-link" data-scroll-target="#ワイドからロング-pivot_longer">ワイドからロング <code>pivot_longer</code></a></li>
+  <li><a href="#データの結合" id="toc-データの結合" class="nav-link" data-scroll-target="#データの結合"><span class="header-section-number">5.3.4</span> データの結合</a></li>
+  </ul></li>
+  <li><a href="#データの保存" id="toc-データの保存" class="nav-link" data-scroll-target="#データの保存"><span class="header-section-number">5.4</span> データの保存</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>この章では、Rを用いたデータ操作の基本的な方法を学びます。 この章は何度も読み返し、繰り返し練習してください。 ここでは、なぜRを使うと便利なのかを分かってもらうために、Excelの操作と比較する形で、Rのデータ操作の基本を学びます。</p>
+<section id="データの読み込み" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="データの読み込み"><span class="header-section-number">5.1</span> データの読み込み</h2>
+<section id="csvファイルの読み込み" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="csvファイルの読み込み"><span class="header-section-number">5.1.1</span> CSVファイルの読み込み</h3>
+<p>多くのプログラミング言語で、読み込むデータとして最も多いのが、CSV形式のファイルです。ファイルの拡張子は<code>.csv</code>です。 CSVとは、Comma Separated Valuesの略で、カンマで区切られたデータのことです。 次のような形をしています。</p>
+<pre><code>企業ID,決算年月,売上高
+13,2020/03,1000
+13,2021/03,1200
+13,2022/03,1500
+24,2020/03,2000
+24,2021/03,2200
+24,2022/03,2500
+33,2020/03,3000
+33,2021/03,3200
+33,2022/03,3500</code></pre>
+<p>このように、値とコンマ<code>,</code>のみで構成されたファイルのため、余計な情報が入っておらず、またファイルサイズも小さく、加工が簡単なので、データのやり取りによく使われます。</p>
+<p>ではファイルを読み込んでみます。ここでは、松浦のウェブサイトにあるデータ<code>keshohin_2023.csv</code>を読み込んでみます。 Rの場合は、<code>read.csv</code>という関数を使って、URLを直接指定して読み込むことができます。読み込んだデータを<code>df</code>という変数に代入しています。</p>
+<p>Excelの場合は、インターネット上のデータを直接取り込むことは難しいので、いったんパソコンの中に保存してから、ファイルを開くとします。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Rの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://so-ichi.com/kesho_2023.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+MS Excelの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>URL<code>https://so-ichi.com/kesho_2023.csv</code>をブラウザに入力してファイルをダウンロードし、任意の場所に保存</li>
+<li>「ファイル」から「開く…」をクリックして、保存したCSVファイルを選択し「開く」をクリック</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="excelファイルの読み込み" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="excelファイルの読み込み"><span class="header-section-number">5.1.2</span> Excelファイルの読み込み</h3>
+<p>MS Excelのファイルは拡張子が<code>.xlsx</code>、古いMS Excelだと<code>.xls</code>です。 RでExcelファイルを読み込むときは、<code>read_excel</code>という関数を使います。 Excelファイルを用意するのが面倒なので、ここではこうやれば読み込めるよ、というコードだけ説明します。ファイル名は<code>hoge.xlsx</code>とします。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Rの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dfx <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"hoge.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+MS Excelの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>「ファイル」から「開く…」をクリックし、保存してあるExcelファイルを選択し「開く」をクリック</li>
+</ol>
+</div>
+</div>
+<p>MS Excelの問題点は、目的のデータがどのExcelファイルに入っていて、それがどこに保存されているのかを覚えておかないと、いちいちファイルを開いて探さないといけないことです。</p>
+<p>Rだとソースコードを残すことができますので、 どこにあるファイルを読み込んで、そこに何が入っているのかをコメントで残しておくことができます。</p>
+</section>
+</section>
+<section id="読み込んだデータの確認" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="読み込んだデータの確認"><span class="header-section-number">5.2</span> 読み込んだデータの確認</h2>
+<p>MS Excelは読み込んだデータが画面上に表として表示されていますが、Rでは変数に代入しただけでは、画面には何も表示されません。 そこでデータの中身を確認する関数として、次のようなものがあります。</p>
+<ul>
+<li><code>head()</code> : 最初の数行を表示させる基本関数</li>
+<li><code>str()</code> : データの構造を表示させる基本関数</li>
+<li><code>glimpse()</code> : データの構造を表示させるdplyrパッケージの関数</li>
+<li><code>names()</code> : 変数名を表示させる基本関数</li>
+</ul>
+<p>これらを使って、データの中身を確認し、データの形に適した処理方法を学ぶ必要があります。 以下では、<code>head()</code>関数を使って、データの最初の数行を表示させてから、<code>str()</code>関数でデータの中の変数とその型を確認します。</p>
+<p>Excelは目視が中心ですが、見ただけでは、文字列なのか数なのかが分からないので、やはりデータの型は確認する必要があります。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Rの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  code   name    term shubetsu ren  sales netincome month
+1  641 資生堂 1985/11       10   1 371040     14526    12
+2  641 資生堂 1986/11       10   1 375294     13632    12
+3  641 資生堂 1987/11       10   1 378977      9014    12
+4  641 資生堂 1988/11       10   1 401311      9515    12
+5  641 資生堂 1989/03       10   1 130654      4265     4
+6  641 資生堂 1990/03       10   1 456352     11362    12</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   130 obs. of  8 variables:
+ $ code     : int  641 641 641 641 641 641 641 641 641 641 ...
+ $ name     : chr  "資生堂" "資生堂" "資生堂" "資生堂" ...
+ $ term     : chr  "1985/11" "1986/11" "1987/11" "1988/11" ...
+ $ shubetsu : int  10 10 10 10 10 10 10 10 10 10 ...
+ $ ren      : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ sales    : int  371040 375294 378977 401311 130654 456352 517252 553299 561549 549178 ...
+ $ netincome: int  14526 13632 9014 9515 4265 11362 15850 16011 13290 14668 ...
+ $ month    : int  12 12 12 12 4 12 12 12 12 12 ...</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+MS Excelの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>画面を見て確認する。</p>
+</div>
+</div>
+<p>このデータには，</p>
+<ul>
+<li><code>code</code> : 企業コード (文字列)</li>
+<li><code>name</code> : 企業名 (文字列)</li>
+<li><code>term</code> : 決算年月 (文字列)</li>
+<li><code>shubetsu</code> : 会計基準の種類 (数値)</li>
+<li><code>ren</code> : 連結か単体 (数値)</li>
+<li><code>sales</code> : 売上高 (数値)</li>
+<li><code>netincome</code> : 当期純利益 (数値)</li>
+<li><code>month</code> : 決算月数 (数値)</li>
+</ul>
+<p>が入っています。</p>
+</section>
+<section id="データの整形" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="データの整形"><span class="header-section-number">5.3</span> データの整形</h2>
+<section id="データ操作の基礎" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="データ操作の基礎"><span class="header-section-number">5.3.1</span> データ操作の基礎</h3>
+<p>さあ面白くなってきました。 次はデータを操作していきます。 Rによるデータ操作では、<code>tidyverse</code>パッケージ群の<code>dplyr</code>パッケージが大活躍します。</p>
+<p><code>dplyr</code>パッケージの関数の中でもよく使うものに次のようなものがあります。</p>
+<ul>
+<li><code>select()</code> : 変数を選択する</li>
+<li><code>filter()</code> : データを抽出する</li>
+<li><code>mutate()</code> : 変数を追加する</li>
+<li><code>arrange()</code> : データを並び替える</li>
+<li><code>summarise()</code> : データを集計する</li>
+<li><code>group_by()</code> : データをグループ化する</li>
+</ul>
+</section>
+<section id="パイプ演算子" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="パイプ演算子"><span class="header-section-number">5.3.2</span> パイプ演算子</h3>
+<p>Rでソースコードを書く際に，理解しやすく，読みやすいコードにするために非常に便利なのが，パイプ演算子<code>%&gt;%</code>です。 パイプ演算子<code>%&gt;%</code>は，左側のオブジェクトを右側の関数の第一引数に渡すという処理を行います。 たとえば，</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">sqrt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.732051</code></pre>
+</div>
+</div>
+<p>と書くと，<code>sqrt(1 + 2)</code>と同じ意味になります。 たとえば，<code>rnorm()</code>関数を使って平均0，分散1の標準正規分から100個のデータを作りたいとします。 <code>rnorm()</code>関数は3つの引数を取ります。</p>
+<ol type="1">
+<li>データの個数</li>
+<li>平均</li>
+<li>標準偏差</li>
+</ol>
+<p>したがって，<code>rnorm(100, 0, 1)</code>と書くと，平均0，分散1の標準正規分布から100個のデータを取り出すことができます。 パイプ演算子を使うと，</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">%&gt;%</span> <span class="fu">rnorm</span>(<span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1]  1.71620491 -0.54237193  0.05810379  0.95236220 -0.17020786 -0.50210105
+  [7]  0.38496768 -1.36893378 -0.09670576  0.08911315  0.39081201 -1.38808040
+ [13] -1.45076481  1.23898967 -1.16125741 -0.70957119 -0.64617693  0.33586063
+ [19] -1.46595232 -0.50477351 -1.61662933  1.81818139 -0.80283970 -2.47876312
+ [25]  0.07672469  0.07267417 -1.52929004  1.19838403  0.36889458  0.01775442
+ [31]  0.18797285 -0.89718435  1.15356487 -0.81453091  0.71607375  1.31116109
+ [37]  0.09160880  0.07568671 -1.88949944  2.14811639  0.29564402 -0.94304867
+ [43]  0.10840980 -0.14132065 -2.28149455  0.61747152  0.04331990  0.53065736
+ [49] -1.11702531  0.35438894  1.18456664 -0.28886734 -0.78821339 -1.34843562
+ [55]  1.71557738 -1.19024637 -1.17537847 -2.37273692  0.02540695 -0.41128109
+ [61]  0.25242397 -0.10763705 -1.26445777  0.08148865  0.13513402 -0.83055443
+ [67]  0.63399452  0.65630206 -1.38873625  0.27772007 -0.26443570 -1.26873322
+ [73] -2.25315602  1.32409045 -0.45646124  1.03996930  1.39757901 -1.33921418
+ [79] -0.52895840 -0.98574050  1.68864516  0.46105347  0.35698877 -1.26873482
+ [85] -0.02337905 -0.16284992  0.09950437  1.17091195  1.21309654 -0.07818817
+ [91] -1.37969751  1.72593104  0.63126025  0.34624972  0.79673381 -0.54156428
+ [97]  1.73564301 -0.01434715 -0.12222752  1.43244970</code></pre>
+</div>
+</div>
+<p>となります。 これは<code>rnorm()</code>関数の第1引数がデータの個数なので，そこに<code>100</code>を渡しています。 ここで平均に値を渡したい場合を考えます。 <code>mean</code>引数は第2引数なので，パイプ演算子では自動で渡してくれません。 そこで<code>.</code>を使って渡す場所を指定してあげます。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">%&gt;%</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span>. , <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] 101.93455  97.78606 100.69824  99.69438  99.80445  99.86083 100.15197
+  [8]  99.71767 100.71892  99.99526 101.54609  99.68867 100.70283  99.28003
+ [15] 100.13156 100.33684  99.73738 100.68807 100.62526  99.36084  97.52908
+ [22]  99.87714 100.58104  97.66689  97.73299 102.23256  98.99517  99.52929
+ [29]  98.85377  99.11497 100.20125  98.37993  98.39496 100.75177 100.20411
+ [36] 100.64019 100.14264  99.75035 100.44570  99.24783  99.91811  99.89115
+ [43] 101.25822 100.77253  99.57741  98.29797 100.30904  98.36167 100.58027
+ [50] 100.49119 100.60299  99.93163  98.66742 100.87405  99.16978 100.31099
+ [57]  99.54965  98.56711  99.53181  99.52658  99.55845  99.63107 101.07016
+ [64]  99.44248 100.46079 100.32938  99.04189 100.50395 100.87821  99.72808
+ [71] 102.18319 101.36821 100.57622  99.34800  98.86859 100.64905 100.40612
+ [78] 101.46867 102.15828  98.89903  99.57590 100.24753 100.47056  99.31839
+ [85] 100.42937  99.68673  99.76692 100.28111  99.05290  98.35323 101.44997
+ [92] 100.04548  99.91756  99.39202  98.83015 101.28635 100.16759  99.82038
+ [99]  99.57501 100.90773</code></pre>
+</div>
+</div>
+<p>これで平均100，標準偏差1の正規分布から100個のデータを取り出せました。</p>
+<p>これだけだと便利さが伝わらないので，たとえば次のような処理を考えてみましょう。</p>
+<ol type="1">
+<li>2020年のデータを抜き出し，</li>
+<li>売上高当期純利益率を計算し，</li>
+<li>産業グループごとに平均を計算する</li>
+<li>利益率が高い順番に並び替える</li>
+</ol>
+<p>をパイプ演算子を使って書くと，</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"2020"</span>) <span class="sc">%&gt;%</span> <span class="co"># 2020年のみ</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>( <span class="co"># 新しい変数を作成</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">ratio =</span> netincome <span class="sc">/</span> sales <span class="co"># 売上高利益率</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(sangyo) <span class="sc">%&gt;%</span> <span class="co"># 産業グループごとに</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>( <span class="co"># 平均を計算</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">mean_ratio =</span> <span class="fu">mean</span>(ratio) <span class="co"># 利益率の平均</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(mean_ratio)) <span class="co"># 利益率の高い順に並び替え</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>のように，上から順番に処理を実行し，次に渡す，というプロセスが分かりやすく，読みやすいコードができました。 コメントも残しておけば，後から見返したときにも分かりやすいですし，他人によんでもらうときも親切ですね。 したがって，以下ではパイプ演算子を駆使して，データ操作を行っていきます。</p>
+</section>
+<section id="新しい変数を作成する-mutate" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="新しい変数を作成する-mutate">新しい変数を作成する <code>mutate</code></h3>
+<p>新しい変数を作成するには，<code>dplyr</code>パッケージの<code>mutate()</code>関数を使います。 先ほど読みこんだデータから，当期純利益を売上高で除して売上高当期純利益率を計算して，<code>ratio</code>という変数を作ってみましょう。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Rの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>( <span class="co"># 新しい変数を作成</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ratio =</span> netincome <span class="sc">/</span> sales <span class="co"># 売上高利益率</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+MS Excelの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>I1</code>のセルに変数名を表す<code>ratio</code>と入力する。 F列の<code>sale</code>とG列の<code>netincome</code>を使って，<code>I2</code>のセルに</p>
+<p><code>= G2 / F2</code></p>
+<p>とし，<code>I2</code>セルの右下の四角をダブルクリックすると，自動で下のセルにも同じ計算がコピーされる。</p>
+</div>
+</div>
+<p>次に，ある変数の値に応じて異なる値をとる変数を作るには，<code>mutate()</code>関数と<code>ifelse()</code>関数を同時に使います。<code>ifelse()</code>関数は次のような引数を取ります。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(条件, 条件が真のときの値, 条件が偽のときの値)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>先ほど計算した売上高当期純利益率が5%以上ならば「高い」，そうでなければ「低い」という変数<code>highlow</code>を作ってみましょう。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Rの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>( <span class="co"># 新しい変数を作成</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">highlow =</span> <span class="fu">ifelse</span>(ratio <span class="sc">&gt;=</span> <span class="fl">0.05</span>, <span class="st">"高い"</span>, <span class="st">"低い"</span>) <span class="co"># 売上高利益率</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+MS Excelの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>J1</code>セルに<code>highlow</code>と入力する。 <code>J2</code>セルに</p>
+<p><code>= if(I2 &gt;= 0.05, "高い", "低い")</code></p>
+<p>と入力し，<code>J2</code>セルの右下の四角をダブルクリックすると，自動で下のセルにも同じ計算がコピーされる。</p>
+</div>
+</div>
+<p>Excelだとセルの移動や変数名の入力，計算式の入力，セルのコピーといった作業で，キーボードとマウスを行ったり来たりする必要があり，若干面倒です。</p>
+<p>ついでに，<code>mutate()</code>関数を使って，長すぎる企業名を短くしてみます。 ここでは「ポーラ・オルビスホールディングス」を「ポーラ」と略してみます。 <code>mutate()</code>と<code>ifelse</code>を使って，<code>name</code>変数の値が「ポーラ・オルビスホールディング」ならば「ポーラ」という値をとる変数<code>name</code>上書きします。を作ってみましょう。 :::{.callout-important} ## Rの場合</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>( <span class="co"># 新しい変数を作成</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">name =</span> <span class="fu">ifelse</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>            name <span class="sc">==</span> <span class="st">"ポーラ・オルビスホールディング"</span>, <span class="st">"ポーラ"</span>, name) <span class="co"># 企業名</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="データを抽出する-filter" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="データを抽出する-filter">データを抽出する <code>filter</code></h3>
+<p>データを抽出するには，<code>dplyr</code>パッケージの<code>filter()</code>関数を使います。 <code>filter()</code>関数は，次のような引数を取ります。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(データ, 条件)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>先ほど作成した<code>ratio2</code>が「高い」企業だけを抽出してみましょう。 <code>filter()</code>関数の中の条件は，<code>==</code>を使って，<code>"高い"</code>という文字列と一致するかどうかを確認しています。 ここでは，<code>highlow</code>変数の値が<code>"高い"</code>と一致する企業だけを抽出し，<code>df_high</code>という変数に代入しています。 :::{.callout-important} ## Rの場合</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_high <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(highlow <span class="sc">==</span> <span class="st">"高い"</span>) <span class="co"># 条件</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>:::</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+MS Excelの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>highlow変数のあるJ列をクリックして枠を移動させ，上の「ホーム」メニューから「並び替えとフィルター」をクリックし，「フィルター」をクリックする。 すると，変数名highlowのヨコに漏斗のようなマークが出るので，それをクリックすると，記録されたデータの種類が出てくるので，「高い」だけにチェックが入った状態にする。</p>
+</div>
+</div>
+<p>Excelのクリック回数が増えてきましたね。</p>
+<p><code>filter()</code>関数の中で指定する条件は，</p>
+<ul>
+<li><code>==</code> : 一致する</li>
+<li><code>!=</code> : 一致しない</li>
+<li><code>&gt;=</code>や<code>&lt;=</code> : 以上や以下</li>
+<li><code>&gt;</code>や<code>&lt;</code> : より大きいや小さい</li>
+<li><code>%in%</code> : いずれかに一致する</li>
+</ul>
+<p>などがあります。またこれらの条件を組み合わせることもできます。 その場合は，以下のように<code>&amp;</code>や<code>|</code>を使います。</p>
+<ul>
+<li><code>&amp;</code> : かつ</li>
+<li><code>|</code> : または</li>
+</ul>
+<p>たとえば，資生堂と花王を抽出したり，売上高当期純利益率が5%以上かつ売上高が1000億円以上の企業を抽出するには， 次のように書きます。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Rの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df_shiseido_kao <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"資生堂"</span>, <span class="st">"花王"</span>)) <span class="co"># 2社だけ抽出</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>df_high2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(ratio <span class="sc">&gt;=</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> sales <span class="sc">&gt;=</span> <span class="dv">1000</span>) <span class="co"># 2条件を同時に満たす</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="変数を選択する-select" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="変数を選択する-select">変数を選択する <code>select</code></h3>
+<p>データの中から必要な変数だけを選択するには，<code>dplyr</code>パッケージの<code>select()</code>関数を使います。 たとえば，先ほど作成した<code>df</code>から，企業コード，企業名，売上高当期純利益率の3つの変数だけを選択してみましょう。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Rの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(code, name, ratio) <span class="co"># 3つの変数だけ選択</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+MS Excelの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>オリジナルのデータをコピーして，下のタブから別のシートを選択し，そこに貼り付ける。</p>
+<p>貼り付けたデータから<code>code</code>と<code>name</code>と<code>ratio</code>以外の列を削除する。</p>
+</div>
+</div>
+<p>MS Excelだと，不要なデータを削除するのが怖い作業で，必要になったときにまた元のデータを読み込まないといけないので，面倒ですし，ミスのもとです。</p>
+<p><code>select()</code>関数の中で使えるものには，以下のようなものがあります。 とても便利なので，覚えておくとよいでしょう。</p>
+<ul>
+<li><code>-</code> : 除外する (<code>-ratio</code>とかくと<code>ratio</code>以外を選択)</li>
+<li><code>:</code> : 連続する変数を選択 (<code>code:ren</code>と書くと<code>code</code>から<code>ren</code>までを選択)</li>
+<li><code>starts_with()</code> : ある文字列で始まる変数を選択</li>
+<li><code>ends_with()</code> : ある文字列で終わる変数を選択</li>
+</ul>
+<p>たとえば，<code>mutate()</code>で新しい変数を作る場合に，変数名に法則性をつけておけば，<code>starts_with()</code>を使って一気に変数を選択することができます。 たとえば，比率を表す変数は<code>ratio</code>で始まるように統一しておく，基準化した変数には<code>_K</code>を最後に付けておく，などです。</p>
+</section>
+<section id="データを並び替える-arrange" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="データを並び替える-arrange">データを並び替える <code>arrange</code></h3>
+<p>データを並び替えるには，<code>dplyr</code>パッケージの<code>arrange()</code>関数を使います。 たとえば，先ほど作成した<code>df</code>から，売上高当期純利益率を並び替えてみましょう。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Rの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(name, ratio) <span class="sc">%&gt;%</span> <span class="co"># 2つの変数だけ選択</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(ratio) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    name       ratio
+1 ポーラ -0.43495809
+2 資生堂 -0.07576384
+3 資生堂 -0.03859062
+4 資生堂 -0.02166802
+5 資生堂 -0.01384122
+6 資生堂 -0.01266169</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>小さい順に並び替えられました。 大きい順にするには，<code>desc()</code>関数を使います。 ついでに<code>knitr</code>パッケージの<code>kabble()</code>関数で表を見やすく加工してみます。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Rの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(name, ratio) <span class="sc">%&gt;%</span> <span class="co"># 2つの変数だけ選択</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(ratio)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="co"># 先頭の10行</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>) <span class="co"># 表をきれいに表示</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">name</th>
+<th style="text-align: right;">ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ポーラ</td>
+<td style="text-align: right;">0.1110647</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">花王</td>
+<td style="text-align: right;">0.1019213</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">花王</td>
+<td style="text-align: right;">0.0987028</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">花王</td>
+<td style="text-align: right;">0.0986613</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ユニ・チャーム</td>
+<td style="text-align: right;">0.0929384</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">花王</td>
+<td style="text-align: right;">0.0912752</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ポーラ</td>
+<td style="text-align: right;">0.0895507</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ユニ・チャーム</td>
+<td style="text-align: right;">0.0891383</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ユニ・チャーム</td>
+<td style="text-align: right;">0.0890311</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ユニ・チャーム</td>
+<td style="text-align: right;">0.0869777</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>これでどの企業のどの年度の売上高当期純利益率が大きいのかが一目瞭然になりました。</p>
+<p>MS Excelだと，</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+MS Excelの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>「ホーム」メニューから「並び替えとフィルター」をクリックし，「昇順」をクリックする。</p>
+<p>必要なデータだけ選択してコピペすれば，表が完成します。</p>
+</div>
+</div>
+<p>となります。 簡単ですが，MS Excelの並び替えは注意が必要で，並び替えた後にデータを追加すると，並び替えが解除されてしまい，元に戻せなくなったり，空列があると並び替えがうまくいかなかったりします。</p>
+</section>
+<section id="long形式とwide形式" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="long形式とwide形式"><span class="header-section-number">5.3.3</span> long形式とwide形式</h3>
+<p>人間には読みやすいけれどパソコンは読みにくい，というデータの形式があります。 例えば下の表を見てみましょう。</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">地点</th>
+<th style="text-align: center;">6時</th>
+<th style="text-align: center;">12時</th>
+<th style="text-align: center;">18時</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">札幌</td>
+<td style="text-align: center;">12℃</td>
+<td style="text-align: center;">15℃</td>
+<td style="text-align: center;">13℃</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">大阪</td>
+<td style="text-align: center;">20℃</td>
+<td style="text-align: center;">24℃</td>
+<td style="text-align: center;">22℃</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">福岡</td>
+<td style="text-align: center;">23℃</td>
+<td style="text-align: center;">25℃</td>
+<td style="text-align: center;">25℃</td>
+</tr>
+</tbody>
+</table>
+<p>このような形のデータをワイド形式(wide)といいます。 天気予報で見かけそうなこの表は，人間にとっては分かりやすいですが，実はコンピュータにとっては，分かりにくいものです。 コンピュータが理解しやすいデータとして表すなら，次のような表になります。</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">地点</th>
+<th style="text-align: center;">時間</th>
+<th style="text-align: center;">気温(℃)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">札幌</td>
+<td style="text-align: center;">6時</td>
+<td style="text-align: center;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">札幌</td>
+<td style="text-align: center;">12時</td>
+<td style="text-align: center;">15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">札幌</td>
+<td style="text-align: center;">18時</td>
+<td style="text-align: center;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">大阪</td>
+<td style="text-align: center;">6時</td>
+<td style="text-align: center;">20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">大阪</td>
+<td style="text-align: center;">12時</td>
+<td style="text-align: center;">24</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">大阪</td>
+<td style="text-align: center;">18時</td>
+<td style="text-align: center;">22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">福岡</td>
+<td style="text-align: center;">6時</td>
+<td style="text-align: center;">23</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">福岡</td>
+<td style="text-align: center;">12時</td>
+<td style="text-align: center;">25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">福岡</td>
+<td style="text-align: center;">18時</td>
+<td style="text-align: center;">25</td>
+</tr>
+</tbody>
+</table>
+<p>このような形式のデータをロング型(long)といいます。 このロング型のうち，一定のルールに従って作成されたデータを<strong>整然データ(tidy data)</strong>といい，Rでは，この整然データを扱うことが多いです。</p>
+<p>R神Hadley Wickham氏は，データの型を理解することを，データ分析の第一歩とし，その一貫として整然データという考え方を提唱しています。 整然データとは，次のような原則に従って構築されたデータのことです(Wickham, 2014) 参考[https://id.fnshr.info/2017/01/09/tidy-data-intro/]。</p>
+<ol type="1">
+<li>個々の変数 (variable) が1つの列 (column) をなす。</li>
+<li>個々の観測 (observation) が1つの行 (row) をなす。</li>
+<li>個々の観測の構成単位の類型 (type of observational unit) が1つの表 (table) をなす。</li>
+<li>個々の値 (value) が1つのセル (cell) をなす</li>
+</ol>
+<p>上の表は，地点，時間，天気，気温の4つの変数があり1つの列をつくっています(ルール1)。 大阪12時の天気は雨，気温は12℃といったように1つの行が1つの観測を表しています(ルール2)。 このデータには種類の異なる観測はない(ルール3)。 また，各セルには1つの値が入っています(ルール4)。 よって，これが整然データとなります。</p>
+<p>上のロング型の天気データを使って，ロングからワイド，ワイドからロングの操作を学びましょう。</p>
+<p>まずデータを作ります。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df_weather <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">place =</span> <span class="fu">c</span>(<span class="st">"札幌"</span>,<span class="st">"札幌"</span>,<span class="st">"札幌"</span>,<span class="st">"大阪"</span>,<span class="st">"大阪"</span>,<span class="st">"大阪"</span>,<span class="st">"福岡"</span>,<span class="st">"福岡"</span>,<span class="st">"福岡"</span>), <span class="co"># 各地を3個ずつ</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"6時"</span>, <span class="st">"12時"</span>, <span class="st">"18時"</span>),<span class="dv">3</span>),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">temp =</span> <span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">15</span>,<span class="dv">13</span>,<span class="dv">20</span>,<span class="dv">24</span>,<span class="dv">22</span>,<span class="dv">23</span>,<span class="dv">25</span>,<span class="dv">25</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_weather)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  place time temp
+1  札幌  6時   12
+2  札幌 12時   15
+3  札幌 18時   13
+4  大阪  6時   20
+5  大阪 12時   24
+6  大阪 18時   22
+7  福岡  6時   23
+8  福岡 12時   25
+9  福岡 18時   25</code></pre>
+</div>
+</div>
+<p>これはロング型の整然データとなります。</p>
+</section>
+<section id="ロングからワイド-pivot_wider" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ロングからワイド-pivot_wider">ロングからワイド <code>pivot_wider</code></h3>
+<p>Rで使うならこのままでよいのですが，あえてこれをワイド型に変えてみましょう。</p>
+<p>教科書で使用されている<code>spread()</code>は「根本的に設計ミスってた」と公式で発表されているので，R神が作った<code>pivot_wider()</code>を使います。widerという名前の通り，ワイド型に変換する関数です。</p>
+<p><code>pivot_wider()</code>の引数は，<code>names_from</code>と<code>values_from</code>です。<code>names_from</code>は，ワイド型に変換するときに，どの変数を列にするかを指定します。<code>values_from</code>は，ワイド型に変換するときに，どの変数の値を使うかを指定します。</p>
+<p>以下のコードでは，<code>time</code>変数の値を列に，<code>temp</code>変数の値を値にして，<code>df_wide</code>という変数に代入しています。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_wide <span class="ot">&lt;-</span> df_weather <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> time, <span class="at">values_from =</span> temp)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  place `6時` `12時` `18時`
+  &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 札幌     12     15     13
+2 大阪     20     24     22
+3 福岡     23     25     25</code></pre>
+</div>
+</div>
+<p>これでワイド型に変換できました。</p>
+</section>
+<section id="ワイドからロング-pivot_longer" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ワイドからロング-pivot_longer">ワイドからロング <code>pivot_longer</code></h3>
+<p>次に，このワイド型のデータをロング型に変換してみます。 教科書では，<code>tidyr</code>の<code>gather()</code>を使っていますが，これも<code>wider()</code>と同じ問題を持っているので，R神による<code>pivot_longer()</code>を使います。</p>
+<p><code>pivot_longer()</code>の引数は，<code>cols</code>と<code>names_to</code>と<code>values_to</code>です。</p>
+<ul>
+<li><code>cols</code>は，ロング型に変換するときに，どの変数を行にするかを指定</li>
+<li><code>names_to</code>は，ロング型に変換するときに，どの変数の値を使うかを指定</li>
+<li><code>values_to</code>は，ロング型に変換するときに，どの変数の値を使うかを指定</li>
+</ul>
+<p>以下のコードでは，<code>6時</code>，<code>12時</code>，<code>18時</code>の3つの変数を行に，<code>time</code>という変数の値を列に，<code>temp</code>という変数の値を値にして，<code>df_long</code>という変数に代入しています。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df_wide <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"6時"</span>, <span class="st">"12時"</span>, <span class="st">"18時"</span>), <span class="co"># 縦にする変数</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">names_to =</span> <span class="st">"time"</span>, <span class="co"># 縦にした変数名</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">values_to =</span> <span class="st">"temp"</span>) <span class="co"># 値</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 3
+  place time   temp
+  &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+1 札幌  6時      12
+2 札幌  12時     15
+3 札幌  18時     13
+4 大阪  6時      20
+5 大阪  12時     24
+6 大阪  18時     22
+7 福岡  6時      23
+8 福岡  12時     25
+9 福岡  18時     25</code></pre>
+</div>
+</div>
+<p>元のロング型に戻りました。</p>
+</section>
+<section id="データの結合" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="データの結合"><span class="header-section-number">5.3.4</span> データの結合</h3>
+<p>別々のデータを結合させて使いたいことはよくあります。 例えば，次のようなデータを結合させる場合を考えてみましょう。</p>
+<section id="表a" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="表a">表A</h4>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">name</th>
+<th style="text-align: right;">term</th>
+<th style="text-align: right;">sale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">トヨタ</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">トヨタ</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">900</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">トヨタ</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">1400</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ホンダ</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">800</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ホンダ</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">700</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ホンダ</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">900</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df_A <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"トヨタ"</span>, <span class="st">"トヨタ"</span>, <span class="st">"トヨタ"</span>, <span class="st">"ホンダ"</span>, <span class="st">"ホンダ"</span>, <span class="st">"ホンダ"</span>),</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">c</span>(<span class="dv">2020</span>, <span class="dv">2021</span>, <span class="dv">2022</span>, <span class="dv">2020</span>, <span class="dv">2021</span>, <span class="dv">2022</span>),</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sale =</span> <span class="fu">c</span>(<span class="dv">1000</span>, <span class="dv">900</span>, <span class="dv">1400</span>, <span class="dv">800</span>, <span class="dv">700</span>, <span class="dv">900</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="表b" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="表b">表B</h4>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">name</th>
+<th style="text-align: right;">term</th>
+<th style="text-align: right;">sale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">日産</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">400</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">日産</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">日産</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">900</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">マツダ</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">300</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">マツダ</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">400</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">マツダ</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">200</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df_B <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"日産"</span>, <span class="st">"日産"</span>, <span class="st">"日産"</span>, <span class="st">"マツダ"</span>, <span class="st">"マツダ"</span>, <span class="st">"マツダ"</span>),</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">c</span>(<span class="dv">2020</span>, <span class="dv">2021</span>, <span class="dv">2022</span>, <span class="dv">2020</span>, <span class="dv">2021</span>, <span class="dv">2022</span>),</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sale =</span> <span class="fu">c</span>(<span class="dv">400</span>, <span class="dv">500</span>, <span class="dv">900</span>, <span class="dv">300</span>, <span class="dv">400</span>, <span class="dv">200</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="表c" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="表c">表C</h4>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">name</th>
+<th style="text-align: right;">term</th>
+<th style="text-align: right;">netincome</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">トヨタ</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">トヨタ</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">90</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">トヨタ</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">150</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ホンダ</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">140</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ホンダ</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ホンダ</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">90</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">スバル</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">スバル</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">スバル</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">50</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df_C <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"トヨタ"</span>, <span class="st">"トヨタ"</span>, <span class="st">"トヨタ"</span>, <span class="st">"ホンダ"</span>, <span class="st">"ホンダ"</span>, <span class="st">"ホンダ"</span>, <span class="st">"スバル"</span>, <span class="st">"スバル"</span>, <span class="st">"スバル"</span>),</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">c</span>(<span class="dv">2020</span>, <span class="dv">2021</span>, <span class="dv">2022</span>, <span class="dv">2020</span>, <span class="dv">2021</span>, <span class="dv">2022</span>, <span class="dv">2020</span>, <span class="dv">2021</span>, <span class="dv">2022</span>),</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">netincome =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">90</span>, <span class="dv">150</span>, <span class="dv">140</span>, <span class="dv">100</span>, <span class="dv">90</span>, <span class="dv">30</span>, <span class="dv">35</span>, <span class="dv">50</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>この3つのデータを結合させる場合を考えます。 まず表Aと表Bは同じ変数をもつデータなので，これらを結合させるには，縦につなげる必要があります。 このような結合を<strong>連結</strong>といいます。 縦結合は，<code>dplyr</code>パッケージの<code>bind_rows()</code>関数を使います。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df_AB <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(df_A, df_B)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_AB)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     name term sale
+1  トヨタ 2020 1000
+2  トヨタ 2021  900
+3  トヨタ 2022 1400
+4  ホンダ 2020  800
+5  ホンダ 2021  700
+6  ホンダ 2022  900
+7    日産 2020  400
+8    日産 2021  500
+9    日産 2022  900
+10 マツダ 2020  300
+11 マツダ 2021  400
+12 マツダ 2022  200</code></pre>
+</div>
+</div>
+<p>縦に結合できたので，トヨタ，ホンダ，日産，マツダのデータが入ったデータベース<code>df_AB</code>ができました。</p>
+<p>次に，この<code>df_AB</code>と<code>df_C</code>を結合させます。 <code>df_C</code>は<code>netincome</code>という<code>df_AB</code>にはない変数があり，異なる変数をもつデータ同士の結合となります。 これらを結合させるには，横につなげる必要があります。 このような結合を<strong>結合</strong>といいます。</p>
+<p>結合には，</p>
+<ul>
+<li><strong>内部結合</strong>(inner join)</li>
+<li><strong>外部結合</strong>(outer join)</li>
+</ul>
+<p>があり，外部結合には，</p>
+<ul>
+<li><strong>完全結合</strong>(full join)</li>
+<li><strong>左結合</strong>(left join)</li>
+<li><strong>右結合</strong>(right join)</li>
+</ul>
+<p>があります。</p>
+<p>内部結合は<strong>両方のデータベースに存在する観測値のみを保持</strong>するため，多くのデータが欠落することになりますが，<strong>外部結合</strong>は、少なくとも1つのテーブルに存在する観測値を保持するので，データが欠落することはありません。 3つの外部結合の特徴は次の通りです。</p>
+<ul>
+<li><strong>完全結合</strong>は、xとyのすべてのオブザベーションを保持します。</li>
+<li><strong>左結合</strong>は、xのすべてのオブザベーションを保持します。</li>
+<li><strong>右結合</strong>は、yのすべてのオブザベーションを保持します。</li>
+</ul>
+<p>図でみるとつぎようになります。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/R4D_join.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">外部結合の例</figcaption>
+</figure>
+</div>
+<p>内部結合と3つの外部結合をベン図で表すとこうなります。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/R4D_outer_join.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">外部結合のベン図</figcaption>
+</figure>
+</div>
+<p>最もよく使われる結合は<strong>左結合</strong>です。 元データに他のデータを結合する場合，元データに含まれるデータのみ保持したい場合が多いので，追加データを調べるときはいつもこれを使います。 左結合はデフォルトの結合であるべきで、他の結合を選択する強い理由がない限り、これを使用します。</p>
+<p>では，<code>df_AB</code>と<code>df_C</code>を左結合してみましょう。 結合する際にキーとなる変数を指定する必要があります。 ここでは<code>name</code>と<code>term</code>の2つの変数をキーとして指定します。 こうすることで，<code>name</code>と<code>term</code>が一致する観測値を結合します。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>df_left <span class="ot">&lt;-</span> df_AB <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(df_C, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"term"</span>))</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_left)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     name term sale netincome
+1  トヨタ 2020 1000       100
+2  トヨタ 2021  900        90
+3  トヨタ 2022 1400       150
+4  ホンダ 2020  800       140
+5  ホンダ 2021  700       100
+6  ホンダ 2022  900        90
+7    日産 2020  400        NA
+8    日産 2021  500        NA
+9    日産 2022  900        NA
+10 マツダ 2020  300        NA
+11 マツダ 2021  400        NA
+12 マツダ 2022  200        NA</code></pre>
+</div>
+</div>
+<p><code>df_AB</code>にはトヨタ，ホンダ，日産，マツダのデータがありますが，<code>df_C</code>には日産とマツダのデータがなく，スバルのデータがあります。 そのため左結合すると，日産とマツダの<code>netincome</code>には<code>NA</code>が入り，スバルは欠落します。</p>
+<p><code>df_AB</code>と<code>df_C</code>を右結合してみましょう。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df_right <span class="ot">&lt;-</span> df_AB <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">right_join</span>(df_C, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"term"</span>))</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_right)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    name term sale netincome
+1 トヨタ 2020 1000       100
+2 トヨタ 2021  900        90
+3 トヨタ 2022 1400       150
+4 ホンダ 2020  800       140
+5 ホンダ 2021  700       100
+6 ホンダ 2022  900        90
+7 スバル 2020   NA        30
+8 スバル 2021   NA        35
+9 スバル 2022   NA        50</code></pre>
+</div>
+</div>
+<p><code>df_C</code>には日産とマツダのデータがなく，トヨタとホンダとスバルのデータがあります。 そのため右結合すると日産とマツダのデータが欠落し，<code>df_C</code>に含まれていたトヨタ，ホンダ，スバルのデータが残ります。 しかしスバルの<code>sale</code>には<code>NA</code>が入ります。</p>
+<p>最後に，<code>df_AB</code>と<code>df_C</code>を完全結合してみましょう。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df_full <span class="ot">&lt;-</span> df_AB <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">full_join</span>(df_C, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"term"</span>))</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     name term sale netincome
+1  トヨタ 2020 1000       100
+2  トヨタ 2021  900        90
+3  トヨタ 2022 1400       150
+4  ホンダ 2020  800       140
+5  ホンダ 2021  700       100
+6  ホンダ 2022  900        90
+7    日産 2020  400        NA
+8    日産 2021  500        NA
+9    日産 2022  900        NA
+10 マツダ 2020  300        NA
+11 マツダ 2021  400        NA
+12 マツダ 2022  200        NA
+13 スバル 2020   NA        30
+14 スバル 2021   NA        35
+15 スバル 2022   NA        50</code></pre>
+</div>
+</div>
+<p><code>df_AB</code>にはトヨタ，ホンダ，日産，マツダのデータがありますが，<code>df_C</code>にはトヨタ，ホンダ，スバルのデータがあるため， 完全結合した<code>df_full</code>にはすべての企業のデータが入ります。 しかし，日産とマツダの<code>netincome</code>には<code>NA</code>が入り，スバルの<code>sale</code>にも<code>NA</code>が入ります。</p>
+<p>このように，結合するデータによって，結合したデータに含まれるデータが変わるので，自分が望む結合後のデータの形を考えて，どの結合を使うかを選ぶ必要があります。</p>
+<p>ついでに内部結合もやってみましょう。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>df_inner <span class="ot">&lt;-</span> df_AB <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">inner_join</span>(df_C, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"term"</span>))</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_inner)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    name term sale netincome
+1 トヨタ 2020 1000       100
+2 トヨタ 2021  900        90
+3 トヨタ 2022 1400       150
+4 ホンダ 2020  800       140
+5 ホンダ 2021  700       100
+6 ホンダ 2022  900        90</code></pre>
+</div>
+</div>
+<p>予想どおり，両方のデータに含まれているトヨタとホンダだけが残り，片方のデータにしか含まれていない日産，マツダ，スバルのデータは欠落してしまいました。 このように内部結合は，両方のデータに存在する観測値のみを保持するため，多くのデータが欠落することになり，利用する機会があまりないです。</p>
+</section>
+</section>
+</section>
+<section id="データの保存" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="データの保存"><span class="header-section-number">5.4</span> データの保存</h2>
+<p>前処理が終わったデータは，ファイルとして保存しておくとよいでしょう。 たとえば，<code>df_left</code>を<code>df_left.csv</code>というファイル名で保存するには，<code>readr</code>パッケージの<code>write_csv()</code>関数を使います。</p>
+<p><code>write_csv()</code>関数の第1引数は保存したいオブジェクト(ここでは<code>df_left</code>)で，あとの主要な引数は，</p>
+<ul>
+<li><code>file</code></li>
+<li><code>na = "NA"</code></li>
+<li><code>append = FALSE</code></li>
+</ul>
+<p>となります。 <code>file</code>は保存するファイル名を指定します。 <code>na</code>は欠損値をどうするかを指定します。デフォルトでは<code>NA</code>となっています。 <code>append</code>は，既存のファイルに追記するかどうかを指定します。基本は上書きなので，<code>FALSE</code>にしておきます。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(df_left, <span class="at">file =</span> <span class="st">"df_left.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>これで，作業ディレクトリに<code>df_left.csv</code>が保存されました。 分析を進める際は，このようにして保存したデータを読み込んで使います。</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Empoli_Chap04.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Rの使い方</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Empoli_Chap06.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">記述統計とデータの可視化・視覚化</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">計量会計学のノート</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">本書は <a href="https://quarto.org/">Quarto</a> で作成されました。</div>
+  </div>
+</footer>
+
+
+
+</body></html>
