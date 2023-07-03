@@ -1,14 +1,14 @@
 project:
   type: book
   output-dir: docs
+
 book:
   title: "計量会計学ノート"
   subtitle : "プレゼミ2023"
   author: "Soichi Matsuura"
-  date: "6/7/2023"
+  date: "7/3/2023"
   reader-mode: true
   language: "ja"
-  # lang: "ja"
   sidebar:
     alignment: left
     style: "docked"
@@ -38,20 +38,20 @@ book:
         file: Empoli_Chap04.qmd
       - text: "5章 Rによるデータ操作"
         file: Empoli_Chap05.qmd
-      # - text: "6章 記述統計と可視化"
-      #   file: Empoli_Chap06.qmd
-      # - text: "7章 統計的推定"
-      #   file: Empoli_Chap07.qmd
-      # - text: "8章 統計的仮説検定"
-      #   file: Empoli_Chap08.qmd
-      # - text: "9章 変数間の関連性"
-      #   file: Empoli_Chap09.qmd
-      # - text: "10章 回帰分析の基礎"
-      #   file: Empoli_Chap10.qmd
-      # - text: "11章 回帰分析の統計的推定"
-      #   file: Empoli_Chap11.qmd
-      # - text: "15章 ロジスティック回帰分析"
-      #   file: Empoli_Chap15.qmd
+      - text: "6章 記述統計と可視化"
+        file: Empoli_Chap06.qmd
+      - text: "7章 統計的推定"
+        file: Empoli_Chap07.qmd
+      - text: "8章 統計的仮説検定"
+        file: Empoli_Chap08.qmd
+      - text: "9章 変数間の関連性"
+        file: Empoli_Chap09.qmd
+      - text: "10章 回帰分析の基礎"
+        file: Empoli_Chap10.qmd
+      - text: "11章 回帰分析の統計的推定"
+        file: Empoli_Chap11.qmd
+      - text: "15章 ロジスティック回帰分析"
+        file: Empoli_Chap15.qmd
     right:
       - icon: house
         href: https://so-ichi.com
@@ -75,13 +75,14 @@ book:
     - Empoli_Chap03.qmd
     - Empoli_Chap04.qmd
     - Empoli_Chap05.qmd
-    # - Empoli_Chap06.qmd
-    # - Empoli_Chap07.qmd
-    # - Empoli_Chap08.qmd
-    # - Empoli_Chap09.qmd
-    # - Empoli_Chap10.qmd
-    # - Empoli_Chap11.qmd
-    # - Empoli_Chap15.qmd
+    - Empoli_Chap06.qmd
+    - Empoli_Chap07.qmd
+    - Empoli_Chap08.qmd
+    - Empoli_Chap09.qmd
+    - Empoli_Chap10.qmd
+    - Empoli_Chap11.qmd
+    - Empoli_Chap15.qmd
+
 format:
   epub:
     toc: true
@@ -91,12 +92,26 @@ format:
     grid:
       sidebar-width: 200px
       body-width: 1200px
-    #   margin-width: 70px
-  pdf:
-    documentclass: scrreprt
+  # pdf:
+  #   documentclass: ltjsarticle
 
+code-block-bg: "#F6F6F6"
+# lang: "ja"
+# pdf-engine: lualatex
 execute:
   message : false
   warning: false
   fig-width: 14
   fig-height: 8
+
+# header-includes:
+#   - \usepackage{float}
+#   - \usepackage{xcolor}
+#   - \usepackage{tabularx}
+#   - \usepackage{amsmath}
+#   - \usepackage{engrec}
+#   - \usepackage{fontspec}
+
+knitr:
+  opts_chunk:
+    dev: cairo_pdf
