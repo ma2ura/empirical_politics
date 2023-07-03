@@ -17,17 +17,18 @@
 library(tidyverse)
 library(ggthemes)
 library(patchwork)
+require(fontregisterer)
 ```
 また、Macだとggplot2で作図したグラフで日本語が表示されないことがあります。
 そのため、グラフのスタイルを事前に設定しておいて、文字化けを回避します。
 
 ```{r}
 mystyle <- list (#  ggplotのテーマ
-  theme_few(), # ggthemesパッケージ
+  theme_few(),
   theme(
     text = element_text(
-      size=10,  #  フォントサイズ
-      family = "HiraKakuProN-W3" # ヒラギノフォント
+      size=10  #  フォントサイズ
+#      family = "HiraKakuProN-W3" # ヒラギノフォント
     )
   )
 )
@@ -367,7 +368,7 @@ ggplot(data = df_year, mapping = aes(x = 年度, y = 平均ROE))
 縦軸と横軸が表示されました。
 軸のラベルが文字化けしているので，最初に作成しておいたスタイル`mystyle`を適用します。
 ```{r}
-ggplot(data = df_year, mapping = aes(x = 年度, y = 平均ROE)) + mystyle
+ggplot(data = df_year, mapping = aes(x = 年度, y = 平均ROE))
 ```
 次に，グラフを作成するために，`geom_line()`関数を使います。
 `ggplot`関数では，次のような`geom_***()`関数を使って，グラフの種類を指定します。
@@ -386,7 +387,7 @@ ggplot(data = df_year, mapping = aes(x = 年度, y = 平均ROE)) + mystyle
 
 ```{r}
 ggplot(data = df_year, mapping = aes(x = 年度, y = 平均ROE)) +
-  geom_bar(stat = "identity") + mystyle
+  geom_bar(stat = "identity")
 ```
 
 横軸が順序に意味のある変数であれば，`geom_line()`で折れ線グラフを作るほうが良いでしょう。
@@ -406,7 +407,7 @@ df_year <- df_year %>%
 ```{r}
 ggplot(data = df_year, mapping = aes(x = 年度f, y = 平均ROE, group = 1)) +
   geom_line() + geom_point() +
-  xlab("年度") + ylab("平均ROE") + mystyle
+  xlab("年度") + ylab("平均ROE")
 ```
 
 上のコードは，必要な引数を省略せずに書きましたが，省略できるものを省略しつつ，
@@ -489,6 +490,7 @@ Macの場合，`ggsave()`関数を使っても，日本語が文字化けして�
 
 
 ```{r}
+#| eval: false
 quartz("violin_plot.pdf", width = 10, height = 6, pointsize = 10)
 print(g)
 dev.off()

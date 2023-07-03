@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -121,7 +92,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -139,85 +111,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <span class="navbar-title">計量会計学ノート</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page">
+    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
  <span class="menu-text">はじめに</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Empoli_Chap01.html">
- <span class="menu-text">1章</span></a>
+    <a class="nav-link" href="./Empoli_Chap01.html" rel="" target="">
+ <span class="menu-text">1章 計量会計学とは？</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Empoli_Chap02.html">
- <span class="menu-text">2章</span></a>
+    <a class="nav-link" href="./Empoli_Chap02.html" rel="" target="">
+ <span class="menu-text">2章 研究テーマの選び方</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Empoli_Chap03.html">
- <span class="menu-text">3章</span></a>
+    <a class="nav-link" href="./Empoli_Chap03.html" rel="" target="">
+ <span class="menu-text">3章 理論と仮説</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Empoli_Chap04.html">
- <span class="menu-text">4章</span></a>
+    <a class="nav-link" href="./Empoli_Chap04.html" rel="" target="">
+ <span class="menu-text">4章 Rの使い方</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Empoli_Chap05.html">
- <span class="menu-text">5章</span></a>
+    <a class="nav-link" href="./Empoli_Chap05.html" rel="" target="">
+ <span class="menu-text">5章 Rによるデータ操作</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Empoli_Chap06.html">
- <span class="menu-text">6章</span></a>
+    <a class="nav-link" href="./Empoli_Chap06.html" rel="" target="">
+ <span class="menu-text">6章 記述統計と可視化</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Empoli_Chap07.html">
- <span class="menu-text">7章</span></a>
+    <a class="nav-link" href="./Empoli_Chap07.html" rel="" target="">
+ <span class="menu-text">7章 統計的推定</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Empoli_Chap08.html">
- <span class="menu-text">8章</span></a>
+    <a class="nav-link" href="./Empoli_Chap08.html" rel="" target="">
+ <span class="menu-text">8章 統計的仮説検定</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Empoli_Chap09.html">
- <span class="menu-text">9章</span></a>
+    <a class="nav-link" href="./Empoli_Chap09.html" rel="" target="">
+ <span class="menu-text">9章 変数間の関連性</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap10.html" rel="" target="">
+ <span class="menu-text">10章 回帰分析の基礎</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap11.html" rel="" target="">
+ <span class="menu-text">11章 回帰分析の統計的推定</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap15.html" rel="" target="">
+ <span class="menu-text">15章 ロジスティック回帰分析</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://so-ichi.com"><i class="bi bi-house" role="img">
+    <a class="nav-link" href="https://so-ichi.com" rel="" target=""><i class="bi bi-house" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img" aria-label="GitHub">
+    <a class="nav-link" href="https://github.com/" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/matsuura_rits"><i class="bi bi-twitter" role="img" aria-label="Twitter">
+    <a class="nav-link" href="https://twitter.com/matsuura_rits" rel="" target=""><i class="bi bi-twitter" role="img" aria-label="Twitter">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
 </a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Empoli_Chap05.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -225,93 +214,122 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-      <div class="mt-2 flex-shrink-0 align-items-center">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">はじめに</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">はじめに</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Empoli_Chap01.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">計量会計学とは</span></a>
+  <a href="./Empoli_Chap01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">計量会計学とは</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Empoli_Chap02.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">研究テーマの選び方</span></a>
+  <a href="./Empoli_Chap02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">研究テーマの選び方</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Empoli_Chap03.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">理論と仮説</span></a>
+  <a href="./Empoli_Chap03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">理論と仮説</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Empoli_Chap04.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Rの使い方</span></a>
+  <a href="./Empoli_Chap04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Rの使い方</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Empoli_Chap05.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></a>
+  <a href="./Empoli_Chap05.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Empoli_Chap06.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">記述統計とデータの可視化・視覚化</span></a>
+  <a href="./Empoli_Chap06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">記述統計とデータの可視化・視覚化</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Empoli_Chap07.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">統計的推定</span></a>
+  <a href="./Empoli_Chap07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">統計的推定</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Empoli_Chap08.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">統計的仮説検定</span></a>
+  <a href="./Empoli_Chap08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">統計的仮説検定</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Empoli_Chap09.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">変数間の関連性</span></a>
+  <a href="./Empoli_Chap09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">変数間の関連性</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析の基礎</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">回帰分析による統計的推定</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ロジスティック回帰分析</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#データの読み込み" id="toc-データの読み込み" class="nav-link active" data-scroll-target="#データの読み込み"><span class="toc-section-number">5.1</span>  データの読み込み</a>
+  <li><a href="#データの読み込み" id="toc-データの読み込み" class="nav-link active" data-scroll-target="#データの読み込み"><span class="header-section-number">5.1</span> データの読み込み</a>
   <ul class="collapse">
-  <li><a href="#csvファイルの読み込み" id="toc-csvファイルの読み込み" class="nav-link" data-scroll-target="#csvファイルの読み込み"><span class="toc-section-number">5.1.1</span>  CSVファイルの読み込み</a></li>
-  <li><a href="#excelファイルの読み込み" id="toc-excelファイルの読み込み" class="nav-link" data-scroll-target="#excelファイルの読み込み"><span class="toc-section-number">5.1.2</span>  Excelファイルの読み込み</a></li>
+  <li><a href="#csvファイルの読み込み" id="toc-csvファイルの読み込み" class="nav-link" data-scroll-target="#csvファイルの読み込み"><span class="header-section-number">5.1.1</span> CSVファイルの読み込み</a></li>
+  <li><a href="#excelファイルの読み込み" id="toc-excelファイルの読み込み" class="nav-link" data-scroll-target="#excelファイルの読み込み"><span class="header-section-number">5.1.2</span> Excelファイルの読み込み</a></li>
   </ul></li>
-  <li><a href="#読み込んだデータの確認" id="toc-読み込んだデータの確認" class="nav-link" data-scroll-target="#読み込んだデータの確認"><span class="toc-section-number">5.2</span>  読み込んだデータの確認</a></li>
-  <li><a href="#データの整形" id="toc-データの整形" class="nav-link" data-scroll-target="#データの整形"><span class="toc-section-number">5.3</span>  データの整形</a>
+  <li><a href="#読み込んだデータの確認" id="toc-読み込んだデータの確認" class="nav-link" data-scroll-target="#読み込んだデータの確認"><span class="header-section-number">5.2</span> 読み込んだデータの確認</a></li>
+  <li><a href="#データの整形" id="toc-データの整形" class="nav-link" data-scroll-target="#データの整形"><span class="header-section-number">5.3</span> データの整形</a>
   <ul class="collapse">
-  <li><a href="#データ操作の基礎" id="toc-データ操作の基礎" class="nav-link" data-scroll-target="#データ操作の基礎"><span class="toc-section-number">5.3.1</span>  データ操作の基礎</a></li>
-  <li><a href="#パイプ演算子" id="toc-パイプ演算子" class="nav-link" data-scroll-target="#パイプ演算子"><span class="toc-section-number">5.3.2</span>  パイプ演算子</a></li>
+  <li><a href="#データ操作の基礎" id="toc-データ操作の基礎" class="nav-link" data-scroll-target="#データ操作の基礎"><span class="header-section-number">5.3.1</span> データ操作の基礎</a></li>
+  <li><a href="#パイプ演算子" id="toc-パイプ演算子" class="nav-link" data-scroll-target="#パイプ演算子"><span class="header-section-number">5.3.2</span> パイプ演算子</a></li>
   <li><a href="#新しい変数を作成する-mutate" id="toc-新しい変数を作成する-mutate" class="nav-link" data-scroll-target="#新しい変数を作成する-mutate">新しい変数を作成する <code>mutate</code></a></li>
   <li><a href="#データを抽出する-filter" id="toc-データを抽出する-filter" class="nav-link" data-scroll-target="#データを抽出する-filter">データを抽出する <code>filter</code></a></li>
   <li><a href="#変数を選択する-select" id="toc-変数を選択する-select" class="nav-link" data-scroll-target="#変数を選択する-select">変数を選択する <code>select</code></a></li>
   <li><a href="#データを並び替える-arrange" id="toc-データを並び替える-arrange" class="nav-link" data-scroll-target="#データを並び替える-arrange">データを並び替える <code>arrange</code></a></li>
-  <li><a href="#long形式とwide形式" id="toc-long形式とwide形式" class="nav-link" data-scroll-target="#long形式とwide形式"><span class="toc-section-number">5.3.3</span>  long形式とwide形式</a></li>
+  <li><a href="#long形式とwide形式" id="toc-long形式とwide形式" class="nav-link" data-scroll-target="#long形式とwide形式"><span class="header-section-number">5.3.3</span> long形式とwide形式</a></li>
   <li><a href="#ロングからワイド-pivot_wider" id="toc-ロングからワイド-pivot_wider" class="nav-link" data-scroll-target="#ロングからワイド-pivot_wider">ロングからワイド <code>pivot_wider</code></a></li>
   <li><a href="#ワイドからロング-pivot_longer" id="toc-ワイドからロング-pivot_longer" class="nav-link" data-scroll-target="#ワイドからロング-pivot_longer">ワイドからロング <code>pivot_longer</code></a></li>
-  <li><a href="#データの結合" id="toc-データの結合" class="nav-link" data-scroll-target="#データの結合"><span class="toc-section-number">5.3.4</span>  データの結合</a></li>
+  <li><a href="#データの結合" id="toc-データの結合" class="nav-link" data-scroll-target="#データの結合"><span class="header-section-number">5.3.4</span> データの結合</a></li>
   </ul></li>
-  <li><a href="#データの保存" id="toc-データの保存" class="nav-link" data-scroll-target="#データの保存"><span class="toc-section-number">5.4</span>  データの保存</a></li>
+  <li><a href="#データの保存" id="toc-データの保存" class="nav-link" data-scroll-target="#データの保存"><span class="header-section-number">5.4</span> データの保存</a></li>
   </ul>
 </nav>
     </div>
@@ -320,7 +338,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></h1>
 </div>
 
 
@@ -335,9 +353,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<div class="cell">
-
-</div>
 <p>この章では、Rを用いたデータ操作の基本的な方法を学びます。 この章は何度も読み返し、繰り返し練習してください。 ここでは、なぜRを使うと便利なのかを分かってもらうために、Excelの操作と比較する形で、Rのデータ操作の基本を学びます。</p>
 <section id="データの読み込み" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="データの読み込み"><span class="header-section-number">5.1</span> データの読み込み</h2>
@@ -357,12 +372,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>このように、値とコンマ<code>,</code>のみで構成されたファイルのため、余計な情報が入っておらず、またファイルサイズも小さく、加工が簡単なので、データのやり取りによく使われます。</p>
 <p>ではファイルを読み込んでみます。ここでは、松浦のウェブサイトにあるデータ<code>keshohin_2023.csv</code>を読み込んでみます。 Rの場合は、<code>read.csv</code>という関数を使って、URLを直接指定して読み込むことができます。読み込んだデータを<code>df</code>という変数に代入しています。</p>
 <p>Excelの場合は、インターネット上のデータを直接取り込むことは難しいので、いったんパソコンの中に保存してから、ファイルを開くとします。</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Rの場合
 </div>
 </div>
@@ -372,12 +387,12 @@ Rの場合
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 MS Excelの場合
 </div>
 </div>
@@ -392,12 +407,12 @@ MS Excelの場合
 <section id="excelファイルの読み込み" class="level3" data-number="5.1.2">
 <h3 data-number="5.1.2" class="anchored" data-anchor-id="excelファイルの読み込み"><span class="header-section-number">5.1.2</span> Excelファイルの読み込み</h3>
 <p>MS Excelのファイルは拡張子が<code>.xlsx</code>、古いMS Excelだと<code>.xls</code>です。 RでExcelファイルを読み込むときは、<code>read_excel</code>という関数を使います。 Excelファイルを用意するのが面倒なので、ここではこうやれば読み込めるよ、というコードだけ説明します。ファイル名は<code>hoge.xlsx</code>とします。</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Rの場合
 </div>
 </div>
@@ -407,12 +422,12 @@ Rの場合
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 MS Excelの場合
 </div>
 </div>
@@ -437,12 +452,12 @@ MS Excelの場合
 </ul>
 <p>これらを使って、データの中身を確認し、データの形に適した処理方法を学ぶ必要があります。 以下では、<code>head()</code>関数を使って、データの最初の数行を表示させてから、<code>str()</code>関数でデータの中の変数とその型を確認します。</p>
 <p>Excelは目視が中心ですが、見ただけでは、文字列なのか数なのかが分からないので、やはりデータの型は確認する必要があります。</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Rの場合
 </div>
 </div>
@@ -473,12 +488,12 @@ Rの場合
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 MS Excelの場合
 </div>
 </div>
@@ -533,44 +548,44 @@ MS Excelの場合
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">%&gt;%</span> <span class="fu">rnorm</span>(<span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1]  2.02098289 -0.01567589  0.15159671  0.25778923 -1.38789405 -0.96028000
-  [7] -0.62912821 -0.04270311  0.22528622  1.68275807 -0.94537580 -0.40561502
- [13]  0.05331148  0.72160469 -0.01756827 -1.06325381 -0.03343546  1.00321681
- [19] -0.38198565  1.49742104  0.55100865  0.66952080  0.54989461  0.65121238
- [25] -0.07506911 -0.38576495  0.01219652  0.29980537 -0.45429946  0.63678530
- [31]  1.78394311  1.77194720 -0.34038288 -1.18337434 -1.79364845  0.10026490
- [37] -2.61258387  0.78334820  0.95621964 -1.34816037 -2.08444166  1.65247988
- [43] -1.07970665 -0.22145043 -0.91265998  0.01654933 -0.78168947  3.19711303
- [49] -1.49518796 -1.92111855 -1.26354892  2.38514420  0.02513105 -0.39064926
- [55]  1.27447458 -0.84663064 -0.92110365 -1.14568245  0.51829520  0.08322748
- [61] -0.22657199 -0.23424784  1.51322048  1.35188482 -1.04573789 -1.51522853
- [67]  0.14801748  0.40871578 -0.63200582  0.94535218  1.10491897  0.68333340
- [73] -0.03745843  0.68080519 -0.16254380 -0.96087029  0.09110569 -0.61514941
- [79] -0.15460568 -1.83845407  0.31323268  1.14365399 -1.97327727  0.88112748
- [85] -0.52354804 -2.27717328  0.07460471  0.13076830 -0.59640832 -0.83443571
- [91]  0.15197046 -0.80717829  0.06020061 -0.34070526 -0.31337371  0.56701534
- [97] -1.33869704 -0.51786763  0.33582848 -1.58718725</code></pre>
+<pre><code>  [1] -0.17432051 -0.07748527 -0.05071530  1.61794663  0.56429459  1.56221548
+  [7] -0.65654459 -0.49054877 -0.22833967  0.95344679 -0.85781263 -1.34316229
+ [13] -1.07156879 -0.01045333  0.37783040 -0.30792744  0.78734950 -1.78686837
+ [19]  1.91505008  1.32456799 -1.03104576 -0.52000211  0.61243223 -0.23288404
+ [25]  2.21857347 -1.38399087 -0.05725251 -1.12057479  0.45745099  0.81232351
+ [31]  0.07140010  0.11651681  0.41334210 -0.49332876 -0.17683923  1.01086482
+ [37] -1.00585547  0.56631405  1.19324649  0.06285872 -0.16053517  2.05420661
+ [43]  0.81795679  1.52200087 -0.04014259  0.22173996  1.69665198  2.02226362
+ [49] -0.62366861 -0.38557931  1.65517703  0.71166147  0.36920721 -0.88496383
+ [55] -0.76420822  2.62660496 -0.78662679 -0.36409836 -0.84803614 -1.07554961
+ [61]  0.06037242  0.80619857 -0.89507186  0.06595305 -0.77147499 -0.75908197
+ [67] -1.81342249  0.47021455  0.78284874  1.18088212 -1.83163518 -0.09830332
+ [73] -0.32874604 -0.02993353  0.64020150  0.52718801  1.87520195  2.08200305
+ [79] -1.43653649 -0.82671122  0.27067895 -0.06499133 -0.25105630 -0.21085695
+ [85] -1.63055845  1.42117362 -0.11663847 -1.90128318  1.08533912 -1.09092580
+ [91] -0.15817220 -0.17152933 -1.10999622  0.21288747 -0.30173524  1.48830826
+ [97] -0.89798954  0.67834140 -1.34989148  0.14828614</code></pre>
 </div>
 </div>
 <p>となります。 これは<code>rnorm()</code>関数の第1引数がデータの個数なので，そこに<code>100</code>を渡しています。 ここで平均に値を渡したい場合を考えます。 <code>mean</code>引数は第2引数なので，パイプ演算子では自動で渡してくれません。 そこで<code>.</code>を使って渡す場所を指定してあげます。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">%&gt;%</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span>. , <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 100.57811 101.13941  98.63739 100.04955 100.10685  99.90529  98.55498
-  [8]  99.37187 100.54730 100.92290 100.46077  99.36059  99.47082  98.84983
- [15]  99.55702  99.78606  99.33123 100.08131 103.04744  99.37914 102.13397
- [22] 100.18628 101.57551 100.38801 100.88334  99.31324  97.78506  99.18476
- [29]  99.91592  98.94678 100.26314  97.22525  99.32539 100.87064 100.19106
- [36]  99.54950  99.42282  98.35240 100.79855 101.24605  98.50947 100.26702
- [43] 100.35572 100.55771 100.24754 100.24274  99.57423  99.88489 101.63059
- [50] 101.16415 100.45155  99.86209 101.06982  99.85424  98.87627 100.24307
- [57] 100.71526  98.82500  99.07848 100.23008 101.05091 100.23221 101.17351
- [64] 100.05771  99.46782  99.84655 101.54824 100.35373  97.87418  99.40525
- [71] 100.63076  98.68811  99.67398 100.27721  99.77991  99.72222 100.06803
- [78] 100.28806  98.31865  98.29058 100.40161 100.24905 100.07623  99.70658
- [85]  99.25663  99.22017 100.39887 101.70582 100.32119 100.74222  99.30291
- [92] 100.01350 101.50755  99.61240 100.93681  99.98940 101.20864  99.05292
- [99]  99.07668 100.30761</code></pre>
+<pre><code>  [1]  99.10436  99.57125  99.95542  99.52662 100.05045  99.80833  99.82485
+  [8] 100.18125 100.70257  99.20295  98.82094  99.03305  99.97208 101.60568
+ [15] 100.35132 101.75364  97.76127  99.85671 100.96000  99.95073 100.93240
+ [22]  99.31156  99.68831  98.89324  99.73564 102.13376  99.26052  99.08703
+ [29] 100.39858 100.39227 100.13016  99.91434  99.89164  98.74682 101.48165
+ [36]  99.44255  99.53558 100.52191 101.03374  98.05087 101.62122 100.58798
+ [43]  98.62594 100.08127  98.61558 100.13288 100.04746  99.86204 100.57233
+ [50]  98.68160  99.83742 101.00244 101.58742  99.09665 101.60652  98.96794
+ [57] 100.06920  99.60654 100.22556  98.54469 100.73730  99.91894 100.48671
+ [64]  99.50543 101.20307  98.17191  99.51566 100.05791 100.77000 100.29410
+ [71]  99.85552 100.04073 100.40329  99.11326  99.70870 100.65645 100.69084
+ [78] 100.53825 100.13490 100.20839 102.79012  99.23006  99.53050 100.13734
+ [85]  99.29280  99.40955 100.08154 101.70865 100.01095  98.67806 100.10335
+ [92]  98.22078 100.42641  99.92206  98.60904 100.21457  99.69667 100.01997
+ [99] 100.92140 100.50183</code></pre>
 </div>
 </div>
 <p>これで平均100，標準偏差1の正規分布から100個のデータを取り出せました。</p>
@@ -599,12 +614,12 @@ MS Excelの場合
 <section id="新しい変数を作成する-mutate" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="新しい変数を作成する-mutate">新しい変数を作成する <code>mutate</code></h3>
 <p>新しい変数を作成するには，<code>dplyr</code>パッケージの<code>mutate()</code>関数を使います。 先ほど読みこんだデータから，当期純利益を売上高で除して売上高当期純利益率を計算して，<code>ratio</code>という変数を作ってみましょう。</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Rの場合
 </div>
 </div>
@@ -617,12 +632,12 @@ Rの場合
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 MS Excelの場合
 </div>
 </div>
@@ -637,12 +652,12 @@ MS Excelの場合
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(条件, 条件が真のときの値, 条件が偽のときの値)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>先ほど計算した売上高当期純利益率が5%以上ならば「高い」，そうでなければ「低い」という変数<code>highlow</code>を作ってみましょう。</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Rの場合
 </div>
 </div>
@@ -655,12 +670,12 @@ Rの場合
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 MS Excelの場合
 </div>
 </div>
@@ -692,12 +707,12 @@ MS Excelの場合
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(highlow <span class="sc">==</span> <span class="st">"高い"</span>) <span class="co"># 条件</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>:::</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 MS Excelの場合
 </div>
 </div>
@@ -720,12 +735,12 @@ MS Excelの場合
 <li><code>|</code> : または</li>
 </ul>
 <p>たとえば，資生堂と花王を抽出したり，売上高当期純利益率が5%以上かつ売上高が1000億円以上の企業を抽出するには， 次のように書きます。</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Rの場合
 </div>
 </div>
@@ -742,12 +757,12 @@ Rの場合
 <section id="変数を選択する-select" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="変数を選択する-select">変数を選択する <code>select</code></h3>
 <p>データの中から必要な変数だけを選択するには，<code>dplyr</code>パッケージの<code>select()</code>関数を使います。 たとえば，先ほど作成した<code>df</code>から，企業コード，企業名，売上高当期純利益率の3つの変数だけを選択してみましょう。</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Rの場合
 </div>
 </div>
@@ -758,12 +773,12 @@ Rの場合
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 MS Excelの場合
 </div>
 </div>
@@ -785,12 +800,12 @@ MS Excelの場合
 <section id="データを並び替える-arrange" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="データを並び替える-arrange">データを並び替える <code>arrange</code></h3>
 <p>データを並び替えるには，<code>dplyr</code>パッケージの<code>arrange()</code>関数を使います。 たとえば，先ほど作成した<code>df</code>から，売上高当期純利益率を並び替えてみましょう。</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Rの場合
 </div>
 </div>
@@ -813,12 +828,12 @@ Rの場合
 </div>
 </div>
 <p>小さい順に並び替えられました。 大きい順にするには，<code>desc()</code>関数を使います。 ついでに<code>knitr</code>パッケージの<code>kabble()</code>関数で表を見やすく加工してみます。</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Rの場合
 </div>
 </div>
@@ -830,7 +845,7 @@ Rの場合
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="co"># 先頭の10行</span></span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>) <span class="co"># 表をきれいに表示</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;">name</th>
@@ -886,12 +901,12 @@ Rの場合
 </div>
 <p>これでどの企業のどの年度の売上高当期純利益率が大きいのかが一目瞭然になりました。</p>
 <p>MS Excelだと，</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 MS Excelの場合
 </div>
 </div>
@@ -1294,14 +1309,14 @@ MS Excelの場合
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/R4D_join.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">外部結合の例</figcaption><p></p>
+<figcaption class="figure-caption">外部結合の例</figcaption>
 </figure>
 </div>
 <p>内部結合と3つの外部結合をベン図で表すとこうなります。</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/R4D_outer_join.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">外部結合のベン図</figcaption><p></p>
+<figcaption class="figure-caption">外部結合のベン図</figcaption>
 </figure>
 </div>
 <p>最もよく使われる結合は<strong>左結合</strong>です。 元データに他のデータを結合する場合，元データに含まれるデータのみ保持したい場合が多いので，追加データを調べるときはいつもこれを使います。 左結合はデフォルトの結合であるべきで、他の結合を選択する強い理由がない限り、これを使用します。</p>
@@ -1437,9 +1452,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1504,6 +1533,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1559,6 +1674,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">計量政治学のノート</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
     <div class="nav-footer-right">本書は <a href="https://quarto.org/">Quarto</a> で作成されました。</div>
   </div>
 </footer>
