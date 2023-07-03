@@ -384,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_few</span>(),</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">size=</span><span class="dv">10</span>,  <span class="co">#  フォントサイズ</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">size=</span><span class="dv">16</span>,  <span class="co">#  フォントサイズ</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span> <span class="co"># ヒラギノフォント</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  )</span>
@@ -734,7 +734,8 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    企業数 <span class="ot">=</span> <span class="fu">n</span>(),</span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    平均売上高 <span class="ot">=</span> <span class="fu">mean</span>(売上高, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># 平均</span></span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <thead>
@@ -776,15 +777,17 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(株主資本 <span class="sc">&gt;</span><span class="dv">0</span> ) <span class="sc">%&gt;%</span> <span class="co"># 株主資本がマイナスの企業を除外</span></span>
 <span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ROE =</span> 親会社株主に帰属する当期純利益 <span class="sc">/</span> <span class="fu">lag</span>(株主資本) <span class="co"># ROEを計算</span></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>df_year <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(年度) <span class="sc">%&gt;%</span></span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    平均<span class="at">ROE =</span> <span class="fu">mean</span>(ROE, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>df_year <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(年度) <span class="sc">%&gt;%</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    平均<span class="at">ROE =</span> <span class="fu">mean</span>(ROE, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>これで，年度ごと，上場場所ごとに，平均ROEを計算したデータフレーム<code>df_year</code>ができました。</p>
 <p>ここで注意しなければならない点として，<code>group_by(企業名)</code>とした上で，<code>lag()</code>関数を使っている点です。 <code>lag()</code>関数は，引数として指定した変数の値の1つ前の値に変換します。 したがって，<code>group_by()</code>を使わないと次のような結果になります。</p>
@@ -795,6 +798,7 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <tr class="header">
 <th style="text-align: left;">企業名</th>
 <th style="text-align: left;">年度</th>
+<th style="text-align: right;">親会社株主に帰属する当期純利益</th>
 <th style="text-align: right;">株主資本</th>
 <th style="text-align: right;">ROE</th>
 </tr>
@@ -803,36 +807,42 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <tr class="odd">
 <td style="text-align: left;">極洋</td>
 <td style="text-align: left;">2020</td>
+<td style="text-align: right;">2037</td>
 <td style="text-align: right;">32396</td>
 <td style="text-align: right;">0.0649844</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">極洋</td>
 <td style="text-align: left;">2021</td>
+<td style="text-align: right;">3838</td>
 <td style="text-align: right;">35300</td>
 <td style="text-align: right;">0.1184714</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">極洋</td>
 <td style="text-align: left;">2022</td>
+<td style="text-align: right;">4634</td>
 <td style="text-align: right;">39072</td>
 <td style="text-align: right;">0.1312748</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">日本水産</td>
 <td style="text-align: left;">1999</td>
+<td style="text-align: right;">-2794</td>
 <td style="text-align: right;">58734</td>
-<td style="text-align: right;">NA</td>
+<td style="text-align: right;">-0.0715090</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">日本水産</td>
 <td style="text-align: left;">2000</td>
+<td style="text-align: right;">5064</td>
 <td style="text-align: right;">67055</td>
 <td style="text-align: right;">0.0862192</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">日本水産</td>
 <td style="text-align: left;">2001</td>
+<td style="text-align: right;">3085</td>
 <td style="text-align: right;">64842</td>
 <td style="text-align: right;">0.0460070</td>
 </tr>
@@ -924,7 +934,7 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 </div>
 <p>縦軸と横軸が表示されました。 軸のラベルが文字化けしているので，最初に作成しておいたスタイル<code>mystyle</code>を適用します。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df_year, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> 年度, <span class="at">y =</span> 平均ROE))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df_year, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> 年度, <span class="at">y =</span> 平均ROE)) <span class="sc">+</span> mystyle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Empoli_Chap06_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="1344"></p>
 </div>
@@ -943,7 +953,7 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <p>ここでは横軸が<code>年度</code>という文字列，縦軸が<code>平均ROE</code>という量的変数となるグラフを作るので，<code>geom_bar()</code>を使います。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df_year, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> 年度, <span class="at">y =</span> 平均ROE)) <span class="sc">+</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span> mystyle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Empoli_Chap06_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="1344"></p>
 </div>
@@ -978,8 +988,10 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <h3 data-number="6.2.2" class="anchored" data-anchor-id="ヒストグラム"><span class="header-section-number">6.2.2</span> ヒストグラム</h3>
 <p>次に，前年度のROEのヒストグラムを作成してみましょう。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span> <span class="fu">aes</span>(ROE) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>) <span class="sc">+</span> mystyle</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span> <span class="fu">aes</span>(ROE) <span class="sc">+</span> </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>) <span class="sc">+</span> mystyle</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Empoli_Chap06_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="1344"></p>
 </div>

@@ -439,10 +439,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">10</span>, <span class="dv">1</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.11386</code></pre>
+<pre><code>[1] 9.780678</code></pre>
 </div>
 </div>
-<p>平均値は10.1138566となり，母平均1とほぼ同じ値になりましたが、1ではありません。 これ母平均<span class="math inline">1</span>と標本平均10.1138566の差を誤差といい、母集団と標本のズレを意味します。</p>
+<p>平均値は9.7806775となり，母平均1とほぼ同じ値になりましたが、1ではありません。 これ母平均<span class="math inline">1</span>と標本平均9.7806775の差を誤差といい、母集団と標本のズレを意味します。</p>
 <p>平均10，標準偏差1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算する，という指向を10000回繰り返して，10000個の平均値をヒストグラムで表示してみます。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">100</span></span>
@@ -461,7 +461,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.00068</code></pre>
+<pre><code>[1] 9.999588</code></pre>
 </div>
 </div>
 <p>とほぼ1と等しくなります。 このように，標本数を増やしていくと，標本平均の平均値は母平均に近づく，という法則を<strong>大数の法則</strong>(law of large numbers)といいます。 統計学における極めて重要な概念です。</p>
@@ -555,12 +555,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="一致推定量" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="一致推定量">一致推定量</h3>
 <p>標本数が増えると，標本分布は母集団の分布に近づく，という特徴をもつ推定量を<strong>一致推定量</strong>(consistent estimator)といいます。 これが最も重要な特徴です。</p>
-<p>例えば，次のような母集団が</p>
+<p>例えば，関心のある母集団が</p>
 <ul>
 <li>母平均<span class="math inline">\mu = 62</span></li>
 <li>母分散<span class="math inline">\sigma^2 = 25</span></li>
 </ul>
-<p>という正規分布にしたがう，としましょう。 グラフにする前に，必要なパッケージの読み出しと，グラフのスタイルを設定します。</p>
+<p>という母数をもつ正規分布に従っている，としましょう。 グラフにする前に，必要なパッケージの読み出しと，グラフのスタイルを設定します。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
@@ -568,17 +568,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_few</span>(), <span class="co"># ggthemesパッケージ</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">size=</span><span class="dv">10</span> <span class="co"># ,  #  フォントサイズ</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>      <span class="co"># family = "HiraKakuProN-W3" # ヒラギノフォント</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">size=</span><span class="dv">16</span>,  <span class="co">#  フォントサイズ</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span> <span class="co"># ヒラギノフォント</span></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>グラフにすると次のようになります。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">47</span>,<span class="dv">77</span>)), <span class="fu">aes</span>(<span class="at">x=</span>X))</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean=</span><span class="dv">62</span>, <span class="at">sd=</span><span class="dv">5</span>)) <span class="sc">+</span> mystyle</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">X =</span> <span class="fu">c</span>(<span class="dv">47</span>,<span class="dv">77</span>)))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span><span class="fu">aes</span>(<span class="at">x =</span> X)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">stat_function</span>(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fun =</span> dnorm, </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">62</span>, <span class="at">sd =</span> <span class="dv">5</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> mystyle</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Empoli_Chap07_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="1344"></p>
 </div>
@@ -587,24 +591,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">10</span> <span class="co"># 標本サイズ</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>trial <span class="ot">=</span> <span class="dv">1000</span> <span class="co"># 試行回数</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>trial) {</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">62</span>, <span class="dv">5</span>)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  result[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial) <span class="co"># 結果を入れる空の箱</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>trial) { <span class="co"># 以下をtrial回繰り返す</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">62</span>, <span class="dv">5</span>) <span class="co"># 標本を生成</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  result[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x) <span class="co"># 標本平均を計算</span></span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(result) <span class="co"># 標本平均の平均</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 62.01963</code></pre>
+<pre><code>[1] 62.01271</code></pre>
 </div>
 </div>
-<p>ヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は62.0196257となりますが，これは母平均62に近い値になっています。</p>
+<p>ヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は62.0127062となりますが，これは母平均62に近い値になっています。</p>
 <p>グラフで確認すると，</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">as.tibble</span>(result)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(result) <span class="sc">+</span> <span class="fu">aes</span>(value) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..), <span class="at">bins=</span><span class="dv">60</span>, <span class="at">fill=</span><span class="st">"white"</span>, <span class="at">color=</span><span class="st">"black"</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">62</span>, <span class="at">sd =</span> <span class="dv">5</span>))</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">47</span>,<span class="dv">77</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">62</span>, <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> mystyle</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(result) <span class="sc">+</span> <span class="fu">aes</span>(value) <span class="co"># 軸の設定</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_histogram</span>( <span class="co"># ヒストグラム</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">bins =</span> <span class="dv">60</span>, <span class="co"># y軸を密度に  </span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="co"># ヒストグラムの色</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">62</span>, <span class="at">sd =</span> <span class="dv">5</span>))　<span class="co"># 母集団の分布</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">62</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="co"># 母平均の縦線</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">47</span>,<span class="dv">77</span>) <span class="sc">+</span> mystyle <span class="co"># x軸の範囲を指定</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Empoli_Chap07_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="1344"></p>
 </div>
@@ -752,58 +760,65 @@ t = \frac{\bar x - \mu}{SE}
 <p>信頼区間とは、観察できない真の値である母数が存在し、その母集団から標本を抽出し、標本平均を計算するということを繰り返したときに、95%の標本平均の信頼区間の中に真の値である母平均が入っている、ということです。</p>
 <p>先の例を使って、信頼区間を表現してみます。 いま、<strong>母集団が平均62，標準偏差5の正規分布にしたがう</strong>とします。 この母集団から<strong>標本サイズ50</strong>の標本を<strong>50個抽出</strong>して，標本平均と標本標準偏差を計算します。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(tidyver)</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>trial <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="co"># 標本数</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="co"># 標本サイズ</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">62</span> <span class="co"># 母平均</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># 母標準偏差</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>) <span class="co"># 乱数を準備</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 標本ごとの統計量を収納する空のベクトルを作成</span></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>sample_mean <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial) <span class="co">#</span></span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>sample_sd   <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial) <span class="co">#</span></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>uplimit     <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial) <span class="co">#</span></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>lowlimit    <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial) <span class="co">#</span></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 標本の数だけ，以下の計算を繰り返す</span></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>trial) {</span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  temp_sample    <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma) <span class="co"># 標本を抽出</span></span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>  sample_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(temp_sample) <span class="co"># 標本平均を計算</span></span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>  sample_sd[i]   <span class="ot">&lt;-</span> <span class="fu">sd</span>(temp_sample) <span class="co"># 標本標準偏差を計算</span></span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 信頼区間の計算</span></span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> .<span class="dv">95</span> <span class="co"># 信頼水準の設定 (95%信頼区間)</span></span>
-<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fu">qt</span>( (<span class="dv">1</span> <span class="sc">-</span> p) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>) <span class="co"># 限界値の計算</span></span>
-<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 信頼区間の上限と下限の計算</span></span>
-<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>uplimit  <span class="ot">&lt;-</span> sample_mean <span class="sc">+</span> alpha <span class="sc">*</span> sample_sd<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>lowlimit <span class="ot">&lt;-</span> sample_mean <span class="sc">-</span> alpha <span class="sc">*</span> sample_sd<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>trial <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="co"># 標本数</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="co"># 標本サイズ</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">62</span> <span class="co"># 母平均</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># 母標準偏差</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>) <span class="co"># 乱数を準備</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 標本ごとの統計量を収納する空のベクトルを作成</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>sample_mean <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial) <span class="co"># 標本平均の入れ物</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>sample_sd   <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial) <span class="co"># 標本標準偏差の入れ物</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>uplimit     <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial) <span class="co"># 信頼区間の上限の入れ物</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>lowlimit    <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial) <span class="co"># 信頼区間の下限の入れ物</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 標本の数だけ，以下の計算を繰り返す</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>trial) {</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  temp_sample    <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu, sigma) <span class="co"># 標本を抽出</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  sample_mean[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(temp_sample) <span class="co"># 標本平均を計算</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>  sample_sd[i]   <span class="ot">&lt;-</span> <span class="fu">sd</span>(temp_sample) <span class="co"># 標本標準偏差を計算</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="co"># 信頼区間の計算</span></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> .<span class="dv">95</span> <span class="co"># 信頼水準の設定 (95%信頼区間)</span></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fu">qt</span>( (<span class="dv">1</span> <span class="sc">-</span> p) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>) <span class="co"># 限界値の計算</span></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 信頼区間の上限と下限の計算</span></span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>uplimit  <span class="ot">&lt;-</span> sample_mean <span class="sc">+</span> alpha <span class="sc">*</span> sample_sd<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>lowlimit <span class="ot">&lt;-</span> sample_mean <span class="sc">-</span> alpha <span class="sc">*</span> sample_sd<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>confidence_interval <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>  標本平均 <span class="ot">=</span> sample_mean,</span>
-<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>  上限 <span class="ot">=</span> uplimit,</span>
-<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>  下限 <span class="ot">=</span> lowlimit,</span>
-<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>  標本番号 <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>trial</span>
-<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot using ggplot2</span></span>
-<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(confidence_interval, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(標本番号, 標本平均), <span class="at">y =</span> 標本平均)) <span class="sc">+</span></span>
-<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> 下限, <span class="at">ymax =</span> 上限,</span>
-<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a>                    <span class="at">color =</span> (下限 <span class="sc">&lt;=</span> <span class="dv">62</span> <span class="sc">&amp;</span> 上限 <span class="sc">&gt;=</span> <span class="dv">62</span>)), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"black"</span>), <span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> 標本平均)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">57</span>,<span class="dv">67</span>) <span class="sc">+</span></span>
-<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">62</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"標本ID"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"95%信頼区間"</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> mystyle</span>
-<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">47</span>,<span class="dv">77</span>)), <span class="fu">aes</span>(<span class="at">x=</span>X))</span>
-<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean=</span><span class="dv">62</span>, <span class="at">sd=</span><span class="dv">5</span>)) <span class="sc">+</span></span>
-<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">62</span>, <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> mystyle</span>
-<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a>p<span class="sc">/</span>g_ci</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>confidence_interval <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>  標本平均 <span class="ot">=</span> sample_mean,</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>  上限 <span class="ot">=</span> uplimit,</span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>  下限 <span class="ot">=</span> lowlimit,</span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>  標本番号 <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>trial</span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot using ggplot2 </span></span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(confidence_interval) <span class="sc">+</span></span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> 標本番号, <span class="at">y =</span> 標本平均)</span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># aes(x = reorder(標本番号, 標本平均), y = 標本平均)</span></span>
+<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">geom_errorbar</span>(</span>
+<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">ymin =</span> 下限, <span class="at">ymax =</span> 上限,</span>
+<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> (下限 <span class="sc">&lt;=</span> <span class="dv">62</span> <span class="sc">&amp;</span> 上限 <span class="sc">&gt;=</span> <span class="dv">62</span>)</span>
+<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a>      ), <span class="at">width =</span> <span class="fl">0.2</span>)</span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">scale_color_manual</span>(</span>
+<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"black"</span>),</span>
+<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">guide =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> 標本平均)) </span>
+<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">62</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"標本ID"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"95%信頼区間"</span>)</span>
+<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">47</span>,<span class="dv">77</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> mystyle</span>
+<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">47</span>,<span class="dv">77</span>)), <span class="fu">aes</span>(<span class="at">x=</span>X))</span>
+<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean=</span><span class="dv">62</span>, <span class="at">sd=</span><span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb32-55"><a href="#cb32-55" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">62</span>, <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> mystyle</span>
+<span id="cb32-56"><a href="#cb32-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-57"><a href="#cb32-57" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb32-58"><a href="#cb32-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-59"><a href="#cb32-59" aria-hidden="true" tabindex="-1"></a>p<span class="sc">/</span>g_ci</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Empoli_Chap07_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="1344"></p>
 </div>

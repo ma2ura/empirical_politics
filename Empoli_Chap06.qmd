@@ -27,7 +27,7 @@ mystyle <- list (#  ggplotのテーマ
   theme_few(),
   theme(
     text = element_text(
-      size=10,  #  フォントサイズ
+      size=16,  #  フォントサイズ
      family = "HiraKakuProN-W3" # ヒラギノフォント
     )
   )
@@ -265,7 +265,8 @@ df %>%
     企業数 = n(),
     平均売上高 = mean(売上高, na.rm = TRUE) # 平均
     ) %>%
-  knitr::kable(booktabs = TRUE)
+  ungroup() %>%
+  knitr::kable(booktabs = TRUE) 
 ```
 
 結果を見れば分かるとおり，`group_by()`で上場場所ごとにグループ化し，`summarize()`で企業数と平均売上高を計算しているので，上場場所，企業数，平均売上高の3変数が3つの観測値をもつ$3 \times 3$の表が作成されています。
@@ -285,7 +286,9 @@ df <- df %>%
     filter(株主資本 >0 ) %>% # 株主資本がマイナスの企業を除外
   mutate(
     ROE = 親会社株主に帰属する当期純利益 / lag(株主資本) # ROEを計算
-    )
+    ) %>%
+  ungroup()
+  
 
 
 df_year <- df %>%
@@ -293,7 +296,7 @@ df_year <- df %>%
   summarize(
     平均ROE = mean(ROE, na.rm = TRUE)
     ) %>%
-    ungroup()
+  ungroup()
 ```
 
 これで，年度ごと，上場場所ごとに，平均ROEを計算したデータフレーム`df_year`ができました。
@@ -304,14 +307,14 @@ df_year <- df %>%
 
 ```{r}
 #| echo: false
-df_sample <- df %>%
+df_1 <- df %>%
   replace_na(list(資本剰余金 = 0, 利益剰余金 = 0, 自己株式 = 0)) %>%
   mutate(
     株主資本 = 資本金 + 資本剰余金 + 利益剰余金 + 自己株式, # 株主資本を計算
     ROE = 親会社株主に帰属する当期純利益 / lag(株主資本) # ROEを計算
     ) %>%
-  select(企業名, 年度, 株主資本, ROE)
-knitr::kable(head(df_sample[22:27, ]))
+  select(企業名, 年度,親会社株主に帰属する当期純利益, 株主資本, ROE)
+knitr::kable(head(df_1[22:27, ]))
 ```
 
 ここで問題になっているのが，日本水産の1999年のROEが計算されている点である。
@@ -329,7 +332,8 @@ df_2 <- df %>%
     株主資本 = 資本金 + 資本剰余金 + 利益剰余金 + 自己株式, # 株主資本を計算
     ROE = 親会社株主に帰属する当期純利益 / lag(株主資本) # ROEを計算
     ) %>%
-  select(企業名, 年度, 株主資本, ROE)
+  select(企業名, 年度, 株主資本, ROE) %>%
+  ungroup()
 knitr::kable(head(df_2[22:27, ]))
 ```
 ## 変数の可視化・視覚化
@@ -368,7 +372,7 @@ ggplot(data = df_year, mapping = aes(x = 年度, y = 平均ROE))
 縦軸と横軸が表示されました。
 軸のラベルが文字化けしているので，最初に作成しておいたスタイル`mystyle`を適用します。
 ```{r}
-ggplot(data = df_year, mapping = aes(x = 年度, y = 平均ROE))
+ggplot(data = df_year, mapping = aes(x = 年度, y = 平均ROE)) + mystyle
 ```
 次に，グラフを作成するために，`geom_line()`関数を使います。
 `ggplot`関数では，次のような`geom_***()`関数を使って，グラフの種類を指定します。
@@ -387,7 +391,7 @@ ggplot(data = df_year, mapping = aes(x = 年度, y = 平均ROE))
 
 ```{r}
 ggplot(data = df_year, mapping = aes(x = 年度, y = 平均ROE)) +
-  geom_bar(stat = "identity")
+  geom_bar(stat = "identity") + mystyle
 ```
 
 横軸が順序に意味のある変数であれば，`geom_line()`で折れ線グラフを作るほうが良いでしょう。
@@ -425,7 +429,9 @@ print(g)
 
 
 ```{r}
-g <- ggplot(df) + aes(ROE) + geom_histogram() + xlim(-1,1) + mystyle
+g <- ggplot(df) + aes(ROE) + 
+  geom_histogram(fill="skyblue", color = "black") + 
+  xlim(-1,1) + mystyle
 print(g)
 ```
 

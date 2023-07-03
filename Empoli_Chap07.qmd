@@ -187,12 +187,12 @@ meanp(sample_var) # 標本平均の平均は5.6
 標本数が増えると，標本分布は母集団の分布に近づく，という特徴をもつ推定量を**一致推定量**(consistent estimator)といいます。
 これが最も重要な特徴です。
 
-例えば，次のような母集団が
+例えば，関心のある母集団が
 
 - 母平均$\mu = 62$
 - 母分散$\sigma^2 = 25$
 
-という正規分布にしたがう，としましょう。
+という母数をもつ正規分布に従っている，としましょう。
 グラフにする前に，必要なパッケージの読み出しと，グラフのスタイルを設定します。
 
 ```{r}
@@ -202,8 +202,8 @@ mystyle <- list (#  ggplotのテーマ
   theme_few(), # ggthemesパッケージ
   theme(
     text = element_text(
-      size=10 # ,  #  フォントサイズ
-      # family = "HiraKakuProN-W3" # ヒラギノフォント
+      size=16,  #  フォントサイズ
+      family = "HiraKakuProN-W3" # ヒラギノフォント
     )
   )
 )
@@ -212,8 +212,12 @@ mystyle <- list (#  ggplotのテーマ
 グラフにすると次のようになります。
 
 ```{r}
-p <- ggplot(data=data.frame(X=c(47,77)), aes(x=X))
-p <- p + stat_function(fun=dnorm, args=list(mean=62, sd=5)) + mystyle
+p <- ggplot(data = data.frame(X = c(47,77)))
+p <- p +aes(x = X)
+p <- p + stat_function(
+  fun = dnorm, 
+  args = list(mean = 62, sd = 5)
+  ) + mystyle
 print(p)
 ```
 ここから，標本サイズ10の標本を取り出し，標本平均を計算する，という試行を1000回繰り返し，1000個の標本平均を作りましょう。
@@ -221,13 +225,14 @@ print(p)
 ```{r}
 n = 10 # 標本サイズ
 trial = 1000 # 試行回数
-result <- numeric(trial)
-for (i in 1:trial) {
-  x <- rnorm(n, 62, 5)
-  result[i] <- mean(x)
+result <- numeric(trial) # 結果を入れる空の箱
+for (i in 1:trial) { # 以下をtrial回繰り返す
+  x <- rnorm(n, 62, 5) # 標本を生成
+  result[i] <- mean(x) # 標本平均を計算
 }
-mean(result)
+mean(result) # 標本平均の平均
 ```
+
 ヒストグラムの中心が母平均の62に近づいていることが分かります。
 標本平均の平均は`r mean(result)`となりますが，これは母平均62に近い値になっています。
 
@@ -235,9 +240,13 @@ mean(result)
 
 ```{r}
 result <- as.tibble(result)
-g <- ggplot(result) + aes(value) + geom_histogram(aes(y=..density..), bins=60, fill="white", color="black")
-g <- g + stat_function(fun=dnorm, args=list(mean = 62, sd = 5))
-g <- g + xlim(47,77) + geom_vline(xintercept = 62, color="red") + mystyle
+g <- ggplot(result) + aes(value) # 軸の設定
+g <- g + geom_histogram( # ヒストグラム
+  aes(y = ..density..), bins = 60, # y軸を密度に  
+  fill = "white", color = "black") # ヒストグラムの色
+g <- g + stat_function(fun=dnorm, args=list(mean = 62, sd = 5))　# 母集団の分布
+g <- g + geom_vline(xintercept = 62, color = "red") # 母平均の縦線
+g <- g + xlim(47,77) + mystyle # x軸の範囲を指定
 print(g)
 ```
 
@@ -445,8 +454,9 @@ $$
 
 
 ```{r}
-#| fig-height: 8
-#library(tidyver)
+#| fig-height: 12
+
+
 trial <- 50 # 標本数
 n <- 50 # 標本サイズ
 mu <- 62 # 母平均
@@ -455,10 +465,10 @@ sigma <- 5 # 母標準偏差
 set.seed(1234) # 乱数を準備
 
 # 標本ごとの統計量を収納する空のベクトルを作成
-sample_mean <- numeric(trial) #
-sample_sd   <- numeric(trial) #
-uplimit     <- numeric(trial) #
-lowlimit    <- numeric(trial) #
+sample_mean <- numeric(trial) # 標本平均の入れ物
+sample_sd   <- numeric(trial) # 標本標準偏差の入れ物
+uplimit     <- numeric(trial) # 信頼区間の上限の入れ物
+lowlimit    <- numeric(trial) # 信頼区間の下限の入れ物
 
 # 標本の数だけ，以下の計算を繰り返す
 for (i in 1:trial) {
@@ -483,13 +493,21 @@ confidence_interval <- data.frame(
   標本番号 = 1:trial
 )
 
-# Plot using ggplot2
-g_ci <- ggplot(confidence_interval, aes(x = reorder(標本番号, 標本平均), y = 標本平均)) +
-  geom_errorbar(aes(ymin = 下限, ymax = 上限,
-                    color = (下限 <= 62 & 上限 >= 62)), width = 0.2) +
-  scale_color_manual(values = c("blue", "black"), guide = FALSE) +
-  geom_point(aes(y = 標本平均)) + ylim(57,67) +
-  geom_hline(yintercept = 62, color = "red") + xlab("標本ID") + ylab("95%信頼区間") + coord_flip() + mystyle
+# Plot using ggplot2 
+g_ci <- ggplot(confidence_interval) +
+  aes(x = 標本番号, y = 標本平均)
+  # aes(x = reorder(標本番号, 標本平均), y = 標本平均)
+g_ci <- g_ci + geom_errorbar(
+  aes(ymin = 下限, ymax = 上限,
+      color = (下限 <= 62 & 上限 >= 62)
+      ), width = 0.2)
+g_ci <- g_ci + scale_color_manual(
+  values = c("blue", "black"),
+  guide = FALSE)
+g_ci <- g_ci + geom_point(aes(y = 標本平均)) 
+g_ci <- g_ci + geom_hline(yintercept = 62, color = "red")
+g_ci <- g_ci + xlab("標本ID") + ylab("95%信頼区間")
+g_ci <- g_ci + ylim(47,77) + coord_flip() + mystyle
 
 p <- ggplot(data=data.frame(X=c(47,77)), aes(x=X))
 p <- p + stat_function(fun=dnorm, args=list(mean=62, sd=5)) +
@@ -507,6 +525,7 @@ p/g_ci
 
 ```{r}
 #| echo: false
+
 # 信頼区間の計算
 p <- .5 # 信頼水準の設定 (95%信頼区間)
 alpha <- qt( (1 - p) / 2, df = n - 1, lower.tail=FALSE) # 限界値の計算
@@ -524,11 +543,12 @@ confidence_interval <- data.frame(
 )
 
 # Plot using ggplot2
-g_ci2 <- ggplot(confidence_interval, aes(x = reorder(標本番号, 標本平均), y = 標本平均)) +
+g_ci2 <- ggplot(confidence_interval) +
+ aes(x = 標本番号, y = 標本平均) +
   geom_errorbar(aes(ymin = 下限, ymax = 上限,
                     color = (下限 <= 62 & 上限 >= 62)), width = 0.2) +
   scale_color_manual(values = c("blue", "black"), guide = FALSE) +
-  geom_point(aes(y = 標本平均)) + ylim(57,67) +
+  geom_point(aes(y = 標本平均)) + ylim(47,77) +
   geom_hline(yintercept = 62, color = "red") + xlab("標本ID") + ylab("95%信頼区間") + coord_flip() + mystyle
 print(g_ci2)
 ```

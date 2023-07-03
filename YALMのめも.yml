@@ -1,0 +1,14 @@
+## 以下 PDFを作成するとき
+
+# lang: "ja"
+# pdf-engine: lualatex
+# header-includes:
+#   - \usepackage{float}
+#   - \usepackage{xcolor}
+#   - \usepackage{tabularx}
+#   - \usepackage{amsmath}
+#   - \usepackage{engrec}
+#   - \usepackage{fontspec}
+# knitr:
+#   opts_chunk:
+#     dev: cairo_pdf
