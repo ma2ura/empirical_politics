@@ -439,10 +439,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">10</span>, <span class="dv">1</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.780678</code></pre>
+<pre><code>[1] 10.16023</code></pre>
 </div>
 </div>
-<p>平均値は9.7806775となり，母平均1とほぼ同じ値になりましたが、1ではありません。 これ母平均<span class="math inline">1</span>と標本平均9.7806775の差を誤差といい、母集団と標本のズレを意味します。</p>
+<p>平均値は10.1602302となり，母平均1とほぼ同じ値になりましたが、1ではありません。 これ母平均<span class="math inline">1</span>と標本平均10.1602302の差を誤差といい、母集団と標本のズレを意味します。</p>
 <p>平均10，標準偏差1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算する，という指向を10000回繰り返して，10000個の平均値をヒストグラムで表示してみます。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">100</span></span>
@@ -461,7 +461,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.999588</code></pre>
+<pre><code>[1] 10.00035</code></pre>
 </div>
 </div>
 <p>とほぼ1と等しくなります。 このように，標本数を増やしていくと，標本平均の平均値は母平均に近づく，という法則を<strong>大数の法則</strong>(law of large numbers)といいます。 統計学における極めて重要な概念です。</p>
@@ -598,10 +598,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(result) <span class="co"># 標本平均の平均</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 62.01271</code></pre>
+<pre><code>[1] 62.00914</code></pre>
 </div>
 </div>
-<p>ヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は62.0127062となりますが，これは母平均62に近い値になっています。</p>
+<p>ヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は62.0091437となりますが，これは母平均62に近い値になっています。</p>
 <p>グラフで確認すると，</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">as.tibble</span>(result)</span>
