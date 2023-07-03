@@ -8,8 +8,8 @@ mystyle <- list (#  ggplotのテーマ
   theme_few(), # ggthemesパッケージ
   theme(
     text = element_text(
-      size=10#,  #  フォントサイズ
-     # family = "HiraKakuProN-W3" # ヒラギノフォント
+      size=10,  #  フォントサイズ
+     family = "HiraKakuProN-W3" # ヒラギノフォント
     )
   )
 )

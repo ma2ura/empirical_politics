@@ -8,7 +8,8 @@ mystyle <- list (#  ggplotのテーマ
   theme_few(), # ggthemesパッケージ
   theme(
     text = element_text(
-      size=18
+      size=18,
+      family = "HiraKakuProN-W3" # ヒラギノフォント
     )))
 set.seed(123)
 ```
