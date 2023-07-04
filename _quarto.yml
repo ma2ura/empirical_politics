@@ -21,7 +21,7 @@ book:
     left:
       - text: "はじめに"
         file: index.qmd
-      - text: "1章 計量会計学とは？"
+      - text: "第1回 実証会計"
         file: Empoli_Chap01.qmd
       - text: "2章 研究テーマの選び方"
         file: Empoli_Chap02.qmd

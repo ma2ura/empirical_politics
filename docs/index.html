@@ -90,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Empoli_Chap01.html" rel="" target="">
- <span class="menu-text">1章 計量会計学とは？</span></a>
+ <span class="menu-text">第1回 実証会計</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./Empoli_Chap02.html" rel="" target="">
@@ -198,7 +198,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap01.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">計量会計学とは</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">計量会計学？</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -279,7 +279,11 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#はじめに" id="toc-はじめに" class="nav-link active" data-scroll-target="#はじめに">はじめに</a>
   <ul class="collapse">
-  <li><a href="#補足" id="toc-補足" class="nav-link" data-scroll-target="#補足">補足</a></li>
+  <li><a href="#教科書について" id="toc-教科書について" class="nav-link" data-scroll-target="#教科書について">教科書について</a></li>
+  <li><a href="#プレゼミの形式について" id="toc-プレゼミの形式について" class="nav-link" data-scroll-target="#プレゼミの形式について">プレゼミの形式について</a></li>
+  <li><a href="#プレゼミのスケジュール" id="toc-プレゼミのスケジュール" class="nav-link" data-scroll-target="#プレゼミのスケジュール">プレゼミのスケジュール</a></li>
+  <li><a href="#補足-1." id="toc-補足-1." class="nav-link" data-scroll-target="#補足-1.">補足 1.</a></li>
+  <li><a href="#補足-2." id="toc-補足-2." class="nav-link" data-scroll-target="#補足-2.">補足 2.</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -320,17 +324,27 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="はじめに" class="level1 unnumbered">
 <h1 class="unnumbered">はじめに</h1><p><img src="img/empirical_politics.jpg" title="計量会計学ノート" class="quarto-cover-image img-fluid"></p>
+<section id="教科書について" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="教科書について">教科書について</h2>
 <p>この本は、プレゼミのメインテキストである浅野・矢内 (2020)「<strong>Rによる計量政治学</strong>」の学習用ノートです。 あと、サブテキストであるウィラワン・勝又 (2023)「<strong>Rによるマーケティング・データ分析</strong>」の一部の内容も含まれています。 基本的に松浦が自分の勉強用に作成したノートのため、誤りや不備が含まれている可能性が高いです。 また、このノートは、浅野・矢内 (2020)やウィラワン・勝又 (2023)の内容を網羅しているわけではないので、このノートを使う場合は教科書を手元において、学習することをおすすめします。</p>
 <p>なぜ会計学を専門とする松浦のプレゼミで、メインの教科書が「Rによる計量政治学」なのかというと、このテキストが社会科学の一分野である政治学という経営学部生にとっても関連のある興味深い題材を用いて、計量経済学の基礎から応用までをRで実装するための知識を習得できるものだからです。</p>
 <p>とりわけ第1部の第2章「研究テーマの選び方」と第3章「理論と仮説」は、卒業論文を書く際にも非常に重要となる内容ですので、全経営学部生によんでもらいたい内容です。 第4章「Rの使い方」と第5章「Rによるデータ操作」は、本書の学習に必要な必要最小限の内容ですので、他の教科書やウェブサイトを参考にして、より詳細な内容を学習したほうが良いですが、この内容を理解し、使えるようになれば、MS Excelを使わずにRだけで分析できるようになるでしょう。</p>
 <p>第6章から第15章までが、統計学から計量経済学の内容となります。 おおよそ、代表的な統計量の計算や、グラフを使ったデータの理解、標本(sample)を用いた母集団(population)の推定や仮説検定、複数の統計量の関係性の理解、因果関係を分析する手法の1つである回帰分析の基礎と応用、2値選択の問題を推定するためのロジスティック関数の使い方などを学習します。</p>
 <p>ここまでの内容の学習にプレゼミ15回のうちおおよそ11回を使います。 12回〜15回の4回は多変量解析手法として因子分析やクラスター分析、機械学習を用いた判別モデルとして決定木分析を学習します。 2年生終了時点で、ここまでの内容を修得していれば、卒業論文の分析に必要な知識はほぼ習得できていると考えて良いでしょう。あとは関心のある研究テーマを選ぶために、面白そうな専門演習(ゼミ)に入って、Rと統計学・計量経済学を使った実証研究を楽しんでくれれば、プレゼミの目標が達成されます。</p>
+</section>
+<section id="プレゼミの形式について" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="プレゼミの形式について">プレゼミの形式について</h2>
+<p>このプレゼミは、基本的には反転授業の形式をとります。 つまり、授業は家で受けて、大学で宿題をやる、という形式です。</p>
+<p>まず、<strong>講義を受ける前に教科書の該当章とこのノートを読んでおきます。</strong> その上で、大学に来て<strong>宿題をやります。</strong> そして宿題の内容を発表し、議論します。</p>
+<p>宿題はこのノートで指示します。</p>
+</section>
+<section id="プレゼミのスケジュール" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="プレゼミのスケジュール">プレゼミのスケジュール</h2>
 <p>プレゼミのスケジュールはおおよそ以下の通りです。</p>
 <ul>
-<li>第1回 実証会計学とは</li>
-<li>第2回 研究テーマの選び方・理論と仮説</li>
-<li>第3回 理論と仮説</li>
-<li>第4回 Rの使い方とRによるデータ操作</li>
+<li>第1回 プレゼミの概要とメンバー紹介</li>
+<li>第2回 実証会計学、研究テーマの選び方・理論と仮説</li>
+<li>第3回 Rの使い方とRによるデータ操作</li>
 <li>第5回 記述統計とデータの可視化・視覚化</li>
 <li>第6回 統計的推定と統計的仮説検定</li>
 <li>第7回 変数間の関連性</li>
@@ -343,8 +357,13 @@ ul.task-list li input[type="checkbox"] {
 <li>第14回 クラスター分析</li>
 <li>第15回 決定木 (時間があれば)</li>
 </ul>
-<section id="補足" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="補足">補足</h2>
+</section>
+<section id="補足-1." class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="補足-1.">補足 1.</h2>
+<p>第3回目のプレゼミでRの導入について説明しますが、早いうちにこのノートに書かれている内容や、紹介しているウェブサイトを参考にして、自分のPCにRをインストールするか、あるいはPosit Cloudというブラウザ上でRを使えるサービスに登録しておいてください。</p>
+</section>
+<section id="補足-2." class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="補足-2.">補足 2.</h2>
 <p>本ノートは、Posit社(以前はRstudio社)が開発した<strong>Quarto</strong>というソフトウェアを使って作成されています。Quartoとは、<code>RMarkdown</code>の記法で書かれたテキストファイルを、<code>knitr</code>というソフトウェアを介して、HTMLやPDF、MS Word、EPUBなどのファイルを作成するためのソフトウェアです。</p>
 <p>最大の特徴は、MS ExcelとMS Wordのようにデータを分析する場所と文章を書く場所が別々ではなく、一つの画面の中でデータ分析とレポート・論文執筆を同時に行える、というものです。</p>
 <p>また、<code>R</code>だけでなく、<code>Python</code>や<code>Julia</code>といった他のプログラミング言語も文章内に埋め込むことができるため、データ分析と文章執筆を統合させる環境として非常に優れています。 プレゼミでも、<code>Quarto</code>を使って最終レポートの作成を行う予定です。 <code>Quarto</code>は今も開発が進んでいる新しいレポート作成ソフトウェアなので、情報が少ないことが難点ですが、<a href="https://quarto.org/">公式サイト</a>と<a href="https://www.jaysong.net/RBook/">私たちのR</a>を見れば大抵のことは分かります。</p>
@@ -592,7 +611,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Empoli_Chap01.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">計量会計学とは</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">計量会計学？</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
