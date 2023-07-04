@@ -374,9 +374,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>母集団：研究対象となるすべての集合</li>
 <li>標本：母集団から抽出されたデータ</li>
 <li>標本サイズ：標本に含まれるデータの個数</li>
-<li>標本数・サンプル数：標本の数，標本サイズのことじゃないよ</li>
-<li>母数：母集団を特徴付ける値</li>
-<li>統計量：標本を特徴付ける値</li>
+<li>標本数・サンプル数：標本の数のことで標本サイズのことじゃないよ</li>
+<li>母数：母集団を特徴付ける値、母平均や母分散など</li>
+<li>統計量：標本を特徴付ける値、標本平均や標本分散など</li>
 <li>推定量：母数の推定に使われる統計量</li>
 <li>統計的推定：推定量から母数を予想すること</li>
 </ul>
@@ -392,9 +392,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>母集団</strong>(population)とは、研究問題(research question)に基づいて選定された対象全体の集まりを指します。 しかし、その全体を調査・分析することは、時間や費用の制約から現実的ではありません。そのため、母集団から一部を抜き出した<strong>標本</strong>(sample)を選び、この標本を通じて母集団の特性を推定します。</p>
 <!-- 統計学とは，いかに小さな標本から，母集団がもつ特徴(これを母数とかパラメータとよぶ)を調べることについて考える学問です。
 自分で作ったお味噌汁の味を確かめるために，お味噌汁をすべて飲むのではなく，しっかりかき混ぜたうえでスプーン一杯飲んで、全体の味を推定することと同じです。 -->
-<p>統計学とは、限られた標本から母集団の特性（母数またはパラメータとも呼ばれます）をどのように探求するかについて研究する学問です。 例えば、作ったお味噌汁全体の味を確かめるには、全部飲むのではなく、よく混ぜた上でスプーン一杯を試飲し、その全体の味を推定するのと同じです。</p>
+<p>統計学とは、限られた標本から母集団の特性（<strong>母数</strong>または<strong>パラメータ</strong>とも呼ばれます）をどのように探求するかについて研究する学問です。 例えば、作ったお味噌汁全体の味を確かめるには、お味噌汁を全部飲むのではなく、しっかりお味噌汁を鍋の中でかき混ぜてから、スプーン一杯を試飲し、その全体の味を推定する、という作業と同じです。</p>
 <p>標本の特徴を調べることで，観察できない母集団の<strong>母数</strong>(parameter)を推定することを，<strong>統計的推定</strong>(statistical estimation)とよびます。 統計的推定には，標本から計算される<strong>統計量</strong>(statistic)を用います。 母数の推定のために利用される統計量を<strong>推定量</strong>(estimator)といいます。</p>
-<p>母数は定数ですが，推定量は標本が変われば値が変わるので確率変数です。1つの標本から計算された標本平均は，たまたま今手元にある標本から計算された平均にすぎず，別の標本を集めて標本平均を計算すれば，異なる値になることが予想されます。</p>
+<p><strong>母数は定数</strong>ですが，標本が変われば値が変わるので<strong>推定量は確率変数</strong>です。 1つの標本から計算された1つの標本平均は，たまたま今手元にある標本から計算された1つの平均値にすぎず，別の標本を集めて再度標本平均を計算すれば，異なる値になることが予想されます。</p>
 <p>また母数を推定するために用いられる統計量と一般的な数式記号は以下の通りです。</p>
 <table class="table">
 <thead>
@@ -433,38 +433,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p>標本から母数を推定するためには，適切な方法で標本を集めなければなりません。 1限の講義に出席している学生にアンケートをとっても，学生全体の推定には適切とはいえない標本があつまるでしょう。</p>
-<p>母集団から標本を選ぶ標本抽出方法として代表的なものが，<strong>単純無作為抽出</strong>(simple randome sampling)です。 単純無作為抽出で選ばれた標本は、母集団の偏りのない標本といえます。 たとえば，平均10，分散1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算してみます。</p>
+<p>母集団から標本を選ぶ標本抽出方法として代表的なものが，<strong>単純無作為抽出</strong>(simple randome sampling)です。 単純無作為抽出で選ばれた標本は、母集団の偏りのない標本といえます。 たとえば，平均10，標準偏差1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算してみます。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">10</span>, <span class="dv">1</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">100</span> <span class="co"># 標本サイズ</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">10</span>, <span class="dv">1</span>) <span class="co"># 標本抽出</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x) <span class="co"># 標本平均</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.16023</code></pre>
+<pre><code>[1] 10.07883</code></pre>
 </div>
 </div>
-<p>平均値は10.1602302となり，母平均1とほぼ同じ値になりましたが、1ではありません。 これ母平均<span class="math inline">1</span>と標本平均10.1602302の差を誤差といい、母集団と標本のズレを意味します。</p>
-<p>平均10，標準偏差1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算する，という指向を10000回繰り返して，10000個の平均値をヒストグラムで表示してみます。</p>
+<p>平均値は10.0788268となり，母平均10とほぼ同じ値になりましたが、ぴったり10ではありませんよね。 この母平均<span class="math inline">10</span>と標本平均10.0788268の差を<strong>誤差</strong>といい、母集団と標本のズレを意味します。</p>
+<p>平均10，標準偏差1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算する，という試行(trial)を10000回繰り返して，10000個の標本から10000個の標本平均を計算して、標本平均のヒストグラムで表示してみます。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>trial <span class="ot">=</span> <span class="dv">10000</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>trial) {</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">10</span>, <span class="dv">1</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  result[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">100</span> <span class="co"># 標本サイズ</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>trial <span class="ot">=</span> <span class="dv">10000</span> <span class="co"># 標本数</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">numeric</span>(trial) <span class="co"># 結果を入れる空の変数</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>trial) { <span class="co"># 以下の処理をtrial回繰り返す</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">10</span>, <span class="dv">1</span>) <span class="co"># 標本抽出</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  result[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x) <span class="co"># 標本平均</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(result) <span class="co"># 基本関数histでヒストグラム作成</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Empoli_Chap07_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
-<p>キレイな正規分布になっており，この10000個の平均値の平均は，</p>
+<p>この図をみると、キレイな左右対称の釣り鐘型の分布になっていることが分かります。 この10000個の平均値の平均は，</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.00035</code></pre>
+<pre><code>[1] 10.00215</code></pre>
 </div>
 </div>
-<p>とほぼ1と等しくなります。 このように，標本数を増やしていくと，標本平均の平均値は母平均に近づく，という法則を<strong>大数の法則</strong>(law of large numbers)といいます。 統計学における極めて重要な概念です。</p>
+<p>とほぼ10と等しくなります。 このように，標本数を増やしていくと，標本平均の平均値は母平均に近づく，という法則を<strong>大数の法則</strong>(law of large numbers)といいます。 統計学における極めて重要な概念です。</p>
 </section>
 <section id="標本分布" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="標本分布"><span class="header-section-number">7.2</span> 標本分布</h2>
@@ -598,10 +598,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(result) <span class="co"># 標本平均の平均</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 62.00914</code></pre>
+<pre><code>[1] 62.0268</code></pre>
 </div>
 </div>
-<p>ヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は62.0091437となりますが，これは母平均62に近い値になっています。</p>
+<p>ヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は62.0267953となりますが，これは母平均62に近い値になっています。</p>
 <p>グラフで確認すると，</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">as.tibble</span>(result)</span>
@@ -675,10 +675,10 @@ SE = \frac{u}{\sqrt{n}}
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># データフレームに変換</span></span>
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rep</span>(x, <span class="dv">3</span>),</span>
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> <span class="fu">c</span>(df1, df5, df100),</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">df =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"df = 1"</span>, <span class="st">"df = 5"</span>, <span class="st">"df = 100"</span>), <span class="at">each =</span> <span class="fu">length</span>(x)))</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">freedom =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"df = 1"</span>, <span class="st">"df = 5"</span>, <span class="st">"df = 100"</span>), <span class="at">each =</span> <span class="fu">length</span>(x)), <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>                 )</span>
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co"># プロット</span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> df)) <span class="sc">+</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> freedom)) <span class="sc">+</span></span>
 <span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>)) <span class="sc">+</span></span>
 <span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"自由度が異なるt分布のプロット"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"t値"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"確率密度"</span>) <span class="sc">+</span> mystyle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -758,9 +758,9 @@ t = \frac{\bar x - \mu}{SE}
 <section id="信頼区間の解釈" class="level3" data-number="7.3.2">
 <h3 data-number="7.3.2" class="anchored" data-anchor-id="信頼区間の解釈"><span class="header-section-number">7.3.2</span> 信頼区間の解釈</h3>
 <p>信頼区間とは、観察できない真の値である母数が存在し、その母集団から標本を抽出し、標本平均を計算するということを繰り返したときに、95%の標本平均の信頼区間の中に真の値である母平均が入っている、ということです。</p>
-<p>先の例を使って、信頼区間を表現してみます。 いま、<strong>母集団が平均62，標準偏差5の正規分布にしたがう</strong>とします。 この母集団から<strong>標本サイズ50</strong>の標本を<strong>50個抽出</strong>して，標本平均と標本標準偏差を計算します。</p>
+<p>先の例を使って、信頼区間を表現してみます。 いま、<strong>母集団が平均62，標準偏差5の正規分布にしたがう</strong>とします。 この母集団から<strong>標本サイズ50</strong>の標本を<strong>100個抽出</strong>して，標本平均と標本標準偏差を計算します。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>trial <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="co"># 標本数</span></span>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>trial <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># 標本数</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="co"># 標本サイズ</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">62</span> <span class="co"># 母平均</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># 母標準偏差</span></span>
@@ -785,11 +785,11 @@ t = \frac{\bar x - \mu}{SE}
 <span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fu">qt</span>( (<span class="dv">1</span> <span class="sc">-</span> p) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>) <span class="co"># 限界値の計算</span></span>
 <span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 信頼区間の上限と下限の計算</span></span>
-<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>uplimit  <span class="ot">&lt;-</span> sample_mean <span class="sc">+</span> alpha <span class="sc">*</span> sample_sd<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>lowlimit <span class="ot">&lt;-</span> sample_mean <span class="sc">-</span> alpha <span class="sc">*</span> sample_sd<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>uplimit  <span class="ot">&lt;-</span> sample_mean <span class="sc">+</span> alpha <span class="sc">*</span> sample_sd<span class="sc">/</span><span class="fu">sqrt</span>(n) <span class="co"># 信頼区間上限</span></span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>lowlimit <span class="ot">&lt;-</span> sample_mean <span class="sc">-</span> alpha <span class="sc">*</span> sample_sd<span class="sc">/</span><span class="fu">sqrt</span>(n) <span class="co"># 信頼区間下限</span></span>
 <span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>confidence_interval <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 信頼区間の計算結果をデータフレームにまとめる</span></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>confidence_interval <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( </span>
 <span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>  標本平均 <span class="ot">=</span> sample_mean,</span>
 <span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>  上限 <span class="ot">=</span> uplimit,</span>
 <span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>  下限 <span class="ot">=</span> lowlimit,</span>
@@ -800,30 +800,29 @@ t = \frac{\bar x - \mu}{SE}
 <span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(confidence_interval) <span class="sc">+</span></span>
 <span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> 標本番号, <span class="at">y =</span> 標本平均)</span>
 <span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># aes(x = reorder(標本番号, 標本平均), y = 標本平均)</span></span>
-<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">geom_errorbar</span>(</span>
+<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">geom_errorbar</span>( <span class="co"># 信頼区間を表す線を描く</span></span>
 <span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">ymin =</span> 下限, <span class="at">ymax =</span> 上限,</span>
 <span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> (下限 <span class="sc">&lt;=</span> <span class="dv">62</span> <span class="sc">&amp;</span> 上限 <span class="sc">&gt;=</span> <span class="dv">62</span>)</span>
 <span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a>      ), <span class="at">width =</span> <span class="fl">0.2</span>)</span>
-<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">scale_color_manual</span>(</span>
-<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"black"</span>),</span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">scale_color_manual</span>( <span class="co"># 色の設定</span></span>
+<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"magenta"</span>, <span class="st">"black"</span>),</span>
 <span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">guide =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> 標本平均)) </span>
-<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">62</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span>
-<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"標本ID"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"95%信頼区間"</span>)</span>
-<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">47</span>,<span class="dv">77</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> mystyle</span>
+<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> 標本平均)) <span class="co"># 標本平均を点で表す</span></span>
+<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">62</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="co"># 母平均を赤い線で表す</span></span>
+<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"標本ID"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"95%信頼区間"</span>) <span class="co"># 軸ラベルの設定</span></span>
+<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>g_ci <span class="ot">&lt;-</span> g_ci <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">47</span>,<span class="dv">77</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> mystyle <span class="co"># 軸の範囲と向きの設定</span></span>
 <span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">47</span>,<span class="dv">77</span>)), <span class="fu">aes</span>(<span class="at">x=</span>X))</span>
-<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">args=</span><span class="fu">list</span>(<span class="at">mean=</span><span class="dv">62</span>, <span class="at">sd=</span><span class="dv">5</span>)) <span class="sc">+</span></span>
-<span id="cb32-55"><a href="#cb32-55" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">62</span>, <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> mystyle</span>
+<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">X =</span> <span class="fu">c</span>(<span class="dv">47</span>,<span class="dv">77</span>))) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> X) <span class="co"># 母集団を描く範囲</span></span>
+<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="dv">62</span>, <span class="at">sd =</span> <span class="dv">5</span>)) <span class="co"># 正規分布を描く</span></span>
+<span id="cb32-55"><a href="#cb32-55" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">62</span>, <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> mystyle　<span class="co"># 母平均を赤い線で表す</span></span>
 <span id="cb32-56"><a href="#cb32-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-57"><a href="#cb32-57" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb32-58"><a href="#cb32-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-59"><a href="#cb32-59" aria-hidden="true" tabindex="-1"></a>p<span class="sc">/</span>g_ci</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-57"><a href="#cb32-57" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork) <span class="co"># グラフを並べるためのパッケージ</span></span>
+<span id="cb32-58"><a href="#cb32-58" aria-hidden="true" tabindex="-1"></a>p <span class="sc">/</span> g_ci <span class="co"># グラフを縦に並べる</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Empoli_Chap07_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
-<p>本当は未知である母平均62，母標準偏差5の母集団から標本を50個取り出し，50個の標本平均と95%信頼区間を計算し，グラフにしています。 この50個の標本から計算した95％信頼区間に母平均62が含まれているかどうかを確認すると，4つの95％信頼区間に母平均が含まれていないことが分かります。<span class="math inline">4/50</span>の割合で信頼区間に母平均が含まれていないので，信頼水準は<span class="math inline">1-4/50=0.92</span>となります。</p>
+<p>本当は未知である母平均62，母標準偏差5の母集団から標本を100個取り出し，100個の標本平均と95%信頼区間を計算し，グラフにしています。 この100個の標本から計算した95％信頼区間に母平均62が含まれているかどうかを確認すると，7つの95％信頼区間に母平均が含まれていないことが分かります。<span class="math inline">7/100</span>の割合で信頼区間に母平均が含まれていないので，信頼水準は<span class="math inline">1-7/100=0.93</span>となります。</p>
 <p>信頼区間を50%にするとどうなるでしょうか？ こうなります。</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -831,6 +830,13 @@ t = \frac{\bar x - \mu}{SE}
 </div>
 </div>
 <p>信頼区間が短くなり，母平均を含まない50%信頼区間が増えました。</p>
+<p>標本サイズを大きくすればどうでしょうか。 先ほどまでは標本サイズ50の標本でしたが、標本サイズを500にして、95%信頼区間を計算してみます。</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Empoli_Chap07_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="1344"></p>
+</div>
+</div>
+<p>標本サイズ<span class="math inline">n</span>が大きくなると、信頼区間の上限と下限を計算するさいの<span class="math inline">\sqrt{n}</span>が大きくなるため、信頼区間が短くなっていることがわかります。</p>
 
 
 </section>

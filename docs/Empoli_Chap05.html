@@ -548,48 +548,51 @@ MS Excelの場合
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">%&gt;%</span> <span class="fu">rnorm</span>(<span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1]  0.63731780  1.13508424 -1.46520365 -0.02469815 -0.58260945  0.21339368
-  [7] -0.75769969  0.32225596  0.58899035 -0.18581443 -1.84516979 -2.20522810
- [13]  0.61437232 -0.56673532 -0.48269903  0.01737167  0.66846673 -0.40935050
- [19] -1.89086032  1.06735819 -1.21819895  0.82315504 -0.81090021 -0.09829557
- [25]  1.22847180  0.68256881  0.04668539  2.21730948 -2.88036835 -0.88013479
- [31] -1.01296681 -0.54283748 -0.22596254 -0.71365287  0.24751570  0.26882883
- [37] -0.31673228  0.22276175  1.62163283 -0.40448147  0.79380478 -1.99359669
- [43] -1.16471570  0.55157192 -2.31246297  0.10648398 -0.17584306  0.19049492
- [49] -0.33077364 -0.75522644 -1.21543522 -0.83760030  1.50072734 -0.07137232
- [55]  3.14731488  0.69149541 -0.85729152 -0.12603326  0.91135489  0.26255369
- [61] -0.05104148  0.69160852 -0.50816136  0.01568461  1.12625184  0.78256912
- [67]  1.75855055 -1.19067385 -0.37653056  1.71966865  0.36457872 -0.14794002
- [73] -0.06837844 -1.61714487 -0.14807768 -0.55930727  0.42334121 -0.58563471
- [79]  2.55245632  0.70485047 -0.62150639  1.11767311  0.61346559 -0.20717410
- [85] -0.74302219  0.14076264  0.64190110  1.02062923  0.82706437 -0.12834933
- [91] -0.79938583 -1.69163922  0.87492542  0.70772559  0.55973604 -0.95426375
- [97] -0.44872623  1.26510264 -0.32767900 -0.70358347</code></pre>
+<pre><code>  [1] -0.885894114 -0.054754625  0.118394506 -1.218483452 -1.392474764
+  [6] -1.819632384  0.155395763 -1.314878087 -1.193858840 -0.634512983
+ [11] -0.370150275 -1.673472317  0.536926948 -0.459919309  0.151570642
+ [16]  0.391190078 -0.335157725  1.743615887 -0.912569135 -0.097057431
+ [21] -0.302974855  0.133524306 -0.554693928 -0.545568631 -2.586678078
+ [26] -0.410397705 -0.317668339  0.951262604 -0.808567386  0.364234989
+ [31]  0.392616860 -0.371026473  1.237636866 -1.391987688 -1.076220877
+ [36]  0.720052766 -0.084134916 -0.128633957  1.135018933  0.373954148
+ [41] -1.224490697 -0.361121811  0.562854288 -1.596618235  0.198900116
+ [46]  0.344414932  0.197091377  0.203834372 -0.030153362 -0.469918494
+ [51]  0.141129617  0.252820648  0.214548088  1.923744169 -0.580846916
+ [56]  0.413452301  0.051213429  0.272592229 -1.731298265  1.929793049
+ [61]  0.467528532 -0.715786963  0.005985159  2.139423307  0.392677499
+ [66] -0.938582585 -1.281262903  0.119063539  0.879704934 -0.707201777
+ [71] -1.855632966 -0.345198627  0.535669251  0.264702391 -0.822339238
+ [76]  0.773756404 -0.295632502  0.661334417  0.255948441  0.299052580
+ [81]  0.303569402 -0.370823580  0.728778510  0.191124140 -0.567742529
+ [86]  0.196496666  2.674901797  0.588778309  0.788109709 -2.867344566
+ [91]  0.554638330 -0.059651893  1.037509047 -0.459525933 -1.600456979
+ [96]  0.716717286  0.224424670 -0.289159559 -0.517825479 -0.434833886</code></pre>
 </div>
 </div>
 <p>となります。 これは<code>rnorm()</code>関数の第1引数がデータの個数なので，そこに<code>100</code>を渡しています。 ここで平均に値を渡したい場合を考えます。 <code>mean</code>引数は第2引数なので，パイプ演算子では自動で渡してくれません。 そこで<code>.</code>を使って渡す場所を指定してあげます。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">%&gt;%</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span>. , <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1]  99.81002  97.74155 100.07505 100.88963 101.37802  99.24159 100.79340
-  [8]  99.64295 100.67728  99.45513 100.68608  99.77962  97.53928  99.73752
- [15]  99.46819 100.77100 100.45325 100.62451  98.70742  99.03420 102.02314
- [22] 100.76673 100.43145 100.31231 100.31761  99.71492 100.16268 100.37099
- [29]  99.33498  98.84549 101.85940 100.47580 100.83180 100.36649 100.44848
- [36]  98.99323  97.44107  99.15564 101.41423  99.29293 100.29128 101.80646
- [43] 101.25186 100.12595  99.97613  99.78701 102.11361 100.98787  99.37332
- [50] 100.49645 100.28963 100.75669 100.20163 100.22434  99.16026  98.53303
- [57]  99.74017 100.06257  98.66816  99.36832 100.44569  98.28216  99.32055
- [64]  99.54763  99.32020 100.00520  99.59696  99.05944  99.41926  98.96369
- [71] 100.09626 100.27305  97.97844 100.08976 100.11618  98.76639 100.04819
- [78]  99.64827 101.18118  97.79674 100.58123 101.42662 102.02136  97.84513
- [85]  98.17027 100.30434 101.84848  99.09364  99.19161 100.09894 101.66007
- [92]  99.35414  99.24132 100.68992 101.01875  99.25749  98.74521 101.52808
- [99] 100.27918 100.45907</code></pre>
+<pre><code>  [1]  99.44273  99.92133 102.44311 100.33282  99.15568 101.48851 101.01992
+  [8]  99.05004  99.81486 100.78026 100.06530 100.92771 100.83166  99.97506
+ [15] 100.14861  99.98392  98.55802  99.26116  98.94704 101.66400 101.10556
+ [22]  99.64294 100.55803 100.38013  99.91877 102.01763 101.17984  99.08354
+ [29]  97.98220  99.97381 100.23749  99.73804 100.45779  99.28818  99.33695
+ [36] 100.40822  99.49497  98.79616 100.89073  99.55502  98.94150  99.09093
+ [43]  99.86201  98.37973 100.55905  99.28287  99.70584 100.26616  99.87153
+ [50]  98.46450  98.86482  99.57262  98.91158 101.81443  98.81038 101.51965
+ [57] 101.24403 100.13410 101.31930 102.17517  99.30298 100.34047  99.88807
+ [64]  98.63743 101.19673  98.53731 101.43542  99.28091 100.38389 102.04243
+ [71] 100.24789  99.62732 100.12454  99.33353  99.21817  99.19311 100.02482
+ [78] 100.30358  99.50114  98.34492 100.33981  99.08513  99.83338  98.91804
+ [85]  99.47259 100.07858  99.23211 101.01071  99.51653 100.86124  99.76932
+ [92]  99.80746 100.45078 100.42179  99.93782 100.57742  99.27196  98.42187
+ [99]  98.42254  99.49731</code></pre>
 </div>
 </div>
 <p>これで平均100，標準偏差1の正規分布から100個のデータを取り出せました。</p>
-<p>これだけだと便利さが伝わらないので，たとえば次のような処理を考えてみましょう。</p>
+<p>これだけだとパイプ演算子<code>%&gt;%</code>の便利さが伝わらないので，たとえば次のような処理を考えてみましょう。</p>
 <ol type="1">
 <li>2020年のデータを抜き出し，</li>
 <li>売上高当期純利益率を計算し，</li>
@@ -686,13 +689,25 @@ MS Excelの場合
 </div>
 </div>
 <p>Excelだとセルの移動や変数名の入力，計算式の入力，セルのコピーといった作業で，キーボードとマウスを行ったり来たりする必要があり，若干面倒です。</p>
-<p>ついでに，<code>mutate()</code>関数を使って，長すぎる企業名を短くしてみます。 ここでは「ポーラ・オルビスホールディングス」を「ポーラ」と略してみます。 <code>mutate()</code>と<code>ifelse</code>を使って，<code>name</code>変数の値が「ポーラ・オルビスホールディング」ならば「ポーラ」という値をとる変数<code>name</code>上書きします。を作ってみましょう。 :::{.callout-important} ## Rの場合</p>
+<p>ついでに，<code>mutate()</code>関数を使って，長すぎる企業名を短くしてみます。 ここでは「ポーラ・オルビスホールディングス」を「ポーラ」と略してみます。 <code>mutate()</code>と<code>ifelse</code>を使って，<code>name</code>変数の値が「ポーラ・オルビスホールディング」ならば「ポーラ」という値をとる変数<code>name</code>上書きします。を作ってみましょう。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Rの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>( <span class="co"># 新しい変数を作成</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">name =</span> <span class="fu">ifelse</span>(</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>            name <span class="sc">==</span> <span class="st">"ポーラ・オルビスホールディング"</span>, <span class="st">"ポーラ"</span>, name) <span class="co"># 企業名</span></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="データを抽出する-filter" class="level3 unnumbered">
@@ -701,12 +716,23 @@ MS Excelの場合
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(データ, 条件)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>先ほど作成した<code>ratio2</code>が「高い」企業だけを抽出してみましょう。 <code>filter()</code>関数の中の条件は，<code>==</code>を使って，<code>"高い"</code>という文字列と一致するかどうかを確認しています。 ここでは，<code>highlow</code>変数の値が<code>"高い"</code>と一致する企業だけを抽出し，<code>df_high</code>という変数に代入しています。 :::{.callout-important} ## Rの場合</p>
+<p>先ほど作成した<code>ratio2</code>が「高い」企業だけを抽出してみましょう。 <code>filter()</code>関数の中の条件は，<code>==</code>を使って，<code>"高い"</code>という文字列と一致するかどうかを確認しています。 ここでは，<code>highlow</code>変数の値が<code>"高い"</code>と一致する企業だけを抽出し，<code>df_high</code>という変数に代入しています。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Rの場合
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_high <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(highlow <span class="sc">==</span> <span class="st">"高い"</span>) <span class="co"># 条件</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>:::</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1008,7 +1034,7 @@ MS Excelの場合
 </tbody>
 </table>
 <p>このような形式のデータをロング型(long)といいます。 このロング型のうち，一定のルールに従って作成されたデータを<strong>整然データ(tidy data)</strong>といい，Rでは，この整然データを扱うことが多いです。</p>
-<p>R神Hadley Wickham氏は，データの型を理解することを，データ分析の第一歩とし，その一貫として整然データという考え方を提唱しています。 整然データとは，次のような原則に従って構築されたデータのことです(Wickham, 2014) 参考[https://id.fnshr.info/2017/01/09/tidy-data-intro/]。</p>
+<p>R神Hadley Wickham氏は，データの型を理解することを，データ分析の第一歩とし，その一貫として整然データという考え方を提唱しています。 整然データとは，次のような原則に従って構築されたデータのことです(Wickham, 2014) 参考<a href="https://id.fnshr.info/2017/01/09/tidy-data-intro/">https://id.fnshr.info/2017/01/09/tidy-data-intro/</a>。</p>
 <ol type="1">
 <li>個々の変数 (variable) が1つの列 (column) をなす。</li>
 <li>個々の観測 (observation) が1つの行 (row) をなす。</li>
@@ -1265,7 +1291,7 @@ MS Excelの場合
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">netincome =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">90</span>, <span class="dv">150</span>, <span class="dv">140</span>, <span class="dv">100</span>, <span class="dv">90</span>, <span class="dv">30</span>, <span class="dv">35</span>, <span class="dv">50</span>)</span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>この3つのデータを結合させる場合を考えます。 まず表Aと表Bは同じ変数をもつデータなので，これらを結合させるには，縦につなげる必要があります。 このような結合を<strong>連結</strong>といいます。 縦結合は，<code>dplyr</code>パッケージの<code>bind_rows()</code>関数を使います。</p>
+<p>この3つのデータを結合させる場合を考えます。 まず表Aと表Bは同じ変数をもつデータなので，これらを結合させるには，縦につなげる必要があります。 このような結合を<strong>縦結合</strong>とか連結といいます。 縦結合は，<code>dplyr</code>パッケージの<code>bind_rows()</code>関数を使います。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df_AB <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(df_A, df_B)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_AB)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1299,13 +1325,14 @@ MS Excelの場合
 <li><strong>右結合</strong>(right join)</li>
 </ul>
 <p>があります。</p>
-<p>内部結合は<strong>両方のデータベースに存在する観測値のみを保持</strong>するため，多くのデータが欠落することになりますが，<strong>外部結合</strong>は、少なくとも1つのテーブルに存在する観測値を保持するので，データが欠落することはありません。 3つの外部結合の特徴は次の通りです。</p>
+<p>内部結合は<strong>両方のデータベースに存在する観測値のみを保持</strong>するため，多くのデータが欠落することになりますが，<strong>外部結合</strong>は、少なくとも1つのテーブルに存在する観測値を保持するので，大部分のデータが欠落することにはなりません。</p>
+<p>3つの外部結合の特徴は次の通りです。</p>
 <ul>
-<li><strong>完全結合</strong>は、xとyのすべてのオブザベーションを保持します。</li>
-<li><strong>左結合</strong>は、xのすべてのオブザベーションを保持します。</li>
-<li><strong>右結合</strong>は、yのすべてのオブザベーションを保持します。</li>
+<li><strong>完全結合</strong>は、xとyのすべての観測値を保持します。</li>
+<li><strong>左結合</strong>は、xのすべての観測値を保持します。</li>
+<li><strong>右結合</strong>は、yのすべての観測値を保持します。</li>
 </ul>
-<p>図でみるとつぎようになります。</p>
+<p>R神の神書籍<a href="https://r4ds.hadley.nz/">R for Data Science (2e)</a>の図がわかりやすいので，ここで紹介します。</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/R4D_join.png" class="img-fluid figure-img"></p>

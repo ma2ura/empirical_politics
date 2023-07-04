@@ -8,9 +8,9 @@
 - 母集団：研究対象となるすべての集合
 - 標本：母集団から抽出されたデータ
 - 標本サイズ：標本に含まれるデータの個数
-- 標本数・サンプル数：標本の数，標本サイズのことじゃないよ
-- 母数：母集団を特徴付ける値
-- 統計量：標本を特徴付ける値
+- 標本数・サンプル数：標本の数のことで標本サイズのことじゃないよ
+- 母数：母集団を特徴付ける値、母平均や母分散など
+- 統計量：標本を特徴付ける値、標本平均や標本分散など
 - 推定量：母数の推定に使われる統計量
 - 統計的推定：推定量から母数を予想すること
 :::
@@ -29,15 +29,15 @@
 <!-- 統計学とは，いかに小さな標本から，母集団がもつ特徴(これを母数とかパラメータとよぶ)を調べることについて考える学問です。
 自分で作ったお味噌汁の味を確かめるために，お味噌汁をすべて飲むのではなく，しっかりかき混ぜたうえでスプーン一杯飲んで、全体の味を推定することと同じです。 -->
 
-統計学とは、限られた標本から母集団の特性（母数またはパラメータとも呼ばれます）をどのように探求するかについて研究する学問です。
-例えば、作ったお味噌汁全体の味を確かめるには、全部飲むのではなく、よく混ぜた上でスプーン一杯を試飲し、その全体の味を推定するのと同じです。
+統計学とは、限られた標本から母集団の特性（**母数**または**パラメータ**とも呼ばれます）をどのように探求するかについて研究する学問です。
+例えば、作ったお味噌汁全体の味を確かめるには、お味噌汁を全部飲むのではなく、しっかりお味噌汁を鍋の中でかき混ぜてから、スプーン一杯を試飲し、その全体の味を推定する、という作業と同じです。
 
 標本の特徴を調べることで，観察できない母集団の**母数**(parameter)を推定することを，**統計的推定**(statistical estimation)とよびます。
 統計的推定には，標本から計算される**統計量**(statistic)を用います。
 母数の推定のために利用される統計量を**推定量**(estimator)といいます。
 
-母数は定数ですが，推定量は標本が変われば値が変わるので確率変数です。1つの標本から計算された標本平均は，たまたま今手元にある標本から計算された平均にすぎず，別の標本を集めて標本平均を計算すれば，異なる値になることが予想されます。
-
+**母数は定数**ですが，標本が変われば値が変わるので**推定量は確率変数**です。
+1つの標本から計算された1つの標本平均は，たまたま今手元にある標本から計算された1つの平均値にすぎず，別の標本を集めて再度標本平均を計算すれば，異なる値になることが予想されます。
 
 また母数を推定するために用いられる統計量と一般的な数式記号は以下の通りです。
 
@@ -54,36 +54,37 @@
 
 母集団から標本を選ぶ標本抽出方法として代表的なものが，**単純無作為抽出**(simple randome sampling)です。
 単純無作為抽出で選ばれた標本は、母集団の偏りのない標本といえます。
-たとえば，平均10，分散1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算してみます。
+たとえば，平均10，標準偏差1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算してみます。
 
 ```{r}
-n = 100
-x <- rnorm(n, 10, 1)
-mean(x)
+n = 100 # 標本サイズ
+x <- rnorm(n, 10, 1) # 標本抽出
+mean(x) # 標本平均
 ```
-平均値は`r mean(x)`となり，母平均1とほぼ同じ値になりましたが、1ではありません。
-これ母平均$1$と標本平均`r mean(x)`の差を誤差といい、母集団と標本のズレを意味します。
+平均値は`r mean(x)`となり，母平均10とほぼ同じ値になりましたが、ぴったり10ではありませんよね。
+この母平均$10$と標本平均`r mean(x)`の差を**誤差**といい、母集団と標本のズレを意味します。
 
-平均10，標準偏差1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算する，という指向を10000回繰り返して，10000個の平均値をヒストグラムで表示してみます。
+平均10，標準偏差1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算する，という試行(trial)を10000回繰り返して，10000個の標本から10000個の標本平均を計算して、標本平均のヒストグラムで表示してみます。
 
 ```{r}
-n = 100
-trial = 10000
-result <- numeric(trial)
-for (i in 1:trial) {
-  x <- rnorm(n, 10, 1)
-  result[i] <- mean(x)
+n = 100 # 標本サイズ
+trial = 10000 # 標本数
+result <- numeric(trial) # 結果を入れる空の変数
+for (i in 1:trial) { # 以下の処理をtrial回繰り返す
+  x <- rnorm(n, 10, 1) # 標本抽出
+  result[i] <- mean(x) # 標本平均
 }
-hist(result)
+hist(result) # 基本関数histでヒストグラム作成
 ```
 
-キレイな正規分布になっており，この10000個の平均値の平均は，
+この図をみると、キレイな左右対称の釣り鐘型の分布になっていることが分かります。
+この10000個の平均値の平均は，
 
 ```{r}
 mean(result)
 ```
 
-とほぼ1と等しくなります。
+とほぼ10と等しくなります。
 このように，標本数を増やしていくと，標本平均の平均値は母平均に近づく，という法則を**大数の法則**(law of large numbers)といいます。
 統計学における極めて重要な概念です。
 
@@ -358,10 +359,10 @@ df100 <- dt(x, df = 100)
 # データフレームに変換
 df <- data.frame(x = rep(x, 3),
                  y = c(df1, df5, df100),
-                 df = rep(c("df = 1", "df = 5", "df = 100"), each = length(x)))
-
+                 freedom = factor(rep(c("df = 1", "df = 5", "df = 100"), each = length(x)), ordered = TRUE)
+                 )
 # プロット
-ggplot(df, aes(x = x, y = y, color = df)) +
+ggplot(df, aes(x = x, y = y, color = freedom)) +
   geom_line() +
   scale_color_manual(values = c("red", "blue", "green")) +
   labs(title = "自由度が異なるt分布のプロット") + xlab("t値") + ylab("確率密度") + mystyle
@@ -450,14 +451,13 @@ $$
 
 先の例を使って、信頼区間を表現してみます。
 いま、**母集団が平均62，標準偏差5の正規分布にしたがう**とします。
-この母集団から**標本サイズ50**の標本を**50個抽出**して，標本平均と標本標準偏差を計算します。
+この母集団から**標本サイズ50**の標本を**100個抽出**して，標本平均と標本標準偏差を計算します。
 
 
 ```{r}
 #| fig-height: 12
 
-
-trial <- 50 # 標本数
+trial <- 100 # 標本数
 n <- 50 # 標本サイズ
 mu <- 62 # 母平均
 sigma <- 5 # 母標準偏差
@@ -482,11 +482,11 @@ p <- .95 # 信頼水準の設定 (95%信頼区間)
 alpha <- qt( (1 - p) / 2, df = n - 1, lower.tail=FALSE) # 限界値の計算
 
 # 信頼区間の上限と下限の計算
-uplimit  <- sample_mean + alpha * sample_sd/sqrt(n)
-lowlimit <- sample_mean - alpha * sample_sd/sqrt(n)
+uplimit  <- sample_mean + alpha * sample_sd/sqrt(n) # 信頼区間上限
+lowlimit <- sample_mean - alpha * sample_sd/sqrt(n) # 信頼区間下限
 
-
-confidence_interval <- data.frame(
+# 信頼区間の計算結果をデータフレームにまとめる
+confidence_interval <- data.frame( 
   標本平均 = sample_mean,
   上限 = uplimit,
   下限 = lowlimit,
@@ -497,28 +497,27 @@ confidence_interval <- data.frame(
 g_ci <- ggplot(confidence_interval) +
   aes(x = 標本番号, y = 標本平均)
   # aes(x = reorder(標本番号, 標本平均), y = 標本平均)
-g_ci <- g_ci + geom_errorbar(
+g_ci <- g_ci + geom_errorbar( # 信頼区間を表す線を描く
   aes(ymin = 下限, ymax = 上限,
       color = (下限 <= 62 & 上限 >= 62)
       ), width = 0.2)
-g_ci <- g_ci + scale_color_manual(
-  values = c("blue", "black"),
+g_ci <- g_ci + scale_color_manual( # 色の設定
+  values = c("magenta", "black"),
   guide = FALSE)
-g_ci <- g_ci + geom_point(aes(y = 標本平均)) 
-g_ci <- g_ci + geom_hline(yintercept = 62, color = "red")
-g_ci <- g_ci + xlab("標本ID") + ylab("95%信頼区間")
-g_ci <- g_ci + ylim(47,77) + coord_flip() + mystyle
+g_ci <- g_ci + geom_point(aes(y = 標本平均)) # 標本平均を点で表す
+g_ci <- g_ci + geom_hline(yintercept = 62, color = "red") # 母平均を赤い線で表す
+g_ci <- g_ci + xlab("標本ID") + ylab("95%信頼区間") # 軸ラベルの設定
+g_ci <- g_ci + ylim(47,77) + coord_flip() + mystyle # 軸の範囲と向きの設定
 
-p <- ggplot(data=data.frame(X=c(47,77)), aes(x=X))
-p <- p + stat_function(fun=dnorm, args=list(mean=62, sd=5)) +
-geom_vline(xintercept = 62, color="red") + mystyle
+p <- ggplot(data.frame(X = c(47,77))) + aes(x = X) # 母集団を描く範囲
+p <- p + stat_function(fun = dnorm, args = list(mean = 62, sd = 5)) # 正規分布を描く
+p <- p + geom_vline(xintercept = 62, color="red") + mystyle　# 母平均を赤い線で表す
 
-library(patchwork)
-
-p/g_ci
+library(patchwork) # グラフを並べるためのパッケージ
+p / g_ci # グラフを縦に並べる
 ```
-本当は未知である母平均62，母標準偏差5の母集団から標本を50個取り出し，50個の標本平均と95%信頼区間を計算し，グラフにしています。
-この50個の標本から計算した95％信頼区間に母平均62が含まれているかどうかを確認すると，4つの95％信頼区間に母平均が含まれていないことが分かります。$4/50$の割合で信頼区間に母平均が含まれていないので，信頼水準は$1-4/50=0.92$となります。
+本当は未知である母平均62，母標準偏差5の母集団から標本を100個取り出し，100個の標本平均と95%信頼区間を計算し，グラフにしています。
+この100個の標本から計算した95％信頼区間に母平均62が含まれているかどうかを確認すると，7つの95％信頼区間に母平均が含まれていないことが分かります。$7/100$の割合で信頼区間に母平均が含まれていないので，信頼水準は$1-7/100=0.93$となります。
 
 信頼区間を50%にするとどうなるでしょうか？
 こうなります。
@@ -547,11 +546,63 @@ g_ci2 <- ggplot(confidence_interval) +
  aes(x = 標本番号, y = 標本平均) +
   geom_errorbar(aes(ymin = 下限, ymax = 上限,
                     color = (下限 <= 62 & 上限 >= 62)), width = 0.2) +
-  scale_color_manual(values = c("blue", "black"), guide = FALSE) +
+  scale_color_manual(values = c("magenta", "black"), guide = FALSE) +
   geom_point(aes(y = 標本平均)) + ylim(47,77) +
-  geom_hline(yintercept = 62, color = "red") + xlab("標本ID") + ylab("95%信頼区間") + coord_flip() + mystyle
+  geom_hline(yintercept = 62, color = "red") + xlab("標本ID") + ylab("50%信頼区間") + coord_flip() + mystyle
 print(g_ci2)
 ```
 信頼区間が短くなり，母平均を含まない50%信頼区間が増えました。
 
 
+標本サイズを大きくすればどうでしょうか。
+先ほどまでは標本サイズ50の標本でしたが、標本サイズを500にして、95%信頼区間を計算してみます。
+
+```{r}
+#| echo: false
+
+trial <- 100 # 標本数
+n <- 500 # 標本サイズ
+mu <- 62 # 母平均
+sigma <- 5 # 母標準偏差
+
+set.seed(1234) # 乱数を準備
+
+# 標本ごとの統計量を収納する空のベクトルを作成
+sample_mean <- numeric(trial) # 標本平均の入れ物
+sample_sd   <- numeric(trial) # 標本標準偏差の入れ物
+uplimit     <- numeric(trial) # 信頼区間の上限の入れ物
+lowlimit    <- numeric(trial) # 信頼区間の下限の入れ物
+
+# 標本の数だけ，以下の計算を繰り返す
+for (i in 1:trial) {
+  temp_sample    <- rnorm(n, mu, sigma) # 標本を抽出
+  sample_mean[i] <- mean(temp_sample) # 標本平均を計算
+  sample_sd[i]   <- sd(temp_sample) # 標本標準偏差を計算
+}
+# 信頼区間の計算
+p <- .95 # 信頼水準の設定 (95%信頼区間)
+alpha <- qt( (1 - p) / 2, df = n - 1, lower.tail=FALSE) # 限界値の計算
+
+# 信頼区間の上限と下限の計算
+uplimit  <- sample_mean + alpha * sample_sd/sqrt(n)
+lowlimit <- sample_mean - alpha * sample_sd/sqrt(n)
+
+
+confidence_interval <- data.frame(
+  標本平均 = sample_mean,
+  上限 = uplimit,
+  下限 = lowlimit,
+  標本番号 = 1:trial
+)
+
+# Plot using ggplot2
+g_ci2 <- ggplot(confidence_interval) +
+ aes(x = 標本番号, y = 標本平均) +
+  geom_errorbar(aes(ymin = 下限, ymax = 上限,
+                    color = (下限 <= 62 & 上限 >= 62)), width = 0.2) +
+  scale_color_manual(values = c("magenta", "black"), guide = FALSE) +
+  geom_point(aes(y = 標本平均)) + ylim(47,77) +
+  geom_hline(yintercept = 62, color = "red") + xlab("標本ID") + ylab("95%信頼区間") + coord_flip() + mystyle
+print(g_ci2)
+```
+標本サイズ$n$が大きくなると、信頼区間の上限と下限を計算するさいの$\sqrt{n}$が大きくなるため、信頼区間が短くなっていることがわかります。
