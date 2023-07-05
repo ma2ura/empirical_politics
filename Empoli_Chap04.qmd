@@ -1,5 +1,20 @@
 # Rの使い方
 
+第3回講義の**到達目標**は、
+
+- R、Rstudio、Visual Studio Code、Quartoのインストールができる。
+- Posit Cloudにログインして、ブラウザ上でRstudioを使うことができる。
+- Visual Studio CodeでRのソースコードを書くことができる。
+- Visual Studio CodeでQuartoを使って、レポートや論文を書くことができる。
+
+第3回講義の**到達度検証のための課題**は、以下の通りです。
+
+1. Visual Studio Codeで必要な拡張機能をインストールする。
+2. Visual Studio Codeで、Rのソースコードを書いて実行し、結果を見る。
+3. Visual Studio Codeで、Quartoを使って短いレポートを作成する。
+4. Visual Studio Codeで、Quartoを使ってスライド資料を作る。
+
+
 正直、Rの使い方を説明したウェブサイトや書籍、動画はたくさんあります。
 そういったものを見てもらった方が早いです。
 
@@ -13,8 +28,11 @@
 
 あるいは、Posit Cloudを使ってウェブ上でRstudioを使えるようにしてください。
 
+[Posit Cloud](https://cloud.posit.jp/)
 
 ## Visual Studio Codeの使い方
+
+Posit Cloudを使わずに、自分のPCでRを使うことを選択した人は、以下の作業に進みますが、まずは矢内先生のウェブサイトなどを参考に、RとRstudioをインストールはインストールしておいてください。
 
 教科書では、Posit社の**Rstudio**の説明をしていますが、RstudioはR専用のIDE（統合開発環境）で、R以外の言語を書くことはできませんし、少々重たいです。
 そこでここでは、Microsoft社の**Visual Studio Code**を使ってRを書く方法を説明します。
@@ -165,7 +183,7 @@ install.packages("patchwork") # グラフを並べて表示
 
 GitHubは、Gitというバージョン管理システムを使って、ソースコードのバージョン管理をクラウド上で行うことができる無料サービスです。
 使いこなすには、少々勉強が必要ですが、使えれば非常に有用なので、是非やってみてください。
-VS CodeはGit/GitHubとの連携も簡単なので、複数人でウェブ開発やプログラミングをする場合には、非常に有益です。
+Visual Studio CodeはGit/GitHubとの連携も簡単なので、複数人でウェブ開発やプログラミングをする場合には、非常に有益です。
 
 まずは、GitHubのウェブサイトにアクセスし、アカウントを作成してください。
 
