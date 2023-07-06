@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -365,36 +365,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<p>第5回講義の<strong>到達目標</strong>は、</p>
+<ul>
+<li>適切なデータの型を選択し，データを読み込むことができる。</li>
+<li>カテゴリー変数を用いて表を作る事が出来る。</li>
+<li><code>dplyr</code>パッケージを駆使して前処理を行い，作図するために必要なデータを作ることができる。</li>
+<li><code>ggplot2</code>パッケージを使って，データの特徴を伝えやすく，シンプルで，美しいグラフを作成することができる。</li>
+</ul>
+<p>第5回講義の<strong>到達度検証のための課題</strong>は、以下の通りです。</p>
+<ul>
+<li>数値，文字列，ファクターを適切に選択したデータを作る。</li>
+<li>カテゴリー変数を用いて，作表する。</li>
+<li><code>group_by()</code>や<code>summarise()</code>を使って，作図するためのデータを準備する。</li>
+<li><code>ggplot()</code>で作図する。</li>
+</ul>
 <p>ここではRの得意とする<strong>データの可視化</strong>(data visualization)について学びます。 いままで利用してきた<code>tidyverse</code>にはグラフ作成のためのパッケージとして<code>ggplot2</code>があります。 本章では，<code>ggplot2</code>の使い方を学習し，読者にもデータの特徴を伝えやすく，シンプルで，美しいグラフの作成を目指します。</p>
 <p>ビッグデータを容易に扱えるようになった昨今において、データの可視化スキルの重要性は高まってきており、以下のような書籍が出版されています。いずれも非常に良い書籍ですので、興味のある方は読んでみてください。</p>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/R_Visu_01.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">データ分析のためのデータ可視化入門</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p>:::{layout-ncol = 3} <img src="img/R_Visu_01.jpg" class="img-fluid" alt="データ分析のためのデータ可視化入門"></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/R_Visu_02.jpg" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Rでできるビジュアル統計学</figcaption>
 </figure>
 </div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/R_Visu_03.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Rによるインタラクティブなデータビジュアライゼーション</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
+<p><img src="img/R_Visu_03.jpg" class="img-fluid" alt="Rによるインタラクティブなデータビジュアライゼーション"> :::</p>
 <p>1冊目はアメリカで絶賛された可視化本が翻訳されたものです。ソースコードとともに、データの可視化の基本や実例を学べます。 2冊目は、統計学を可視化という視点で学習する本です。 3冊目は前の2冊とは若干毛色が異なっており、<code>Shiny</code>というPosit社が開発したパッケージを使って、インタラクティブなグラフを作成する方法を学べます。</p>
 <p><code>ggplot2</code>を使うために<code>tidyverse</code>と<code>ggthemes</code>と<code>patchwork</code>を読み込みます。まだインストールできていなければ，始めにインストールしておいてください。</p>
 <div class="cell">
@@ -463,7 +457,7 @@ $ `開発費・試験研究費`           &lt;dbl&gt; 210, 105, 119, 153, 176, 1
 $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097, 3923, 3359, 2725,…</code></pre>
 </div>
 </div>
-<p>23個の変数があり、データの個数は57,823となっています。 以下ではこのデータを使って、データの可視化を学びます。</p>
+<p><code>23</code>個の変数があり、データの個数は<code>57,823</code>となっています。 以下ではこのデータを使って、データの可視化を学びます。</p>
 </section>
 <section id="基本的な統計量の確認" class="level3" data-number="6.1.2">
 <h3 data-number="6.1.2" class="anchored" data-anchor-id="基本的な統計量の確認"><span class="header-section-number">6.1.2</span> 基本的な統計量の確認</h3>

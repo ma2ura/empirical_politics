@@ -1,5 +1,17 @@
 # 統計的推定
 
+第6回講義の**到達目標**は、
+
+- 母集団と標本の違いを理解する。
+- 不偏推定量と一致推定量を理解し，説明することができる。
+- 信頼区間を理解し，説明することが出来る。
+
+
+第6回講義の**到達度検証のための課題**は、以下の通りです。
+
+- 標本を構築し，記述統計量を計算する。
+- シミュレーションを利用して，統計量を作る事が出来る。
+- 信頼区間を計算することができる
 
 
 ::: {.callout-important}
@@ -216,7 +228,7 @@ mystyle <- list (#  ggplotのテーマ
 p <- ggplot(data = data.frame(X = c(47,77)))
 p <- p +aes(x = X)
 p <- p + stat_function(
-  fun = dnorm, 
+  fun = dnorm,
   args = list(mean = 62, sd = 5)
   ) + mystyle
 print(p)
@@ -243,7 +255,7 @@ mean(result) # 標本平均の平均
 result <- as.tibble(result)
 g <- ggplot(result) + aes(value) # 軸の設定
 g <- g + geom_histogram( # ヒストグラム
-  aes(y = ..density..), bins = 60, # y軸を密度に  
+  aes(y = ..density..), bins = 60, # y軸を密度に
   fill = "white", color = "black") # ヒストグラムの色
 g <- g + stat_function(fun=dnorm, args=list(mean = 62, sd = 5))　# 母集団の分布
 g <- g + geom_vline(xintercept = 62, color = "red") # 母平均の縦線
@@ -486,14 +498,14 @@ uplimit  <- sample_mean + alpha * sample_sd/sqrt(n) # 信頼区間上限
 lowlimit <- sample_mean - alpha * sample_sd/sqrt(n) # 信頼区間下限
 
 # 信頼区間の計算結果をデータフレームにまとめる
-confidence_interval <- data.frame( 
+confidence_interval <- data.frame(
   標本平均 = sample_mean,
   上限 = uplimit,
   下限 = lowlimit,
   標本番号 = 1:trial
 )
 
-# Plot using ggplot2 
+# Plot using ggplot2
 g_ci <- ggplot(confidence_interval) +
   aes(x = 標本番号, y = 標本平均)
   # aes(x = reorder(標本番号, 標本平均), y = 標本平均)
