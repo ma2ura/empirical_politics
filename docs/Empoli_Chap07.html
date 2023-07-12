@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -337,6 +337,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#母平均の信頼区間" id="toc-母平均の信頼区間" class="nav-link" data-scroll-target="#母平均の信頼区間"><span class="header-section-number">7.3.1</span> 母平均の信頼区間 <!-- 7.3.1 ---></a></li>
   <li><a href="#信頼区間の解釈" id="toc-信頼区間の解釈" class="nav-link" data-scroll-target="#信頼区間の解釈"><span class="header-section-number">7.3.2</span> 信頼区間の解釈</a></li>
   </ul></li>
+  <li><a href="#統計的検定の諸問題" id="toc-統計的検定の諸問題" class="nav-link" data-scroll-target="#統計的検定の諸問題"><span class="header-section-number">7.4</span> 統計的検定の諸問題</a>
+  <ul class="collapse">
+  <li><a href="#仮説検定における2種類の誤りと検出力" id="toc-仮説検定における2種類の誤りと検出力" class="nav-link" data-scroll-target="#仮説検定における2種類の誤りと検出力"><span class="header-section-number">7.4.1</span> 仮説検定における2種類の「誤り」と検出力</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -451,10 +455,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">10</span>, <span class="dv">1</span>) <span class="co"># 標本抽出</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x) <span class="co"># 標本平均</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.00544</code></pre>
+<pre><code>[1] 9.91293</code></pre>
 </div>
 </div>
-<p>平均値は10.0054433となり，母平均10とほぼ同じ値になりましたが、ぴったり10ではありませんよね。 この母平均<span class="math inline">10</span>と標本平均10.0054433の差を<strong>誤差</strong>といい、母集団と標本のズレを意味します。</p>
+<p>平均値は9.9129298となり，母平均10とほぼ同じ値になりましたが、ぴったり10ではありませんよね。 この母平均<span class="math inline">10</span>と標本平均9.9129298の差を<strong>誤差</strong>といい、母集団と標本のズレを意味します。</p>
 <p>平均10，標準偏差1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算する，という試行(trial)を10000回繰り返して，10000個の標本から10000個の標本平均を計算して、標本平均のヒストグラムで表示してみます。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">100</span> <span class="co"># 標本サイズ</span></span>
@@ -473,7 +477,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.99946</code></pre>
+<pre><code>[1] 10.00015</code></pre>
 </div>
 </div>
 <p>とほぼ10と等しくなります。 このように，標本数を増やしていくと，標本平均の平均値は母平均に近づく，という法則を<strong>大数の法則</strong>(law of large numbers)といいます。 統計学における極めて重要な概念です。</p>
@@ -610,10 +614,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(result) <span class="co"># 標本平均の平均</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 61.98745</code></pre>
+<pre><code>[1] 61.97721</code></pre>
 </div>
 </div>
-<p>ヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は61.987446となりますが，これは母平均62に近い値になっています。</p>
+<p>ヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は61.9772121となりますが，これは母平均62に近い値になっています。</p>
 <p>グラフで確認すると，</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">as.tibble</span>(result)</span>
@@ -849,6 +853,85 @@ t = \frac{\bar x - \mu}{SE}
 </div>
 </div>
 <p>標本サイズ<span class="math inline">n</span>が大きくなると、信頼区間の上限と下限を計算するさいの<span class="math inline">\sqrt{n}</span>が大きくなるため、信頼区間が短くなっていることがわかります。</p>
+</section>
+</section>
+<section id="統計的検定の諸問題" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="統計的検定の諸問題"><span class="header-section-number">7.4</span> 統計的検定の諸問題</h2>
+<section id="仮説検定における2種類の誤りと検出力" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="仮説検定における2種類の誤りと検出力"><span class="header-section-number">7.4.1</span> 仮説検定における2種類の「誤り」と検出力</h3>
+<ul>
+<li>第1種の過誤(type 1 error) : 帰無仮説が正しいのに，帰無仮説を棄却してしまう誤り。偽陽性(False Positive)とも呼ばれる。</li>
+<li>第2種の過誤(type 2 error) : 帰無仮説が正しくないのに，帰無仮説を棄却しない誤り。偽陰性（False Negative）とも呼ばれる。</li>
+</ul>
+<p>第1種の過誤の例として，よく挙げられる犯罪容疑者の例で説明すると，容疑者が無実なのに，容疑者を有罪としてしまう(えん罪)誤りを第1種の過誤といい，容疑者が犯罪者なのに，容疑者を無罪としてしまう誤りを第2種の過誤といいます。</p>
+<p>第1種の過誤(えん罪)を小さくしたいとします。 この確率を$$で表し，実はこれが有意水準の大きさとなります。 有意水準5％というのは，ある検定統計量の標本分布の平均から離れた5％の面積に入る統計量を<strong>かけ離れた値</strong>とするかを(研究者が勝手に)決めたものです。 両側検定なら，標本平均から離れた左右の2.5％の面積に入る統計量をかけ離れた値とし，ここに計算した統計量が含まれるとき，帰無仮説を棄却します。</p>
+<p>第1種の過誤と減らすために有意水準を小さくすると，だい2種の過誤が大きくなります。 当然ですが，えん罪を減らそうとしてほとんどのケースを無罪とすると，犯罪者を逃がすことになる，というロジックと同じです。</p>
+<p>帰無仮説が正しいとした場合の正規分布を青色で，真の分布を赤色で示し，有意水準が両側で5％，つまり片側が2.5％となる図を書くとこんな感じです。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 正規分布の確率密度関数</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>dnorm_with_mean_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) {</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>sd<span class="sc">^</span><span class="dv">2</span>))<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>((x <span class="sc">-</span> mean)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>sd<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"># パラメータの設定</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>mu1 <span class="ot">&lt;-</span> <span class="dv">0</span>   <span class="co"># 帰無仮説の平均</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>sd1 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 帰無仮説の標準偏差</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>mu2 <span class="ot">&lt;-</span> <span class="fl">1.5</span> <span class="co"># 対立仮説の平均</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>sd2 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 対立仮説の標準偏差</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">=</span> <span class="fl">0.025</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="co"># サンプルデータを生成</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x,</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dnorm1 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1),</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dnorm2 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu2, <span class="at">sd =</span> sd2))</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplotを使って描画</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha, mu1, sd1)),</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(alpha, mu1, sd1)),</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(alpha, mu1, sd1) <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha, mu1, sd1)),</span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Density"</span>,</span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"両側検定における第1種の過誤と第2種の過誤"</span>)</span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha), <span class="at">linetype=</span><span class="st">"dotted"</span>)</span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu1, <span class="at">color =</span> <span class="st">"darkblue"</span>)</span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu2, <span class="at">color =</span> <span class="st">"darkred"</span>)</span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">+</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1) <span class="sc">/</span> <span class="dv">6</span>,</span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"第1種の過誤"</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>) <span class="sc">+</span></span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">-</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">/</span> <span class="dv">6</span>,</span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"第2種の過誤"</span>, <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">-</span> <span class="dv">2</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1)<span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>                  <span class="at">label =</span> <span class="st">"帰無仮説下の分布"</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span> ) <span class="sc">+</span></span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">+</span> <span class="fl">1.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">-</span> <span class="fl">0.1</span>,</span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"真の分布"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>) <span class="sc">+</span> mystyle</span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Empoli_Chap07_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="1344"></p>
+</div>
+</div>
+<p>帰無仮説が正しいときに帰無仮説を棄却する確率である第1種の過誤<span class="math inline">\alpha</span>を小さくすると，こうなります。</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Empoli_Chap07_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="1344"></p>
+</div>
+</div>
+<p>片側検定の場合なら，こんな感じです。</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Empoli_Chap07_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="1344"></p>
+</div>
+</div>
 
 
 </section>
