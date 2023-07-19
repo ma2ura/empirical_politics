@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -381,14 +381,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>ここではRの得意とする<strong>データの可視化</strong>(data visualization)について学びます。 いままで利用してきた<code>tidyverse</code>にはグラフ作成のためのパッケージとして<code>ggplot2</code>があります。 本章では，<code>ggplot2</code>の使い方を学習し，読者にもデータの特徴を伝えやすく，シンプルで，美しいグラフの作成を目指します。</p>
 <p>ビッグデータを容易に扱えるようになった昨今において、データの可視化スキルの重要性は高まってきており、以下のような書籍が出版されています。いずれも非常に良い書籍ですので、興味のある方は読んでみてください。</p>
-<p>:::{layout-ncol = 3} <img src="img/R_Visu_01.jpg" class="img-fluid" alt="データ分析のためのデータ可視化入門"></p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/R_Visu_01.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">データ分析のためのデータ可視化入門</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/R_Visu_02.jpg" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Rでできるビジュアル統計学</figcaption>
 </figure>
 </div>
-<p><img src="img/R_Visu_03.jpg" class="img-fluid" alt="Rによるインタラクティブなデータビジュアライゼーション"> :::</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/R_Visu_03.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Rによるインタラクティブなデータビジュアライゼーション</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 <p>1冊目はアメリカで絶賛された可視化本が翻訳されたものです。ソースコードとともに、データの可視化の基本や実例を学べます。 2冊目は、統計学を可視化という視点で学習する本です。 3冊目は前の2冊とは若干毛色が異なっており、<code>Shiny</code>というPosit社が開発したパッケージを使って、インタラクティブなグラフを作成する方法を学べます。</p>
 <p><code>ggplot2</code>を使うために<code>tidyverse</code>と<code>ggthemes</code>と<code>patchwork</code>を読み込みます。まだインストールできていなければ，始めにインストールしておいてください。</p>
 <div class="cell">
@@ -798,226 +818,304 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 </div>
 </div>
 <p>結果を見れば分かるとおり，<code>group_by()</code>で上場場所ごとにグループ化し，<code>summarize()</code>で企業数と平均売上高を計算しているので，上場場所，企業数，平均売上高の3変数が3つの観測値をもつ<span class="math inline">3 \times 3</span>の表が作成されています。 <code>group_by()</code>と<code>summarize()</code>を組み合わせると，結果としてグループ数に応じた統計量を計算した結果となり，元のデータよりも小さなデータフレームとなって返ってきます。</p>
-<p>ついでに，産業別の売上高合計を計算してみましょう。</p>
+<p>ついでに，産業別の売上高合計，利益平均値，利益中央値，利益の標準偏差を計算してみましょう。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(中分類) <span class="sc">%&gt;%</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    企業数 <span class="ot">=</span> <span class="fu">n</span>(),</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    平均利益 <span class="ot">=</span> <span class="fu">mean</span>(親会社株主に帰属する当期純利益, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co"># 平均</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    利益標準偏差 <span class="ot">=</span> <span class="fu">sd</span>(親会社株主に帰属する当期純利益, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(平均利益)) <span class="sc">%&gt;%</span></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    売上合計 <span class="ot">=</span> <span class="fu">sum</span>(売上高, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co"># 合計</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    利益平均値 <span class="ot">=</span> <span class="fu">mean</span>(親会社株主に帰属する当期純利益, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co"># 平均</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    利益中央値 <span class="ot">=</span> <span class="fu">median</span>(親会社株主に帰属する当期純利益, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co"># 中央値</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    利益標準偏差 <span class="ot">=</span> <span class="fu">sd</span>(親会社株主に帰属する当期純利益, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># 標準偏差</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(売上合計)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 9%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 18%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">中分類</th>
 <th style="text-align: right;">企業数</th>
-<th style="text-align: right;">平均利益</th>
+<th style="text-align: right;">売上合計</th>
+<th style="text-align: right;">利益平均値</th>
+<th style="text-align: right;">利益中央値</th>
 <th style="text-align: right;">利益標準偏差</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">通信</td>
-<td style="text-align: right;">625</td>
-<td style="text-align: right;">67415.843</td>
-<td style="text-align: right;">284105.640</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">自動車・自動車部品</td>
-<td style="text-align: right;">1651</td>
-<td style="text-align: right;">39250.629</td>
-<td style="text-align: right;">210604.044</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">電力</td>
-<td style="text-align: right;">285</td>
-<td style="text-align: right;">24108.284</td>
-<td style="text-align: right;">127809.199</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">医薬品</td>
-<td style="text-align: right;">947</td>
-<td style="text-align: right;">20915.376</td>
-<td style="text-align: right;">48451.048</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">鉄道・バス</td>
-<td style="text-align: right;">670</td>
-<td style="text-align: right;">16710.421</td>
-<td style="text-align: right;">61053.123</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ガス</td>
-<td style="text-align: right;">214</td>
-<td style="text-align: right;">16210.327</td>
-<td style="text-align: right;">26366.794</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">鉱業</td>
-<td style="text-align: right;">131</td>
-<td style="text-align: right;">15827.588</td>
-<td style="text-align: right;">46860.380</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">海運</td>
-<td style="text-align: right;">261</td>
-<td style="text-align: right;">15152.031</td>
-<td style="text-align: right;">93497.186</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">石油</td>
-<td style="text-align: right;">178</td>
-<td style="text-align: right;">14830.657</td>
-<td style="text-align: right;">81496.356</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">空輸</td>
-<td style="text-align: right;">96</td>
-<td style="text-align: right;">13813.062</td>
-<td style="text-align: right;">105853.201</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ゴム</td>
-<td style="text-align: right;">459</td>
-<td style="text-align: right;">12362.357</td>
-<td style="text-align: right;">43652.986</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">電気機器</td>
 <td style="text-align: right;">5016</td>
+<td style="text-align: right;">1941560030</td>
 <td style="text-align: right;">10167.927</td>
+<td style="text-align: right;">1084.0</td>
 <td style="text-align: right;">62674.007</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">その他金融業</td>
-<td style="text-align: right;">832</td>
-<td style="text-align: right;">9388.689</td>
-<td style="text-align: right;">47428.745</td>
-</tr>
 <tr class="even">
-<td style="text-align: left;">鉄鉱業</td>
-<td style="text-align: right;">906</td>
-<td style="text-align: right;">8887.185</td>
-<td style="text-align: right;">47067.285</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">食品</td>
-<td style="text-align: right;">2215</td>
-<td style="text-align: right;">8370.878</td>
-<td style="text-align: right;">32427.752</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">化学工業</td>
-<td style="text-align: right;">3915</td>
-<td style="text-align: right;">7564.608</td>
-<td style="text-align: right;">23530.649</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">商社</td>
 <td style="text-align: right;">5926</td>
+<td style="text-align: right;">1909721701</td>
 <td style="text-align: right;">6754.815</td>
+<td style="text-align: right;">738.0</td>
 <td style="text-align: right;">43249.527</td>
 </tr>
+<tr class="odd">
+<td style="text-align: left;">自動車・自動車部品</td>
+<td style="text-align: right;">1651</td>
+<td style="text-align: right;">1688864541</td>
+<td style="text-align: right;">39250.629</td>
+<td style="text-align: right;">1851.0</td>
+<td style="text-align: right;">210604.044</td>
+</tr>
 <tr class="even">
-<td style="text-align: left;">精密機器</td>
-<td style="text-align: right;">1035</td>
-<td style="text-align: right;">6338.030</td>
-<td style="text-align: right;">17597.021</td>
+<td style="text-align: left;">小売業</td>
+<td style="text-align: right;">3501</td>
+<td style="text-align: right;">793035711</td>
+<td style="text-align: right;">4590.688</td>
+<td style="text-align: right;">880.0</td>
+<td style="text-align: right;">14968.112</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">不動産</td>
-<td style="text-align: right;">1674</td>
-<td style="text-align: right;">5826.409</td>
-<td style="text-align: right;">20315.917</td>
+<td style="text-align: left;">化学工業</td>
+<td style="text-align: right;">3915</td>
+<td style="text-align: right;">736860746</td>
+<td style="text-align: right;">7564.608</td>
+<td style="text-align: right;">1445.0</td>
+<td style="text-align: right;">23530.649</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">サービス業</td>
+<td style="text-align: right;">11753</td>
+<td style="text-align: right;">694250494</td>
+<td style="text-align: right;">2578.502</td>
+<td style="text-align: right;">361.0</td>
+<td style="text-align: right;">17729.118</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">通信</td>
+<td style="text-align: right;">625</td>
+<td style="text-align: right;">647052927</td>
+<td style="text-align: right;">67415.843</td>
+<td style="text-align: right;">3040.0</td>
+<td style="text-align: right;">284105.640</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">機械</td>
 <td style="text-align: right;">4338</td>
+<td style="text-align: right;">616584704</td>
 <td style="text-align: right;">5310.454</td>
+<td style="text-align: right;">1007.0</td>
 <td style="text-align: right;">20211.162</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">建設</td>
 <td style="text-align: right;">2715</td>
+<td style="text-align: right;">597371111</td>
 <td style="text-align: right;">4868.903</td>
+<td style="text-align: right;">1073.5</td>
 <td style="text-align: right;">22122.402</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">陸運</td>
-<td style="text-align: right;">640</td>
-<td style="text-align: right;">4662.080</td>
-<td style="text-align: right;">9675.867</td>
+<td style="text-align: left;">食品</td>
+<td style="text-align: right;">2215</td>
+<td style="text-align: right;">553185961</td>
+<td style="text-align: right;">8370.878</td>
+<td style="text-align: right;">1211.0</td>
+<td style="text-align: right;">32427.752</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">小売業</td>
-<td style="text-align: right;">3501</td>
-<td style="text-align: right;">4590.688</td>
-<td style="text-align: right;">14968.112</td>
+<td style="text-align: left;">電力</td>
+<td style="text-align: right;">285</td>
+<td style="text-align: right;">435223159</td>
+<td style="text-align: right;">24108.284</td>
+<td style="text-align: right;">21988.0</td>
+<td style="text-align: right;">127809.199</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">窯業</td>
-<td style="text-align: right;">1066</td>
-<td style="text-align: right;">4485.089</td>
-<td style="text-align: right;">13623.277</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">その他輸送用機器</td>
-<td style="text-align: right;">253</td>
-<td style="text-align: right;">4227.802</td>
-<td style="text-align: right;">12600.550</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">造船</td>
-<td style="text-align: right;">96</td>
-<td style="text-align: right;">4001.927</td>
-<td style="text-align: right;">18613.163</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">非金属及び金属製品</td>
 <td style="text-align: right;">2174</td>
+<td style="text-align: right;">333425028</td>
 <td style="text-align: right;">3537.316</td>
+<td style="text-align: right;">704.0</td>
 <td style="text-align: right;">15694.021</td>
 </tr>
+<tr class="odd">
+<td style="text-align: left;">鉄道・バス</td>
+<td style="text-align: right;">670</td>
+<td style="text-align: right;">309477897</td>
+<td style="text-align: right;">16710.421</td>
+<td style="text-align: right;">3660.0</td>
+<td style="text-align: right;">61053.123</td>
+</tr>
 <tr class="even">
-<td style="text-align: left;">パルプ・紙</td>
-<td style="text-align: right;">432</td>
-<td style="text-align: right;">3345.630</td>
-<td style="text-align: right;">9869.195</td>
+<td style="text-align: left;">鉄鉱業</td>
+<td style="text-align: right;">906</td>
+<td style="text-align: right;">306858163</td>
+<td style="text-align: right;">8887.185</td>
+<td style="text-align: right;">903.0</td>
+<td style="text-align: right;">47067.285</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">石油</td>
+<td style="text-align: right;">178</td>
+<td style="text-align: right;">247483911</td>
+<td style="text-align: right;">14830.657</td>
+<td style="text-align: right;">1510.5</td>
+<td style="text-align: right;">81496.356</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">医薬品</td>
+<td style="text-align: right;">947</td>
+<td style="text-align: right;">199368660</td>
+<td style="text-align: right;">20915.376</td>
+<td style="text-align: right;">4157.0</td>
+<td style="text-align: right;">48451.048</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">その他製造業</td>
 <td style="text-align: right;">1936</td>
+<td style="text-align: right;">189462230</td>
 <td style="text-align: right;">2630.949</td>
+<td style="text-align: right;">595.0</td>
 <td style="text-align: right;">8999.953</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">サービス業</td>
-<td style="text-align: right;">11753</td>
-<td style="text-align: right;">2578.502</td>
-<td style="text-align: right;">17729.118</td>
+<td style="text-align: left;">不動産</td>
+<td style="text-align: right;">1674</td>
+<td style="text-align: right;">181588397</td>
+<td style="text-align: right;">5826.409</td>
+<td style="text-align: right;">1192.0</td>
+<td style="text-align: right;">20315.917</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">繊維</td>
-<td style="text-align: right;">934</td>
-<td style="text-align: right;">2405.079</td>
-<td style="text-align: right;">10837.288</td>
+<td style="text-align: left;">窯業</td>
+<td style="text-align: right;">1066</td>
+<td style="text-align: right;">145506672</td>
+<td style="text-align: right;">4485.089</td>
+<td style="text-align: right;">909.5</td>
+<td style="text-align: right;">13623.277</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">水産</td>
-<td style="text-align: right;">203</td>
-<td style="text-align: right;">2327.473</td>
-<td style="text-align: right;">4202.917</td>
+<td style="text-align: left;">その他金融業</td>
+<td style="text-align: right;">832</td>
+<td style="text-align: right;">142861287</td>
+<td style="text-align: right;">9388.689</td>
+<td style="text-align: right;">1657.5</td>
+<td style="text-align: right;">47428.745</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">ゴム</td>
+<td style="text-align: right;">459</td>
+<td style="text-align: right;">133429682</td>
+<td style="text-align: right;">12362.357</td>
+<td style="text-align: right;">1381.0</td>
+<td style="text-align: right;">43652.986</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">精密機器</td>
+<td style="text-align: right;">1035</td>
+<td style="text-align: right;">132220025</td>
+<td style="text-align: right;">6338.030</td>
+<td style="text-align: right;">1015.0</td>
+<td style="text-align: right;">17597.021</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">陸運</td>
+<td style="text-align: right;">640</td>
+<td style="text-align: right;">118243116</td>
+<td style="text-align: right;">4662.080</td>
+<td style="text-align: right;">1285.5</td>
+<td style="text-align: right;">9675.867</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">繊維</td>
+<td style="text-align: right;">934</td>
+<td style="text-align: right;">115700455</td>
+<td style="text-align: right;">2405.079</td>
+<td style="text-align: right;">542.0</td>
+<td style="text-align: right;">10837.288</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">海運</td>
+<td style="text-align: right;">261</td>
+<td style="text-align: right;">104869365</td>
+<td style="text-align: right;">15152.031</td>
+<td style="text-align: right;">1012.0</td>
+<td style="text-align: right;">93497.186</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">パルプ・紙</td>
+<td style="text-align: right;">432</td>
+<td style="text-align: right;">100989604</td>
+<td style="text-align: right;">3345.630</td>
+<td style="text-align: right;">693.5</td>
+<td style="text-align: right;">9869.195</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ガス</td>
+<td style="text-align: right;">214</td>
+<td style="text-align: right;">89266508</td>
+<td style="text-align: right;">16210.327</td>
+<td style="text-align: right;">3620.0</td>
+<td style="text-align: right;">26366.794</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">空輸</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">70396355</td>
+<td style="text-align: right;">13813.062</td>
+<td style="text-align: right;">1053.0</td>
+<td style="text-align: right;">105853.201</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">造船</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">50404788</td>
+<td style="text-align: right;">4001.927</td>
+<td style="text-align: right;">968.5</td>
+<td style="text-align: right;">18613.163</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">倉庫・運輸関連</td>
 <td style="text-align: right;">746</td>
+<td style="text-align: right;">48088368</td>
 <td style="text-align: right;">1876.247</td>
+<td style="text-align: right;">622.0</td>
 <td style="text-align: right;">3991.522</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">水産</td>
+<td style="text-align: right;">203</td>
+<td style="text-align: right;">35003357</td>
+<td style="text-align: right;">2327.473</td>
+<td style="text-align: right;">1122.0</td>
+<td style="text-align: right;">4202.917</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">その他輸送用機器</td>
+<td style="text-align: right;">253</td>
+<td style="text-align: right;">27993041</td>
+<td style="text-align: right;">4227.802</td>
+<td style="text-align: right;">1102.0</td>
+<td style="text-align: right;">12600.550</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">鉱業</td>
+<td style="text-align: right;">131</td>
+<td style="text-align: right;">26740727</td>
+<td style="text-align: right;">15827.588</td>
+<td style="text-align: right;">2096.0</td>
+<td style="text-align: right;">46860.380</td>
 </tr>
 </tbody>
 </table>
