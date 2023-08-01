@@ -1,0 +1,33 @@
+# 交差項の使い方
+
+```{r}
+#| echo: FALSE
+library(tidyverse)
+library(ggthemes)
+mystyle <- list (#  ggplotのテーマ
+  theme_few(), # ggthemesパッケージ
+  theme(
+    text = element_text(
+      size=10,  #  フォントサイズ
+      family = "HiraKakuProN-W3" # ヒラギノフォント
+    )
+  )
+)
+set.seed(123)
+```
+
+## 交差項で何が分かるのか
+
+## 交差項を入れた回帰分析の注意点
+
+## まるまるを事例とした交差項の分析
+
+### データの読み込み
+
+### 記述統計と散布図の表示
+
+### 交差項を使った重回帰分析
+
+### 交差項を含む回帰分析結果の解釈と可視化
+
+## まとめ

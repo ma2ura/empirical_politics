@@ -1,0 +1,31 @@
+# 回帰分析による統計的推定
+
+```{r}
+#| echo: FALSE
+library(tidyverse)
+library(ggthemes)
+mystyle <- list (#  ggplotのテーマ
+  theme_few(), # ggthemesパッケージ
+  theme(
+    text = element_text(
+      size=10,  #  フォントサイズ
+      family = "HiraKakuProN-W3" # ヒラギノフォント
+    )
+  )
+)
+set.seed(123)
+```
+
+## ダミー変数の利用
+
+### ダミー変数
+
+### ダミー変数を使った回帰分析
+
+## 変数変換
+
+### 線形変換
+
+### 中心化
+
+## まとめ
