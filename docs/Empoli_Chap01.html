@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>計量会計学ノート - 1&nbsp; 計量会計学？</title>
+<title>Rによる計量政治学ノート - 1&nbsp; 定量研究とは</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Empoli_Chap02.html" rel="next">
+<link href="./Empoli_Chap03.html" rel="next">
 <link href="./index.html" rel="prev">
 <link href="./favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -74,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">計量会計学ノート</span>
+    <span class="navbar-title">Rによる計量政治学ノート</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -85,14 +85,14 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
- <span class="menu-text">はじめに</span></a>
+ <span class="menu-text">第1回 はじめに</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Empoli_Chap01.html" rel="" target="">
- <span class="menu-text">第1回 実証会計</span></a>
+    <a class="nav-link" href="./Empoli_Chap0.qmd" rel="" target="">
+ <span class="menu-text">第2回 実証研究</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Empoli_Chap02.html" rel="" target="">
+    <a class="nav-link" href="./Empoli_Chap02.qmd" rel="" target="">
  <span class="menu-text">2章 研究テーマの選び方</span></a>
   </li>  
   <li class="nav-item">
@@ -168,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Empoli_Chap01.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">計量会計学？</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Empoli_Chap01.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">定量研究とは</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -197,73 +197,67 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap01.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">計量会計学？</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Empoli_Chap02.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">研究テーマの選び方</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">定量研究とは</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap03.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">理論と仮説</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理論と仮説</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Rの使い方</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rの使い方</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap05.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap06.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">記述統計とデータの可視化・視覚化</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">記述統計とデータの可視化・視覚化</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap07.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">統計的推定</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">統計的推定</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap08.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">統計的仮説検定</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">統計的仮説検定</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">変数間の関連性</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">変数間の関連性</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析の基礎</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">回帰分析の基礎</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">回帰分析による統計的推定</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析による統計的推定</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap15.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ロジスティック回帰分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">ロジスティック回帰分析</span></span></a>
   </div>
 </li>
     </ul>
@@ -276,8 +270,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#会計を計量する" id="toc-会計を計量する" class="nav-link active" data-scroll-target="#会計を計量する"><span class="header-section-number">1.1</span> 会計を計量する？</a></li>
-  <li><a href="#分析的会計研究と実証的会計研究" id="toc-分析的会計研究と実証的会計研究" class="nav-link" data-scroll-target="#分析的会計研究と実証的会計研究"><span class="header-section-number">1.2</span> 分析的会計研究と実証的会計研究</a></li>
+  <li><a href="#sec-01" id="toc-sec-01" class="nav-link active" data-scroll-target="#sec-01"><span class="header-section-number">1.1</span> 会計を計量する？</a></li>
+  <li><a href="#sec-02" id="toc-sec-02" class="nav-link" data-scroll-target="#sec-02"><span class="header-section-number">1.2</span> 会計学の領域</a></li>
   </ul>
 </nav>
     </div>
@@ -286,7 +280,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">計量会計学？</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">定量研究とは</span></h1>
 </div>
 
 
@@ -301,28 +295,17 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>第1回講義の到達目標は、</p>
-<ol type="1">
-<li>実証研究とはどんなものかを理解し、他人に説明できる。</li>
-<li>実証研究で扱える研究課題を理解し、研究課題を適切に設定できる。</li>
-<li>良い研究課題が持つべき特性を理解し、その特徴を備えた研究課題を設定できる。</li>
-</ol>
-<p>第1回講義の到達度検証のための課題は、以下の通りです。</p>
-<ol type="1">
-<li>定量データを用いて行う実証研究の利点と欠点を説明する。</li>
-<li>自分が興味をもてそうな研究課題を設定する。</li>
-<li>上で立てた研究課題がよい研究課題かどうかを5つの観点から検討し、評価する。</li>
-</ol>
-<section id="会計を計量する" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="会計を計量する"><span class="header-section-number">1.1</span> 会計を計量する？</h2>
+<section id="sec-01" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="sec-01"><span class="header-section-number">1.1</span> 会計を計量する？</h2>
 <p>ここでは、教科書「Rによる計量政治学」の内容を「会計学」に置き換えて考えてみます。 「計量会計学」という言葉は一般的ではなく、会計学の世界では「<strong>実証的会計研究</strong>」とか「<strong>実証会計学</strong>」いう言葉が使われています。</p>
 <p>社会科学において、社会で生じる様々な現象（たとえば、経営現象や会計実務）を、数値化して分析することを<strong>計量化</strong>(quantification)と呼びます。 計量化されたデータを用いて、社会現象を説明しようとするアプローチを<strong>計量分析</strong>(quantitative analysis)と呼びます。 計量分析の手法は、統計学や計量経済学などの数理的な手法を用いて、社会現象を説明しようとするものです。</p>
-<p><strong>会計</strong>とは経営活動から生み出される価値の変化を貨幣的に計測・記録し、その情報を整理し、集約することで、最終成果物として報告書(たとえば貸借対照表など)を作成し、それを利害関係者に報告することで、投資意思決定に役立つ情報を提供したり、利害関係者間の利害調整を行うことを目的とした一連のプロセスを意味します。 つまり会計そのものが、経営現象を計量化することを目的としているため、その最終成果物である財務諸表は、経営現象を計量化したデータの集合体と言えます。 この会計という経営実務を研究対象とした学問を<strong>会計学</strong>(accounting)といいます。 経営現象を研究対象とする経営学研究のうち、会計という経営実務に焦点を当てた会計研究を、計量分析の手法を用いて行うことを<strong>実証会計学</strong>(empirical accounting)と呼びます。</p>
-<p>とりわけ会計学の中でも、公表された会計情報といった計量化されたデータを用いた研究を(狭義の)<strong>実証的会計研究</strong>(archival based empirical accounting research)とか、単に<strong>実証会計</strong>といいます<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 。</p>
-<p>国際的に評価の高い会計学の学術誌である、<em>The Accounting Review</em>(TAR)、<em>Journal of Accounting and Economics</em>(JAE)、<em>Journal of Accounting Research</em>(JAR)、<em>Review of Accounting Studies</em>(RAST)、<em>Contemporary Accounting Research</em>(CAR)の五大誌に掲載されている論文の大部分が、会計情報を用いた計量分析となっています。 ただこの5誌はすべて北米の研究機関や大学が発行している雑誌ですので、実証、実験、分析的な会計研究がメインストリームの扱いとなりますが、ヨーロッパでは、 <em>Accounting, Organisation snd Society</em>(AOS)、<em>European Accounting Research</em>(EAR)、<em>British Accounting Research</em>(BAR)、<em>Critical Accounting Research</em>(CAR)といった、定性的研究も重要視し、経済学ではなく社会学をベースとした研究が主流？となっている雑誌もあります。しかし松浦は社会学について語れる知識がないので、やはり沈黙します。</p>
+<p><strong>会計</strong>とは経営活動から生み出される価値の変化を貨幣的に計測・記録し、その情報を整理し、集約することで、最終成果物として報告書(たとえば貸借対照表など)を作成し、それを利害関係者に報告することで、投資意思決定に役立つ情報を提供したり、利害関係者間の利害調整を行うことを目的とした一連のプロセスを意味します。 つまり会計そのものが、経営現象を計量化することを目的としているため、その最終成果物である財務諸表は、経営現象を計量化したデータの集合体と言えます。 この会計という経営実務を研究対象とした学問を<strong>会計学</strong>(accounting)といいます。</p>
 </section>
-<section id="分析的会計研究と実証的会計研究" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="分析的会計研究と実証的会計研究"><span class="header-section-number">1.2</span> 分析的会計研究と実証的会計研究</h2>
+<section id="sec-02" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="sec-02"><span class="header-section-number">1.2</span> 会計学の領域</h2>
+<p>会計学には様々な研究分野があります。 会計の歴史を研究対象とする<strong>会計史</strong>(accounting history)、会計の計算構造を研究対象とする<strong>計算構造研究</strong>(accounting structure)、簿記そのものを研究対象とする<strong>簿記論</strong>(bookkeeping)、そして、会計の実務を説明し予想するための理論の構築を目指す<strong>事実解明的な会計研究</strong>(positive accounting research)などがあります。</p>
+<p>とりわけ事実解明的な会計研究のうち、<strong>公表された情報</strong>を計量分析の手法を用いて分析する会計研究を、<strong>実証会計学</strong>(archival based empirical accounting)とか、単に<strong>実証会計</strong>と呼びます。 実証会計以外の事実解明的な研究には、実験により生成されたデータを分析する<strong>実験会計研究</strong>(experimental accounting)、データを必要とせず、数理モデルを用いて行われる<strong>分析会計研究</strong>(analytical accounting)などがあります。</p>
+<p>国際的に評価の高い会計学の学術誌である、<em>The Accounting Review</em>(TAR)、<em>Journal of Accounting and Economics</em>(JAE)、<em>Journal of Accounting Research</em>(JAR)、<em>Review of Accounting Studies</em>(RAST)、<em>Contemporary Accounting Research</em>(CAR)の五大誌に掲載されている論文の大部分が、会計情報を用いた計量分析となっています。 ただこの5誌はすべて北米の研究機関や大学が発行している雑誌ですので、実証、実験、分析的な会計研究がメインストリームの扱いとなりますが、ヨーロッパでは、 <em>Accounting, Organisation snd Society</em>(AOS)、<em>European Accounting Research</em>(EAR)、<em>British Accounting Research</em>(BAR)、<em>Critical Accounting Research</em>(CAR)といった、定性的研究も重要視し、経済学ではなく社会学をベースとした研究が主流？となっている雑誌もあります。しかし松浦は社会学について語れる知識がないので、やはり沈黙します。</p>
 <p>会計研究の世界では、1960年頃までは規範的研究(normative research)という「〇〇するべき」という主張をする研究が主流でした。たとえば企業が保有する株式を時価評価すべきかとか、ある特徴をもつリース資産を購入したものとして扱うべきか、といったものです。</p>
 <p>しかし、1968年にJournal of Accounting Researchに掲載された<em>Ball and Brown (1968) An Empirical Evaluation of Accounting Income Numbers</em>を皮切りに、実際に会計情報は投資家の役に立っているのかをデータを使って確かめる、という、いわゆる実証研究が行われるようになり、今日まで会計研究の主要分野となっています。</p>
 <p>実証的会計研究を行うために必要な知識・技術として、</p>
@@ -345,14 +328,6 @@ ul.task-list li input[type="checkbox"] {
 <p>ただやはり難しい数式が出てくる会計研究は松浦には完全に理解することはできないので、ここでは実証的会計研究について考えていきます。ヴィトゲンシュタインの言葉を借りれば、語り得ないものは語らないということで、分析的会計研究は沈黙するべきです。</p>
 
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>ちなみに(広義の)事実解明的な会計研究(positive accounting research)とは、会計実務を説明し予想するための理論の構築を目指す学問を指す会計研究を意味します。いまのところは、特に覚える必要はないです。</p>
-<p>他にも、事実解明的な会計研究として、数理モデルを用いた分析的会計研究(analytical accounting research)、実験経済を用いた実験会計研究(experimental accounting research)、行動科学の理論を用いた会計研究(behavioral accounting research)があります。</p>
-<p>その他にも、簿記を研究対象とした簿記論、会計計算の仕組みを研究する計算構造研究、会計の歴史を研究する会計史など様々な研究分野があります。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
@@ -596,8 +571,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Empoli_Chap02.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">研究テーマの選び方</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Empoli_Chap03.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">理論と仮説</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

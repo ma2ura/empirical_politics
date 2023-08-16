@@ -3,8 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "計量会計学ノート"
-  subtitle : "プレゼミ2023"
+  title: "Rによる計量政治学ノート"
   author: "Soichi Matsuura"
   date: "7/3/2023"
   reader-mode: true
@@ -19,10 +18,10 @@ book:
     background: "#a10000"
 #    logo: "img/rits_logo.pdf"
     left:
-      - text: "はじめに"
+      - text: "第1回 はじめに"
         file: index.qmd
-      - text: "第1回 実証会計"
-        file: Empoli_Chap01.qmd
+      - text: "第2回 実証研究"
+        file: Empoli_Chap0.qmd
       - text: "2章 研究テーマの選び方"
         file: Empoli_Chap02.qmd
       - text: "3章 理論と仮説"
@@ -59,13 +58,14 @@ book:
       計量会計学のノート
     right: |
       本書は <a href="https://quarto.org/">Quarto</a> で作成されました。
-  cover-image: "img/empirical_politics.jpg"
+  # cover-image: "img/empirical_politics.jpg"
+  cover-image: "img/rits_logo.png"
   favicon: favicon.ico
 
   chapters:
     - index.qmd
     - Empoli_Chap01.qmd
-    - Empoli_Chap02.qmd
+    # - presemi2023_02.qmd
     - Empoli_Chap03.qmd
     - Empoli_Chap04.qmd
     - Empoli_Chap05.qmd
