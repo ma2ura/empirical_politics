@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>プレゼミ - 12&nbsp; ロジスティック回帰分析</title>
+<title>Rによる計量政治学ノート - 14&nbsp; ロジスティック回帰分析</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Empoli_Chap11.html" rel="prev">
+<link href="./Empoli_Chap14.html" rel="prev">
 <link href="./favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -89,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">プレゼミ</span>
+    <span class="navbar-title">Rによる計量政治学ノート</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -103,11 +103,11 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">第1回 はじめに</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./presemi2023_02.html" rel="" target="">
+    <a class="nav-link" href="./Empoli_Chap01.html" rel="" target="">
  <span class="menu-text">第2回 実証研究</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Empoli_Chap02.qmd" rel="" target="">
+    <a class="nav-link" href="./Empoli_Chap02.html" rel="" target="">
  <span class="menu-text">2章 研究テーマの選び方</span></a>
   </li>  
   <li class="nav-item">
@@ -147,6 +147,14 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">11章 回帰分析の統計的推定</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap13.html" rel="" target="">
+ <span class="menu-text">13章 回帰分析の応用</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap14.html" rel="" target="">
+ <span class="menu-text">14章 交差項の使い方</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./Empoli_Chap15.html" rel="" target="">
  <span class="menu-text">15章 ロジスティック回帰分析</span></a>
   </li>  
@@ -183,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Empoli_Chap15.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ロジスティック回帰分析</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Empoli_Chap15.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">ロジスティック回帰分析</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -212,13 +220,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap01.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">研究、仮説、実証会計</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">定量研究とは</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./presemi2023_02.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">研究、仮説、実証会計</span></span></a>
+  <a href="./Empoli_Chap02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">研究テーマの選び方</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -277,8 +285,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">回帰分析の応用</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">交差項の使い方</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap15.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ロジスティック回帰分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">ロジスティック回帰分析</span></span></a>
   </div>
 </li>
     </ul>
@@ -291,11 +311,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#ロジスティック関数" id="toc-ロジスティック関数" class="nav-link active" data-scroll-target="#ロジスティック関数"><span class="header-section-number">12.1</span> ロジスティック関数</a>
+  <li><a href="#ロジスティック関数" id="toc-ロジスティック関数" class="nav-link active" data-scroll-target="#ロジスティック関数"><span class="header-section-number">14.1</span> ロジスティック関数</a>
   <ul class="collapse">
-  <li><a href="#最尤法" id="toc-最尤法" class="nav-link" data-scroll-target="#最尤法"><span class="header-section-number">12.1.1</span> 最尤法</a></li>
+  <li><a href="#最尤法" id="toc-最尤法" class="nav-link" data-scroll-target="#最尤法"><span class="header-section-number">14.1.1</span> 最尤法</a></li>
   </ul></li>
-  <li><a href="#ロジスティック回帰分析の手順" id="toc-ロジスティック回帰分析の手順" class="nav-link" data-scroll-target="#ロジスティック回帰分析の手順"><span class="header-section-number">12.2</span> ロジスティック回帰分析の手順</a></li>
+  <li><a href="#ロジスティック回帰分析の手順" id="toc-ロジスティック回帰分析の手順" class="nav-link" data-scroll-target="#ロジスティック回帰分析の手順"><span class="header-section-number">14.2</span> ロジスティック回帰分析の手順</a></li>
   </ul>
 </nav>
     </div>
@@ -304,7 +324,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ロジスティック回帰分析</span></h1>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">ロジスティック回帰分析</span></h1>
 </div>
 
 
@@ -319,8 +339,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="ロジスティック関数" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="ロジスティック関数"><span class="header-section-number">12.1</span> ロジスティック関数</h2>
+<section id="ロジスティック関数" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="ロジスティック関数"><span class="header-section-number">14.1</span> ロジスティック関数</h2>
 <p>「当たったか、外れたか」、「ある会計基準を選択したか、否か」、「ある商品を購入したか、否か」など、結果が二値で表されるような変数を二値変数(binary variable)といい、二値変数を応答変数として回帰分析したいとき、ロジスティック回帰分析が便利です。</p>
 <p>事象Aと事象Bのどちらかが起こるとき、事象Aが起こる確率を<span class="math inline">p</span>とすると、事象Bが起こる確率は<span class="math inline">1-p</span>となります。 <span class="math inline">p</span>は確率を表しているので，<span class="math inline">0</span>から<span class="math inline">1</span>の間の値をとります。 この事象Aが起こる確率と事象Aが起こらない確率の比を<strong>オッズ(odds)</strong>といいます。</p>
 <p><span class="math display">
@@ -383,8 +403,8 @@ f^{-1}(x) = \frac{\exp(x)}{1 + \exp(x)} = \frac{1}{1 + \exp(-x)}
 \log \left( \frac{\Pr(y_i = 1)}{1 - \Pr(y_i = 1)} \right) = \beta_0 + \beta_1 x_i
 </span></p>
 <p>ようやく回帰分析の式になりました。</p>
-<section id="最尤法" class="level3" data-number="12.1.1">
-<h3 data-number="12.1.1" class="anchored" data-anchor-id="最尤法"><span class="header-section-number">12.1.1</span> 最尤法</h3>
+<section id="最尤法" class="level3" data-number="14.1.1">
+<h3 data-number="14.1.1" class="anchored" data-anchor-id="最尤法"><span class="header-section-number">14.1.1</span> 最尤法</h3>
 <p>つぎに，この<span class="math inline">\beta</span>を推定する方法を考えます。 この回帰モデルは非線形であるため，モデルと観測値の誤差を最小にする，という最小二乗法を使ってパラメータを推定することはできません。 そこで，<strong>最尤法</strong>(most likelifood method)を使ってパラメータを推定します。 最尤法とは，観測値が得られる確率を最大にするようなパラメータを推定する方法で，一定の条件のもとで優れた推定量を与えることが知られています。</p>
 <p>最尤法について考える前に，まずロジスティック回帰のモデルの背後にある線形モデルについて考えてみます。 観察される応答変数<span class="math inline">y_i</span>は<span class="math inline">0</span>か<span class="math inline">1</span>という二値変数となりますが，その背後には，線形関係があると考えることができます。 つまりある閾値<span class="math inline">y^*</span>を設定して，<span class="math inline">y_i</span>が<span class="math inline">y^*</span>より大きいときは<span class="math inline">1</span>，<span class="math inline">y^*</span>より小さいときは<span class="math inline">0</span>となると考えることができます。</p>
 <p><span class="math display">
@@ -396,8 +416,8 @@ y_i =
 </span></p>
 </section>
 </section>
-<section id="ロジスティック回帰分析の手順" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="ロジスティック回帰分析の手順"><span class="header-section-number">12.2</span> ロジスティック回帰分析の手順</h2>
+<section id="ロジスティック回帰分析の手順" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="ロジスティック回帰分析の手順"><span class="header-section-number">14.2</span> ロジスティック回帰分析の手順</h2>
 <p>回帰分析とほぼ同じ手順です。 実際にRでロジスティック回帰分析を行う場合は，<code>lm()</code>関数ではなく<code>glm()</code>関数を使うだけで，ほぼ同じように分析できます。</p>
 
 
@@ -639,8 +659,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Empoli_Chap11.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">回帰分析による統計的推定</span></span>
+      <a href="./Empoli_Chap14.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">交差項の使い方</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

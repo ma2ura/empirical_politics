@@ -21,7 +21,7 @@ book:
       - text: "第1回 はじめに"
         file: index.qmd
       - text: "第2回 実証研究"
-        file: Empoli_Chap0.qmd
+        file: Empoli_Chap01.qmd
       - text: "2章 研究テーマの選び方"
         file: Empoli_Chap02.qmd
       - text: "3章 理論と仮説"
@@ -42,6 +42,12 @@ book:
         file: Empoli_Chap10.qmd
       - text: "11章 回帰分析の統計的推定"
         file: Empoli_Chap11.qmd
+      - text: "12章 回帰分析の前提と妥当性の診断"
+        file: Empoli_Chap12.qmd
+      - text: "13章 回帰分析の応用"
+        file: Empoli_Chap13.qmd
+      - text: "14章 交差項の使い方"
+        file: Empoli_Chap14.qmd
       - text: "15章 ロジスティック回帰分析"
         file: Empoli_Chap15.qmd
     right:
@@ -65,7 +71,7 @@ book:
   chapters:
     - index.qmd
     - Empoli_Chap01.qmd
-    # - presemi2023_02.qmd
+    - Empoli_Chap02.qmd
     - Empoli_Chap03.qmd
     - Empoli_Chap04.qmd
     - Empoli_Chap05.qmd
@@ -75,6 +81,9 @@ book:
     - Empoli_Chap09.qmd
     - Empoli_Chap10.qmd
     - Empoli_Chap11.qmd
+    - Empoli_Chap12.qmd
+    - Empoli_Chap13.qmd
+    - Empoli_Chap14.qmd
     - Empoli_Chap15.qmd
 
 format:
