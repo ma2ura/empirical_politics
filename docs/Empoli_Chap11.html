@@ -100,6 +100,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
 <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
@@ -369,6 +372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#重回帰モデル" id="toc-重回帰モデル" class="nav-link" data-scroll-target="#重回帰モデル"><span class="header-section-number">11.2.1</span> 重回帰モデル</a></li>
   <li><a href="#信頼区間と仮説検定-1" id="toc-信頼区間と仮説検定-1" class="nav-link" data-scroll-target="#信頼区間と仮説検定-1"><span class="header-section-number">11.2.2</span> 信頼区間と仮説検定</a></li>
   </ul></li>
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">11.3</span> まとめ</a></li>
   </ul>
 </nav>
     </div>
@@ -474,9 +478,237 @@ Y_i = \beta _0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_p x_{ik} + \va
 <p><span class="math display">
 b_m - t _{n-k-1, \frac{\alpha}{2}} SE(b_m) \leq \beta_m \leq b_m + t_{n-k-1, \frac{\alpha}{2}} SE(b_m)
 </span></p>
+<p>のように計算できます。 先ほど推定した重回帰分析の結果を再度確認してみます。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = 売上高 ~ lag(研究開発費) + lag(広告宣伝費), 
+    data = df)
 
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-12323473   -100139    -69328     20239  19099811 
 
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     1.005e+05  1.257e+04   7.995 1.58e-15 ***
+lag(研究開発費) 1.717e+01  2.639e-01  65.039  &lt; 2e-16 ***
+lag(広告宣伝費) 6.913e+00  5.164e-01  13.386  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 862200 on 5171 degrees of freedom
+  ( 23266 個の観測値が欠損のため削除されました )
+Multiple R-squared:  0.7853,    Adjusted R-squared:  0.7853 
+F-statistic:  9460 on 2 and 5171 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>ここから信頼区間を計算するためには，サンプルサイズ<span class="math inline">n</span>と説明変数の数<span class="math inline">k</span>から自由度<span class="math inline">df = n - k -1</span>を求め， そのもとで特定の有意水準を設定して，関数<code>qt()</code>を使って<span class="math inline">t</span>値を計算します。 先ほどの重回帰の例だと，サンプルサイズは28440，説明変数の数は2なので，有意水準5％の両側検定を行う場合の<span class="math inline">t</span>値は，</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df) <span class="co"># サンプルサイズ</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># 説明変数の数</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>freedom <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">2</span> <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.025</span> <span class="co"># 両側5%なので片側2.5％</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(p, freedom , <span class="at">lower.tail =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.960047</code></pre>
+</div>
+</div>
+<p>すると<span class="math inline">t</span>値は，1.96と計算できました。</p>
+<section id="仮説検定" class="level4" data-number="11.2.2.1">
+<h4 data-number="11.2.2.1" class="anchored" data-anchor-id="仮説検定"><span class="header-section-number">11.2.2.1</span> 仮説検定</h4>
+<p>重回帰分析で検証したい仮説は，<strong>説明変数が応答変数に影響を与えるか否か</strong>ですが，複数の説明変数があるため，仮説には2つのパターンがあります。 1つ目は，回帰係数のすべてがゼロである，という帰無仮説です。 構築した回帰モデルの説明変数の中に，応答変数に影響を与えるものが1つもない，という仮説です。 <span class="math display">
+\begin{aligned}
+H_0 : &amp;\beta _1 = \beta _2 = \cdots = \beta_k = 0\\
+H_A : &amp;\beta _1 \not = 0 \text{ or } \beta _2 \not = 0 \text{ or } \cdots \text{ or } \beta _k \not = 0
+\end{aligned}
+</span></p>
+<p>2つ目は，回帰係数の中に少なくとも1つはゼロではない，という仮説です。 この仮説だと，個々の説明変数が応答変数に与える影響を別々に考え，説明変数ごとに回帰係数がゼロとなるかどうかを調べることになります。</p>
+<p><span class="math display">
+\begin{aligned}
+H_{01}: \beta _1 &amp;= 0, &amp; H_{a1} : \beta _1 \not = 0 \\
+H_{02}: \beta _1 &amp;= 0, &amp; H_{a2} : \beta _1 \not = 0 \\
+\vdots \\
+H_{0k}: \beta _k &amp;= 0, &amp; H_{ak} : \beta _k \not = 0 \\
+\end{aligned}
+</span></p>
 </section>
+<section id="つの仮説の検定" class="level4" data-number="11.2.2.2">
+<h4 data-number="11.2.2.2" class="anchored" data-anchor-id="つの仮説の検定"><span class="header-section-number">11.2.2.2</span> 1つの仮説の検定</h4>
+<p>すべての回帰係数がゼロかどうかを検定するためには，<strong>F分布</strong>という確率分布を用います。 F分布の確率密度関数の導出は難しいのでここでは省略します F分布の下で，自由度<span class="math inline">n - k -1</span>で説明変数の数が<span class="math inline">k</span>個であるときの検定統計量<span class="math inline">F_0</span>は，次のように計算できます。</p>
+<p><span class="math display">
+\begin{aligned}
+F_0 = \frac{R^2}{1 - R^2} \frac{n - k - 1}{k} = \displaystyle \frac{\sum (\hat y - \bar y)^2}{k} \div \frac{\sum e_i-2}{n - k - 1}
+\end{aligned}
+</span></p>
+<p>ここで<span class="math inline">R^2</span>は決定係数です。 この検定統計量<span class="math inline">F_0</span>を用いたF検定の結果は，<code>lm()</code>関数で推定した結果の<code>summary()</code>関数で確認できます。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = 売上高 ~ lag(研究開発費) + lag(広告宣伝費), 
+    data = df)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-12323473   -100139    -69328     20239  19099811 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     1.005e+05  1.257e+04   7.995 1.58e-15 ***
+lag(研究開発費) 1.717e+01  2.639e-01  65.039  &lt; 2e-16 ***
+lag(広告宣伝費) 6.913e+00  5.164e-01  13.386  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 862200 on 5171 degrees of freedom
+  ( 23266 個の観測値が欠損のため削除されました )
+Multiple R-squared:  0.7853,    Adjusted R-squared:  0.7853 
+F-statistic:  9460 on 2 and 5171 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>結果の最後の行で<code>F-statistic:  9460 on 2 and 5171 DF,  p-value: &lt; 2.2e-16</code>とあり，自由度2と5171のF分布で検定した結果，検定統計量<span class="math inline">F_0</span>は9460であり，p値はほぼゼロとなりました。 つまり，帰無仮説である「すべての回帰係数がゼロ」は棄却され，少なくとも一つの回帰係数はゼロではない，という対立仮説が採択されました。</p>
+<p>t分布と同様にF分布を用いた検定の臨界値は基本関数<code>qf()</code>で計算できます。 先ほどの例だと，サンプルサイズは28440，説明変数の数は2なので，有意水準5％の両側検定を行う場合の<span class="math inline">t</span>値は，</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="fl">0.05</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">&lt;-</span> <span class="dv">5171</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qf</span>(p,f1,f2,<span class="at">lower.tail =</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.997468</code></pre>
+</div>
+</div>
+<p>となり，2.9975という臨界値が得られた。 先ほどの推定結果からF値が9460と，臨界値を遙かに超える値であったため，帰無仮説は棄却された。</p>
+</section>
+<section id="回帰係数の個別的検定" class="level4" data-number="11.2.2.3">
+<h4 data-number="11.2.2.3" class="anchored" data-anchor-id="回帰係数の個別的検定"><span class="header-section-number">11.2.2.3</span> 回帰係数の個別的検定</h4>
+<p>第2の仮説のパターンである個々の回帰係数の検定について考えてみましょう。 売上高を研究開発費と広告宣伝費で説明しようとした重回帰モデルだと，次の2つの仮説を検定することになります。</p>
+<p><span class="math display">
+\begin{aligned}
+\text{研究開発費} H_{01} : \beta_1 = 0, &amp; H_{a1} : \beta_1 \not = 0 \\
+\text{広告宣伝費} H_{02} : \beta_1 = 0, &amp; H_{a2} : \beta_1 \not = 0
+\end{aligned}
+</span></p>
+<p>回帰係数の個別的検定は，単回帰分析と同様にt検定を用います。 この分析結果も，<code>summary()</code>関数で確認できます。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = 売上高 ~ lag(研究開発費) + lag(広告宣伝費), 
+    data = df)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-12323473   -100139    -69328     20239  19099811 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     1.005e+05  1.257e+04   7.995 1.58e-15 ***
+lag(研究開発費) 1.717e+01  2.639e-01  65.039  &lt; 2e-16 ***
+lag(広告宣伝費) 6.913e+00  5.164e-01  13.386  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 862200 on 5171 degrees of freedom
+  ( 23266 個の観測値が欠損のため削除されました )
+Multiple R-squared:  0.7853,    Adjusted R-squared:  0.7853 
+F-statistic:  9460 on 2 and 5171 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p><code>Coefficients</code>の出力結果に，各説明変数の回帰係数の推定値<code>Estimate</code>と標準誤差<code>Std. Error</code>，t値<code>t value</code>，p値<code>Pr(&gt;|t|)</code>が表示されています。 このp値が設定した有意水準より小さい場合，その回帰係数がゼロであるという帰無仮説が棄却され，説明変数が応答変数に影響を与えている，という対立仮説が採択されるのです。</p>
+<p>このように複数の説明変数で応答変数を説明しようとする重回帰分析だと，2種類の仮説検証を行うことになります。 気をつける点として，すべての回帰係数がゼロであるという帰無仮説を検証するF検定で，帰無仮説が棄却されたとしても，個別の回帰係数の検定で，すべての検定で帰無仮説を棄却できない，というケースも起こり得ます。 このような結果が出たときは，説明変数どうしの相関が強いときに生じやすいので注意しよう。</p>
+<p>重回帰分析の結果を論文などに掲載する場合には，ほぼ決まったフォーマットがあるため，それに従って結果をまとめることになります。 例えば，次のような表を作成することになります。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">msummary</span>(res,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">stars =</span> <span class="cn">TRUE</span>, <span class="co"># p値の有意性を星で表示する</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fmt =</span> <span class="st">'%.2f'</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">gof_omit =</span> <span class="st">"AIC|BIC|Log.Lik."</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">output =</span> <span class="st">'html'</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">&nbsp;(1)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: center;">100495.49***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(12569.41)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lag(研究開発費)</td>
+<td style="text-align: center;">17.17***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.26)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lag(広告宣伝費)</td>
+<td style="text-align: center;">6.91***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; box-shadow: 0px 1px;"></td>
+<td style="text-align: center; box-shadow: 0px 1px;">(0.52)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Num.Obs.</td>
+<td style="text-align: center;">5174</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R2</td>
+<td style="text-align: center;">0.785</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">R2 Adj.</td>
+<td style="text-align: center;">0.785</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RMSE</td>
+<td style="text-align: center;">861991.65</td>
+</tr>
+</tbody><tfoot>
+<tr class="odd">
+<td style="text-align: left; padding: 0;"><sup></sup> + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td>
+<td style="text-align: center;"></td>
+</tr>
+</tfoot>
+
+</table>
+
+
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="まとめ" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">11.3</span> まとめ</h2>
+<ul>
+<li>観測値とモデルとの差を表す確率変数である誤差項を含んだ確率的回帰モデルを考えます。
+<ul>
+<li>単回帰モデル : <span class="math inline">Y_i = \beta _0 + \beta_1 X_i + \varepsilon_i</span></li>
+<li>重回帰モデル : <span class="math inline">Y_i = \beta _0 + \beta_1 X_{i1} + \cdots + \beta_k X_{ik} + \varepsilon_i</span></li>
+</ul></li>
+<li>確率的誤差項は，平均ゼロの正規分布にしたがう確率変数であると仮定します。</li>
+<li>回帰分析の目的は，回帰係数<span class="math inline">\beta_m</span>の推定値<span class="math inline">b_m</span>の値を求めることです。</li>
+<li>推定値<span class="math inline">b_m</span>は標本ごとに異なる値となるため，推定値は分布します。そこで推定値の信頼区間を求めて推定の不確実性を評価します。</li>
+<li>重回帰モデルの仮説検定は2種類あって，すべての回帰係数がゼロである，というものと，個々の回帰係数がゼロである，というものがあります。前者にはF検定，後者にはt検定を用いて分析します。</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->

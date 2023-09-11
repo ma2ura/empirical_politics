@@ -165,7 +165,6 @@ modelsummary(res01)
 いろいろオプションを追加して、もっと見やすい表にします。
 
 ```{r}
-library(modelsummary)
 cm  <-  c(
     "(Intercept)" = "切片", # 切片のラベルを変更する
     "log_広告宣伝費" = "対数広告宣伝費" # 傾きのラベルを変更する

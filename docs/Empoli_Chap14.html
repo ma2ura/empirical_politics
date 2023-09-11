@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Rによる計量政治学ノート - 13&nbsp; 交差項の使い方</title>
+<title>Rによる計量政治学ノート - 14&nbsp; 交差項の使い方</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -185,6 +185,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">11章 回帰分析の統計的推定</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./Empoli_Chap12.html" rel="" target="">
+ <span class="menu-text">12章 回帰分析の前提と妥当性の診断</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./Empoli_Chap13.html" rel="" target="">
  <span class="menu-text">13章 回帰分析の応用</span></a>
   </li>  
@@ -229,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Empoli_Chap14.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">交差項の使い方</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Empoli_Chap14.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">交差項の使い方</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -323,20 +327,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Empoli_Chap12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">回帰分析の前提と妥当性の診断</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap13.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">回帰分析の応用</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">回帰分析の応用</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap14.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">交差項の使い方</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">交差項の使い方</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Empoli_Chap15.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">ロジスティック回帰分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ロジスティック回帰分析</span></span></a>
   </div>
 </li>
     </ul>
@@ -349,15 +359,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#交差項で何が分かるのか" id="toc-交差項で何が分かるのか" class="nav-link active" data-scroll-target="#交差項で何が分かるのか"><span class="header-section-number">13.1</span> 交差項で何が分かるのか</a></li>
-  <li><a href="#交差項を入れた回帰分析の注意点" id="toc-交差項を入れた回帰分析の注意点" class="nav-link" data-scroll-target="#交差項を入れた回帰分析の注意点"><span class="header-section-number">13.2</span> 交差項を入れた回帰分析の注意点</a></li>
-  <li><a href="#広告宣伝費を事例とした交差項の分析" id="toc-広告宣伝費を事例とした交差項の分析" class="nav-link" data-scroll-target="#広告宣伝費を事例とした交差項の分析"><span class="header-section-number">13.3</span> 広告宣伝費を事例とした交差項の分析</a>
+  <li><a href="#交差項で何が分かるのか" id="toc-交差項で何が分かるのか" class="nav-link active" data-scroll-target="#交差項で何が分かるのか"><span class="header-section-number">14.1</span> 交差項で何が分かるのか</a></li>
+  <li><a href="#交差項を入れた回帰分析の注意点" id="toc-交差項を入れた回帰分析の注意点" class="nav-link" data-scroll-target="#交差項を入れた回帰分析の注意点"><span class="header-section-number">14.2</span> 交差項を入れた回帰分析の注意点</a></li>
+  <li><a href="#広告宣伝費を事例とした交差項の分析" id="toc-広告宣伝費を事例とした交差項の分析" class="nav-link" data-scroll-target="#広告宣伝費を事例とした交差項の分析"><span class="header-section-number">14.3</span> 広告宣伝費を事例とした交差項の分析</a>
   <ul class="collapse">
-  <li><a href="#記述統計と散布図の表示" id="toc-記述統計と散布図の表示" class="nav-link" data-scroll-target="#記述統計と散布図の表示"><span class="header-section-number">13.3.1</span> 記述統計と散布図の表示</a></li>
-  <li><a href="#交差項を使った重回帰分析" id="toc-交差項を使った重回帰分析" class="nav-link" data-scroll-target="#交差項を使った重回帰分析"><span class="header-section-number">13.3.2</span> 交差項を使った重回帰分析</a></li>
-  <li><a href="#交差項を含む回帰分析結果の解釈と可視化" id="toc-交差項を含む回帰分析結果の解釈と可視化" class="nav-link" data-scroll-target="#交差項を含む回帰分析結果の解釈と可視化"><span class="header-section-number">13.3.3</span> 交差項を含む回帰分析結果の解釈と可視化</a></li>
+  <li><a href="#記述統計と散布図の表示" id="toc-記述統計と散布図の表示" class="nav-link" data-scroll-target="#記述統計と散布図の表示"><span class="header-section-number">14.3.1</span> 記述統計と散布図の表示</a></li>
+  <li><a href="#交差項を使った重回帰分析" id="toc-交差項を使った重回帰分析" class="nav-link" data-scroll-target="#交差項を使った重回帰分析"><span class="header-section-number">14.3.2</span> 交差項を使った重回帰分析</a></li>
+  <li><a href="#交差項を含む回帰分析結果の解釈と可視化" id="toc-交差項を含む回帰分析結果の解釈と可視化" class="nav-link" data-scroll-target="#交差項を含む回帰分析結果の解釈と可視化"><span class="header-section-number">14.3.3</span> 交差項を含む回帰分析結果の解釈と可視化</a></li>
   </ul></li>
-  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">13.4</span> まとめ</a></li>
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">14.4</span> まとめ</a></li>
   </ul>
 </nav>
     </div>
@@ -366,7 +376,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">交差項の使い方</span></h1>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">交差項の使い方</span></h1>
 </div>
 
 
@@ -381,8 +391,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="交差項で何が分かるのか" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="交差項で何が分かるのか"><span class="header-section-number">13.1</span> 交差項で何が分かるのか</h2>
+<section id="交差項で何が分かるのか" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="交差項で何が分かるのか"><span class="header-section-number">14.1</span> 交差項で何が分かるのか</h2>
 <p>説明変数<span class="math inline">X</span>が応答変数<span class="math inline">Y</span>に与える影響(直接効果)に対して，別の説明変数<span class="math inline">Z</span>が与える影響がある場合，<span class="math inline">X</span>と<span class="math inline">Z</span>の交差項<span class="math inline">X \times Z</span>をモデルに組み入れることで，<span class="math inline">X</span>の影響が<span class="math inline">Z</span>の値によってどのように変化するかを分析することができます。</p>
 <p><span class="math display">
 Y = \beta_0 + \beta_1 X + \beta_2 Z + \beta_3 X \times Z + \varepsilon
@@ -390,8 +400,8 @@ Y = \beta_0 + \beta_1 X + \beta_2 Z + \beta_3 X \times Z + \varepsilon
 <p>この<span class="math inline">X \times Z</span>を<strong>交差項</strong>(interaction term)とよびます。</p>
 <p>前章で導入したダミー変数との交差項は，ダミー変数の値によって，切片や傾きがどのように変化するかを分析することができましたが，ここでは量的変数と量的変数の交差項のケースを考えます。</p>
 </section>
-<section id="交差項を入れた回帰分析の注意点" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="交差項を入れた回帰分析の注意点"><span class="header-section-number">13.2</span> 交差項を入れた回帰分析の注意点</h2>
+<section id="交差項を入れた回帰分析の注意点" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="交差項を入れた回帰分析の注意点"><span class="header-section-number">14.2</span> 交差項を入れた回帰分析の注意点</h2>
 <p>回帰分析で交差項を入れる場合の注意点は次の4つです。</p>
 <ol type="1">
 <li>条件付仮説(たとえば，十分に<span class="math inline">Z</span>が大きいとき，<span class="math inline">X</span>は<span class="math inline">Y</span>に影響を与える，とか)を検証する場合に，交差項を使う。</li>
@@ -403,14 +413,14 @@ Y = \beta_0 + \beta_1 X + \beta_2 Z + \beta_3 X \times Z + \varepsilon
 <p><span class="math display">
 Y = \beta_0 + \beta_1 X + \beta_2 Z + \beta_3 X \times Z + \varepsilon
 </span></p>
-<p>であるとき，<span class="math inline">X</span>の影響は，<span class="math inline">Y</span>を<span class="math inline">X</span>で偏微分することで求められます。</p>
+<p>であるとき，説明変数<span class="math inline">X</span>が応答変数<span class="math inline">Y</span>に与える影響は，<span class="math inline">Y</span>を<span class="math inline">X</span>で偏微分することで求められます。</p>
 <p><span class="math display">
 \frac{\partial Y}{\partial X} = \beta_1 + \beta_3 Z
 </span></p>
-<p>この式から，<span class="math inline">Z</span>の値によって，<span class="math inline">X</span>の影響が変化することが分かります。 そのため，<span class="math inline">\beta_1</span>の値だけでは，<span class="math inline">X</span>の影響を正確に評価することができません。また，<span class="math inline">Z</span>の値によって，<span class="math inline">X</span>の影響が変化することを示すためには，<span class="math inline">Z</span>の値を変化させたときの<span class="math inline">\beta_1</span>の値を示す必要があります。これを<strong>限界効果</strong>(marginal effect)とよびます。</p>
+<p>この式から，<span class="math inline">X</span>が<span class="math inline">Y</span>に与える影響が<span class="math inline">Z</span>の値によって変化する、ということが分かります。 そのため，<span class="math inline">\beta_1</span>の値だけでは，<span class="math inline">X</span>の影響を正確に評価することができません。また，<span class="math inline">Z</span>の値によって，<span class="math inline">X</span>の影響が変化することを示すためには，<span class="math inline">Z</span>の値を変化させたときの<span class="math inline">\beta_1</span>の値を示す必要があります。これを<strong>限界効果</strong>(marginal effect)とよびます。</p>
 </section>
-<section id="広告宣伝費を事例とした交差項の分析" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="広告宣伝費を事例とした交差項の分析"><span class="header-section-number">13.3</span> 広告宣伝費を事例とした交差項の分析</h2>
+<section id="広告宣伝費を事例とした交差項の分析" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="広告宣伝費を事例とした交差項の分析"><span class="header-section-number">14.3</span> 広告宣伝費を事例とした交差項の分析</h2>
 <p>以下の分析で利用するためのデータを読み込みます。 ここでも，<code>tidyverse</code>パッケージ群の<code>read_csv()</code>関数を使います。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/adv_2023.csv"</span>) <span class="co"># データの読み込み</span></span>
@@ -438,21 +448,21 @@ $ 設備投資額     &lt;dbl&gt; 897, 1841, 17186, 16031, 19105, 28872, 21121, 
 </div>
 </div>
 <p>以下では，応答変数として売上高，説明変数として広告宣伝費と設備投資額を使います。</p>
-<section id="記述統計と散布図の表示" class="level3" data-number="13.3.1">
-<h3 data-number="13.3.1" class="anchored" data-anchor-id="記述統計と散布図の表示"><span class="header-section-number">13.3.1</span> 記述統計と散布図の表示</h3>
+<section id="記述統計と散布図の表示" class="level3" data-number="14.3.1">
+<h3 data-number="14.3.1" class="anchored" data-anchor-id="記述統計と散布図の表示"><span class="header-section-number">14.3.1</span> 記述統計と散布図の表示</h3>
 <p>主要変数3つの記述統計をみます。 ここでは<code>summary()</code>関数を使います。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"売上高"</span>, <span class="st">"広告宣伝費"</span>, <span class="st">"設備投資額"</span>)]</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"売上高"</span>, <span class="st">"広告宣伝費"</span>, <span class="st">"設備投資額"</span>, <span class="st">"資産合計"</span>)]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     売上高           広告宣伝費       設備投資額     
- Min.   :      54   Min.   :     1   Min.   :      1  
- 1st Qu.:   26299   1st Qu.:   250   1st Qu.:    771  
- Median :   84923   Median :  1284   Median :   3078  
- Mean   :  448013   Mean   :  9912   Mean   :  28789  
- 3rd Qu.:  277604   3rd Qu.:  6158   3rd Qu.:  12271  
- Max.   :30225681   Max.   :509653   Max.   :4069225  
-                                     NA's   :540      </code></pre>
+<pre><code>     売上高           広告宣伝費       設備投資額         資産合計       
+ Min.   :      54   Min.   :     1   Min.   :      1   Min.   :      25  
+ 1st Qu.:   26299   1st Qu.:   250   1st Qu.:    771   1st Qu.:   27312  
+ Median :   84923   Median :  1284   Median :   3078   Median :   83040  
+ Mean   :  448013   Mean   :  9912   Mean   :  28789   Mean   :  592193  
+ 3rd Qu.:  277604   3rd Qu.:  6158   3rd Qu.:  12271   3rd Qu.:  278223  
+ Max.   :30225681   Max.   :509653   Max.   :4069225   Max.   :51936949  
+                                     NA's   :540       NA's   :5         </code></pre>
 </div>
 </div>
 <p>これでも良いのですが，<code>skimr</code>パッケージと<code>summarytools</code>パッケージを使うと，より見やすい表を作ることが出来ます。</p>
@@ -474,7 +484,7 @@ $ 設備投資額     &lt;dbl&gt; 897, 1841, 17186, 16031, 19105, 28872, 21121, 
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Number of columns</td>
-<td style="text-align: left;">3</td>
+<td style="text-align: left;">4</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">_______________________</td>
@@ -486,7 +496,7 @@ $ 設備投資額     &lt;dbl&gt; 897, 1841, 17186, 16031, 19105, 28872, 21121, 
 </tr>
 <tr class="even">
 <td style="text-align: left;">numeric</td>
-<td style="text-align: left;">3</td>
+<td style="text-align: left;">4</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">________________________</td>
@@ -568,6 +578,19 @@ $ 設備投資額     &lt;dbl&gt; 897, 1841, 17186, 16031, 19105, 28872, 21121, 
 <td style="text-align: right;">4069225</td>
 <td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
+<tr class="even">
+<td style="text-align: left;">資産合計</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">592192.73</td>
+<td style="text-align: right;">2348228.18</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">27312.00</td>
+<td style="text-align: right;">83040.0</td>
+<td style="text-align: right;">278223.00</td>
+<td style="text-align: right;">51936949</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -585,6 +608,7 @@ N: 8632
                         Mean      Std.Dev     Min         Q1     Median          Q3           Max
 ---------------- ----------- ------------ ------- ---------- ---------- ----------- -------------
       広告宣伝費     9911.51     34054.36    1.00     250.00    1283.50     6161.00     509653.00
+        資産合計   592192.73   2348228.18   25.00   27302.00   83040.00   278313.00   51936949.00
       設備投資額    28788.64    156138.90    1.00     770.50    3078.50    12280.50    4069225.00
           売上高   448013.23   1522677.66   54.00   26293.50   84923.00   277652.00   30225681.00
 
@@ -595,6 +619,7 @@ Table: Table continues below
                          MAD         IQR     CV   Skewness   SE.Skewness   Kurtosis   N.Valid   Pct.Valid
 ---------------- ----------- ----------- ------ ---------- ------------- ---------- --------- -----------
       広告宣伝費     1818.41     5908.00   3.44       8.29          0.03      86.44   8632.00      100.00
+        資産合計   106096.34   250911.00   3.97      10.91          0.03     165.12   8627.00       99.94
       設備投資額     4215.77    11499.50   5.42      15.22          0.03     285.02   8092.00       93.74
           売上高   107098.58   251305.25   3.40       9.52          0.03     127.38   8632.00      100.00</code></pre>
 </div>
@@ -613,7 +638,7 @@ Table: Table continues below
 <div class="container st-container">
 <h3 class="anchored">Data Frame Summary</h3>
 <h4 class="anchored">df3</h4>
-<strong>Dimensions</strong>: 8632 x 3
+<strong>Dimensions</strong>: 8632 x 4
   <br><strong>Duplicates</strong>: 0
 <br>
 
@@ -654,7 +679,7 @@ Table: Table continues below
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">8492 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAIMAAABfCAQAAABhaLy5AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfnCBkALwW4gh6sAAABEElEQVR42u3csU0EMRRF0bNoe6QHqAd6oEpIXjALAkQAi+DezHJin9E4/Kdnxc21D/A7igExrPNx8fjmobg/XfuA39fxsufLrduL1dO1T/pj9VMghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGdf54++FiuuzfnSz7CcNxtuzTK5Sv9bsJT8ebPf6rEeR3hw9z+lc3f7eeSMSwYgAvKRQOwZn3jmYAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDgtMjVUMDA6NDc6MDQrMDA6MDA0atcOAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA4LTI1VDAwOjQ3OjA0KzAwOjAwRTdvsgAAAD10RVh0aWNjOmNvcHlyaWdodABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRzIHJlc2VydmVkLp5m3CkAAAAjdEVYdGljYzpkZXNjcmlwdGlvbgBHZW5lcmljIFJHQiBQcm9maWxlGqc4jgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAIMAAABfCAQAAABhaLy5AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfnCQEONhji16CnAAABEElEQVR42u3csU0EMRRF0bNoe6QHqAd6oEpIXjALAkQAi+DezHJin9E4/Kdnxc21D/A7igExrPNx8fjmobg/XfuA39fxsufLrduL1dO1T/pj9VMghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGdf54++FiuuzfnSz7CcNxtuzTK5Sv9bsJT8ebPf6rEeR3hw9z+lc3f7eeSMSwYgAvKRQOwZn3jmYAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMDFUMTQ6NTQ6MjQrMDA6MDDWr2NIAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTAxVDE0OjU0OjI0KzAwOjAwp/Lb9AAAAD10RVh0aWNjOmNvcHlyaWdodABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRzIHJlc2VydmVkLp5m3CkAAAAjdEVYdGljYzpkZXNjcmlwdGlvbgBHZW5lcmljIFJHQiBQcm9maWxlGqc4jgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
 <tr class="even">
@@ -676,7 +701,7 @@ Table: Table continues below
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">4878 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAIMAAABfCAQAAABhaLy5AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfnCBkALwW4gh6sAAABFElEQVR42u3cQUoDQRRF0RPJHt2DrifZg6vUyRtESCATjZh7Z00XdNWBruE/fCpeHr2Bv1EMiGEdLx/ONy6K98Ojt/kTXR72+P3V65XlH4/e7y/UT4EYVgyIYcWAGFYMiGHFgBhWDIhhxYAYVgyIYcWAGFYMiGHFgBhWDIhhxYAYVgyIYcWAGFYMiGHFgBhWDIhhxYAYVgyIYcWAGFYMiGHFgBhWDIhhxYAYVgyIYcWAGFYMiGHFgBhWDIhhxYAYVgyIYcWAGFYMiGHFgBhWDIhhxYAYVgyIYcWAGFYMiGHFgBjW8Z5Fp6szZv/ThNm7GK5PmD3dPan7frBHgR8uv3t+qhHkbxe4h6c6+c26IhHDigF8AR/jEMFn2JNHAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA4LTI1VDAwOjQ3OjA1KzAwOjAwkh3cugAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOC0yNVQwMDo0NzowNSswMDowMONAZAYAAAA9dEVYdGljYzpjb3B5cmlnaHQAQ29weXJpZ2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC6eZtwpAAAAI3RFWHRpY2M6ZGVzY3JpcHRpb24AR2VuZXJpYyBSR0IgUHJvZmlsZRqnOI4AAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAIMAAABfCAQAAABhaLy5AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfnCQEONhji16CnAAABFElEQVR42u3cQUoDQRRF0RPJHt2DrifZg6vUyRtESCATjZh7Z00XdNWBruE/fCpeHr2Bv1EMiGEdLx/ONy6K98Ojt/kTXR72+P3V65XlH4/e7y/UT4EYVgyIYcWAGFYMiGHFgBhWDIhhxYAYVgyIYcWAGFYMiGHFgBhWDIhhxYAYVgyIYcWAGFYMiGHFgBhWDIhhxYAYVgyIYcWAGFYMiGHFgBhWDIhhxYAYVgyIYcWAGFYMiGHFgBhWDIhhxYAYVgyIYcWAGFYMiGHFgBhWDIhhxYAYVgyIYcWAGFYMiGHFgBjW8Z5Fp6szZv/ThNm7GK5PmD3dPan7frBHgR8uv3t+qhHkbxe4h6c6+c26IhHDigF8AR/jEMFn2JNHAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTAxVDE0OjU0OjI0KzAwOjAw1q9jSAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0wMVQxNDo1NDoyNCswMDowMKfy2/QAAAA9dEVYdGljYzpjb3B5cmlnaHQAQ29weXJpZ2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC6eZtwpAAAAI3RFWHRpY2M6ZGVzY3JpcHRpb24AR2VuZXJpYyBSR0IgUHJvZmlsZRqnOI4AAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
 <tr class="odd">
@@ -698,13 +723,35 @@ Table: Table continues below
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">5751 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAIMAAABfCAQAAABhaLy5AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfnCBkALwW4gh6sAAABCklEQVR42u3cQUoDQRRF0RPJHl2E64l7cJU6eYNoSAYSiYF7Z03TUHWKruE/fCpeHr2A/1EMiGEdzx/eb14Ub4dHL/a+nW/2+P3V69WPPh696j+tnwIxrBgQw4oBMawYEMOKATGsGBDDigExrBgQw4oBMawYEMOKATGsGBDDigExrBgQw4oBMawYEMOKATGsGBDDigExrBgQw4oBMawYEMOKATGsGBDDigExrBgQw4oBMawYEMOKATGsGBDDigExrBgQw4oBMawYEMOKATGsGBDDigExrBgQw4oBMawYEMOKATGsGHAxS/ZWp6sDd59/2O4Pht8Nzj095+jys8M7POcO7l13A2JYMYAvNTMLAbyN8EQAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDgtMjVUMDA6NDc6MDUrMDA6MDCSHdy6AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA4LTI1VDAwOjQ3OjA1KzAwOjAw40BkBgAAAD10RVh0aWNjOmNvcHlyaWdodABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRzIHJlc2VydmVkLp5m3CkAAAAjdEVYdGljYzpkZXNjcmlwdGlvbgBHZW5lcmljIFJHQiBQcm9maWxlGqc4jgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAIMAAABfCAQAAABhaLy5AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfnCQEONhji16CnAAABCklEQVR42u3cQUoDQRRF0RPJHl2E64l7cJU6eYNoSAYSiYF7Z03TUHWKruE/fCpeHr2A/1EMiGEdzx/eb14Ub4dHL/a+nW/2+P3V69WPPh696j+tnwIxrBgQw4oBMawYEMOKATGsGBDDigExrBgQw4oBMawYEMOKATGsGBDDigExrBgQw4oBMawYEMOKATGsGBDDigExrBgQw4oBMawYEMOKATGsGBDDigExrBgQw4oBMawYEMOKATGsGBDDigExrBgQw4oBMawYEMOKATGsGBDDigExrBgQw4oBMawYEMOKATGsGHAxS/ZWp6sDd59/2O4Pht8Nzj095+jys8M7POcO7l13A2JYMYAvNTMLAbyN8EQAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMDFUMTQ6NTQ6MjQrMDA6MDDWr2NIAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTAxVDE0OjU0OjI0KzAwOjAwp/Lb9AAAAD10RVh0aWNjOmNvcHlyaWdodABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRzIHJlc2VydmVkLp5m3CkAAAAjdEVYdGljYzpkZXNjcmlwdGlvbgBHZW5lcmljIFJHQiBQcm9maWxlGqc4jgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">540 (6.3%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">資産合計 [numeric]</td>
+<td style="text-align: left; padding: 8; vertical-align: middle;"><table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<tbody>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">Mean (sd) : 592192.7 (2348228)</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">min ≤ med ≤ max:</td>
+</tr>
+<tr class="odd" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">25 ≤ 83040 ≤ 51936949</td>
+</tr>
+<tr class="even" style="background-color:transparent">
+<td style="text-align: left; padding: 0; margin: 0; border: 0;">IQR (CV) : 250911 (4)</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left; vertical-align: middle;">8480 distinct values</td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAIMAAABfCAQAAABhaLy5AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfnCQEONhji16CnAAABCElEQVR42u3csVHDUBRFwTXjHimCeqAHqoTkBgZM5LHl4JxMIwVPq9EP3+lL8XL0AM9RDIhhnS8vPv45KN5OR495jy5f9vzz1uuVxz+PnvcB9VMghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQNiWDEghhUDYlgxIIYVA2JYMSCGFQP+7JK93vuNO7mffyXvL4b7rM+9lfFOXXyc03NO+Og6GxDDigF8AwUpCwEZdPdwAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTAxVDE0OjU0OjI0KzAwOjAw1q9jSAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0wMVQxNDo1NDoyNCswMDowMKfy2/QAAAA9dEVYdGljYzpjb3B5cmlnaHQAQ29weXJpZ2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC6eZtwpAAAAI3RFWHRpY2M6ZGVzY3JpcHRpb24AR2VuZXJpYyBSR0IgUHJvZmlsZRqnOI4AAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: center;">5 (0.1%)</td>
 </tr>
 </tbody>
 </table>
 
-<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.2.2)<br>2023-08-25</p>
+<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.2.2)<br>2023-09-01</p>
 </div>
 </div>
 </div>
@@ -723,18 +770,22 @@ Table: Table continues below
 <p>設備投資額が多い企業ほど売上高が多いように見えますが，因果関係を明らかにするためにも，広告宣伝費と翌期の売上高の散布図を書いてみます。ついでに両変数を対数変換して，分布を正規分布に近づけておきます。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(<span class="fu">lag</span>(設備投資額)), <span class="at">y =</span> <span class="fu">log</span>(売上高)) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"前期対数設備投資額"</span>, <span class="at">y =</span> <span class="st">"対数売上高"</span>) <span class="sc">+</span> mystyle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    K_設備投資額 <span class="ot">=</span> <span class="fu">lag</span>(設備投資額) <span class="sc">/</span> <span class="fu">lag</span>(資産合計),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    K_売上高 <span class="ot">=</span> 売上高 <span class="sc">/</span> <span class="fu">lag</span>(資産合計)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> K_設備投資額, <span class="at">y =</span> K_売上高) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"基準化済み前期設備投資額"</span>, <span class="at">y =</span> <span class="st">"基準化済み売上高"</span>) <span class="sc">+</span> mystyle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Empoli_Chap14_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>次に，この設備投資額と売上高の関係に広告宣伝費がどのような影響を与えているのかを調べるために，回帰モデルに交差項を組み込んでいきます。</p>
 </section>
-<section id="交差項を使った重回帰分析" class="level3" data-number="13.3.2">
-<h3 data-number="13.3.2" class="anchored" data-anchor-id="交差項を使った重回帰分析"><span class="header-section-number">13.3.2</span> 交差項を使った重回帰分析</h3>
+<section id="交差項を使った重回帰分析" class="level3" data-number="14.3.2">
+<h3 data-number="14.3.2" class="anchored" data-anchor-id="交差項を使った重回帰分析"><span class="header-section-number">14.3.2</span> 交差項を使った重回帰分析</h3>
 <p>ここでは，次のような仮説を考えてみます。</p>
 <blockquote class="blockquote">
 <p>広告宣伝費が多い企業ほど，設備投資額が多いと，売上高が増加する。</p>
@@ -844,8 +895,8 @@ $$
 </div>
 <p>この限界効果の推定から，広告宣伝費が増加すると，設備投資と売上高の正の関係が強くなることが分かります。</p>
 </section>
-<section id="交差項を含む回帰分析結果の解釈と可視化" class="level3" data-number="13.3.3">
-<h3 data-number="13.3.3" class="anchored" data-anchor-id="交差項を含む回帰分析結果の解釈と可視化"><span class="header-section-number">13.3.3</span> 交差項を含む回帰分析結果の解釈と可視化</h3>
+<section id="交差項を含む回帰分析結果の解釈と可視化" class="level3" data-number="14.3.3">
+<h3 data-number="14.3.3" class="anchored" data-anchor-id="交差項を含む回帰分析結果の解釈と可視化"><span class="header-section-number">14.3.3</span> 交差項を含む回帰分析結果の解釈と可視化</h3>
 <p>上の分析結果から，設備投資額と売上高との関係は，広告宣伝費の規模に応じて変化することが分かりました。 しかし，前述した通り設備投資額が売上高に与える影響の強さは，広告宣伝費に応じて決まるため，設備投資額が1円増えたとき，売上高がいくら増えるのかはこの推定結果からは分かりません。</p>
 <p>そこで，説明変数を中心化することで，推定結果を解釈可能なものにします。 前章と同様に，中心化するために，各説明変数から標本平均を引きます。 ここでは，<code>scale()</code>関数を使って中心化します。</p>
 <div class="cell">
@@ -947,8 +998,8 @@ $$
 </div>
 </section>
 </section>
-<section id="まとめ" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">13.4</span> まとめ</h2>
+<section id="まとめ" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">14.4</span> まとめ</h2>
 
 
 </section>
@@ -1190,12 +1241,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./Empoli_Chap13.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">回帰分析の応用</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">回帰分析の応用</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Empoli_Chap15.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">ロジスティック回帰分析</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ロジスティック回帰分析</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

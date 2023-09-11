@@ -894,7 +894,7 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 </section>
 <section id="カテゴリー別に量的変数の値を調べる" class="level3" data-number="6.1.5">
 <h3 data-number="6.1.5" class="anchored" data-anchor-id="カテゴリー別に量的変数の値を調べる"><span class="header-section-number">6.1.5</span> カテゴリー別に量的変数の値を調べる</h3>
-<p>次は，量的変数をカテゴリーごとに分析したいときがあります。 たとえば，産業別や年度別に売上高の平均値を知りたい，ということが何度もあります。 任意のグループごとに処理を繰り返したいときは，<code>dplyr</code>パッケージの<code>group_by()</code>関数を使います。 <code>group_by()</code>関数は，第1引数にグループ化したい変数を指定します。</p>
+<p>次は，量的変数をカテゴリーごとに分析したいときがあります。 たとえば，産業別や年度別に売上高の平均値を知りたい，ということが何度もあります。 任意のグループごとに処理を繰り返したいときは，<code>tidyverse</code>の<code>dplyr</code>パッケージの<code>group_by()</code>関数を使います。 <code>group_by()</code>関数は，第1引数にグループ化したい変数を指定します。</p>
 <p>そして<code>group_by()</code>関数と同時に使うことで，グループごとの統計量を計算するために便利なのが<code>dplyr</code>パッケージの<code>summarize()</code>関数です。 <code>summarize()</code>関数は，次のような引数をとり，各種統計量を計算してくれます。</p>
 <ul>
 <li><code>mean =</code> : 平均</li>
@@ -906,13 +906,13 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <p>例えば，上場場所ごとに売上高の平均値を計算するには，次のようにします。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(上場コード) <span class="sc">%&gt;%</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    企業数 <span class="ot">=</span> <span class="fu">n</span>(),</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    平均売上高 <span class="ot">=</span> <span class="fu">mean</span>(売上高, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># 平均</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(上場コード) <span class="sc">%&gt;%</span> <span class="co"># 上場コードごとに以下の処理を繰り返す</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>( <span class="co"># 基本統計量の計算</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    企業数 <span class="ot">=</span> <span class="fu">n</span>(), <span class="co"># 個体数</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    平均売上高 <span class="ot">=</span> <span class="fu">mean</span>(売上高, <span class="at">na.rm =</span> T) <span class="co"># 平均</span></span>
 <span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="co"># グループ化解除</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>) <span class="co"># 表の整形</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <thead>
@@ -942,7 +942,7 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 </table>
 </div>
 </div>
-<p>結果を見れば分かるとおり，<code>group_by()</code>で上場場所ごとにグループ化し，<code>summarize()</code>で企業数と平均売上高を計算しているので，上場場所，企業数，平均売上高の3変数が3つの観測値をもつ<span class="math inline">3 \times 3</span>の表が作成されています。 <code>group_by()</code>と<code>summarize()</code>を組み合わせると，結果としてグループ数に応じた統計量を計算した結果となり，元のデータよりも小さなデータフレームとなって返ってきます。</p>
+<p>結果を見れば分かるとおり，<code>group_by()</code>で上場場所ごとにグループ化し，<code>summarize()</code>で企業数と平均売上高を計算しているので，上場場所，企業数，平均売上高の3変数が3つの観測値をもつ<span class="math inline">3 \times 3</span>の表が作成されています。 <code>group_by()</code>と<code>summarize()</code>を組み合わせると，結果としてグループ数に応じた統計量を計算した結果となり，元のデータを集約した小さなデータフレームとなって返ってきます。</p>
 <p>ついでに，産業別の売上高合計，利益平均値，利益中央値，利益の標準偏差を計算してみましょう。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>

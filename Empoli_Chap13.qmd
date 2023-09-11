@@ -32,6 +32,39 @@ X = \begin{cases}
 \end{aligned}
 $$
 
+例えば、単回帰分析の説明変数がダミー変数$D$である場合を考えます。
+
+$$
+\begin{aligned}
+Y = \beta_0 + \beta_1 D + \varepsilon
+\end{aligned}
+$$
+
+このとき、この単回帰モデルを次のように書くことが出来ます。
+
+$$
+\begin{aligned}
+Y = \begin{cases}
+\beta_0 + \varepsilon & \text{if } D = 0 \\
+\beta_0 + \beta_1 + \varepsilon & \text{if } D = 1
+\end{cases}
+\end{aligned}
+$$
+
+このとき、期待値$\mathrm{E}[Y]$は次のようになります。
+
+$$
+\begin{aligned}
+\mathrm{E}[Y] = \begin{cases}
+\beta_0  & \text{if } D = 0 \\
+\beta_0 + \beta_1 & \text{if } D = 1
+\end{cases}
+\end{aligned}
+$$
+
+この単回帰モデルの切片$\beta_0$は、ダミー変数$D$が0のときの$Y$の平均値を表しています。
+
+
 会計研究では，コントロール変数として頻出の業種ダミーや年度ダミーに加えて，監査の質の代理変数となる四大監査法人ダミーや，会計基準選択で用いられるIFRSダミーといったものなど，非常に多くのダミー変数が用いられています。
 
 
