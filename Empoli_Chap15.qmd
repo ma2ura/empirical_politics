@@ -147,8 +147,50 @@ y_i =
 \end{cases}
 $$
 
-## ロジスティック回帰分析の手順
+## ロジスティック回帰式の推定
 
-回帰分析とほぼ同じ手順です。
-実際にRでロジスティック回帰分析を行う場合は，`lm()`関数ではなく`glm()`関数を使うだけで，ほぼ同じように分析できます。
+実際にRでロジスティック回帰分析を行う場合は，線形回帰モデルの推定で利用した`lm()`関数ではなく、`glm()`関数を使うだけで，ほぼ同じように分析できます。
+ここでは、不正を行う企業の特徴を分析してみます。
+
+```{r}
+df <- read_csv("data/fraud.csv") %>%
+  select(SCODE, Year,NKILM, FEM_NUM, BOARDSIZE, IDOUT_NUM,AGE_AVERAGE, ROA, DASS, FRAUD)
+df$Year <- as.factor(df$Year)
+df$NKILM <- as.factor(df$NKILM)
+glimpse(df)
+```
+ここで、分析に使う変数は次のものです。
+
+
+- `SCODE`は証券コード
+- `Year`は年度
+- `FEM`は女性役員数
+- `BOARDSIZE`は取締役会の人数
+- `IDOUT_NUM`は独立役員数
+- `AGE_AVERAGE`は取締役会の平均年齢
+- `ROA`は総資産利益率
+- `DASS`は負債比率
+- `FRAUD`は不正を行った企業ならば1、そうでなければ0
+
+検証する仮説は「**外部取締役が多いほど、会計不正が発生しない**」というものです。
+この仮説を検証するために、ロジスティック回帰分析を行います。
+ここでは、ロジスティック回帰分析を学習するために、あえて少ない変数で分析を行います。
+$$
+% \begin{aligned}
+FRAUD_{it} = \beta_0 + \beta_1 BOARDSIZE_{it} + \beta_2 AGE\_AVERAGE_{it} + \varepsilon_{it}
+% \end{aligned}
+$$
+
+これを推定するために、`glm()`関数を使います。
+`glm()`は一般化線形モデルを推定するための関数で、引数として、`formula`、`family`、`data`を指定します。ここでは、`formula`には推定する式を、`family`には`binomial(link = "logit")`を指定します。`binomial`は二項分布を指定するオプションで、リンク関数としてロジスティック関数の逆関数であるロジット関数を指定しています。`data`には、分析に使うデータフレームを指定します。
+
+
+```{r}
+model_1 <- glm(FRAUD ~ BOARDSIZE + AGE_AVERAGE,   
+               family = binomial(link = "logit"), data = df)
+summary(model_1)
+```
+
+有意な変数がほとんどありません。
+強いて言うなら、負債比率が高いほど、不正が発生しやすいという結果が得られました。
 

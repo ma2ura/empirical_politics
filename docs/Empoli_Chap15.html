@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -325,7 +359,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#最尤法" id="toc-最尤法" class="nav-link" data-scroll-target="#最尤法"><span class="header-section-number">15.1.1</span> 最尤法</a></li>
   </ul></li>
-  <li><a href="#ロジスティック回帰分析の手順" id="toc-ロジスティック回帰分析の手順" class="nav-link" data-scroll-target="#ロジスティック回帰分析の手順"><span class="header-section-number">15.2</span> ロジスティック回帰分析の手順</a></li>
+  <li><a href="#ロジスティック回帰式の推定" id="toc-ロジスティック回帰式の推定" class="nav-link" data-scroll-target="#ロジスティック回帰式の推定"><span class="header-section-number">15.2</span> ロジスティック回帰式の推定</a></li>
   </ul>
 </nav>
     </div>
@@ -426,9 +460,111 @@ y_i =
 </span></p>
 </section>
 </section>
-<section id="ロジスティック回帰分析の手順" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="ロジスティック回帰分析の手順"><span class="header-section-number">15.2</span> ロジスティック回帰分析の手順</h2>
-<p>回帰分析とほぼ同じ手順です。 実際にRでロジスティック回帰分析を行う場合は，<code>lm()</code>関数ではなく<code>glm()</code>関数を使うだけで，ほぼ同じように分析できます。</p>
+<section id="ロジスティック回帰式の推定" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="ロジスティック回帰式の推定"><span class="header-section-number">15.2</span> ロジスティック回帰式の推定</h2>
+<p>実際にRでロジスティック回帰分析を行う場合は，線形回帰モデルの推定で利用した<code>lm()</code>関数ではなく、<code>glm()</code>関数を使うだけで，ほぼ同じように分析できます。 ここでは、不正を行う企業の特徴を分析してみます。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/fraud.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SCODE, Year,NKILM, FEM_NUM, BOARDSIZE, IDOUT_NUM,AGE_AVERAGE, ROA, DASS, FRAUD)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>Year)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>NKILM <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>NKILM)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 520
+Columns: 10
+$ SCODE       &lt;dbl&gt; 1515, 1515, 1925, 1925, 8267, 5471, 1925, 5471, 5121, 7878…
+$ Year        &lt;fct&gt; 2017, 2018, 2018, 2019, 2018, 2018, 2017, 2019, 2017, 2017…
+$ NKILM       &lt;fct&gt; 37, 37, 41, 41, 45, 17, 41, 17, 13, 33, 31, 43, 71, 71, 71…
+$ FEM_NUM     &lt;dbl&gt; 0, 0, 1, 1, 3, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1…
+$ BOARDSIZE   &lt;dbl&gt; 9, 9, 19, 16, 9, 10, 19, 10, 9, 7, 7, 6, 13, 13, 14, 5, 11…
+$ IDOUT_NUM   &lt;dbl&gt; 2, 2, 3, 3, 5, 2, 3, 3, 2, 1, 2, 3, 3, 3, 2, 1, 2, 1, 2, 3…
+$ AGE_AVERAGE &lt;dbl&gt; 60, 61, 64, 65, 67, 61, 64, 63, 61, 63, 59, 50, 67, 66, 64…
+$ ROA         &lt;dbl&gt; 5.41791, 4.26605, 8.90847, 8.48329, 2.27571, 5.34920, 9.69…
+$ DASS        &lt;dbl&gt; 38.4, 37.6, 62.1, 61.7, 81.3, 51.1, 62.5, 50.6, 30.7, 38.8…
+$ FRAUD       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…</code></pre>
+</div>
+</div>
+<p>ここで、分析に使う変数は次のものです。</p>
+<ul>
+<li><code>SCODE</code>は証券コード</li>
+<li><code>Year</code>は年度</li>
+<li><code>FEM</code>は女性役員数</li>
+<li><code>BOARDSIZE</code>は取締役会の人数</li>
+<li><code>IDOUT_NUM</code>は独立役員数</li>
+<li><code>AGE_AVERAGE</code>は取締役会の平均年齢</li>
+<li><code>ROA</code>は総資産利益率</li>
+<li><code>DASS</code>は負債比率</li>
+<li><code>FRAUD</code>は不正を行った企業ならば1、そうでなければ0</li>
+</ul>
+<p>検証する仮説は「<strong>女性取締役が多い企業ほど、会計不正が発生しない</strong>」というものです。 この仮説を検証するために、ロジスティック回帰分析を行います。</p>
+<p><span class="math display">
+\begin{aligned}
+FRAUD_{it} &amp;= \beta_0 + \beta_1 FEM_{it} + \beta_2 BOARDSIZE_{it} + \beta_3 IDOUT\_NUM_{it}\\
+           &amp;+ \beta_4 AGE\_AVERAGE_{it} + \beta_5 ROA_{it} + \beta_6 DASS_{it} \\
+           &amp;+ Year + \varepsilon_{it}
+\end{aligned}
+</span></p>
+<p>これを推定するために、<code>glm()</code>関数を使います。 <code>glm()</code>は一般化線形モデルを推定するための関数で、引数として、<code>formula</code>、<code>family</code>、<code>data</code>を指定します。ここでは、<code>formula</code>には推定する式を、<code>family</code>には<code>binomial(link = "logit")</code>を指定します。<code>binomial</code>は二項分布を指定するオプションで、リンク関数としてロジスティック関数の逆関数であるロジット関数を指定しています。<code>data</code>には、分析に使うデータフレームを指定します。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model_1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(FRAUD <span class="sc">~</span> FEM_NUM <span class="sc">+</span> BOARDSIZE <span class="sc">+</span> IDOUT_NUM <span class="sc">+</span> AGE_AVERAGE <span class="sc">+</span> ROA <span class="sc">+</span> DASS <span class="sc">+</span> Year <span class="sc">+</span> NKILM,  </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>), <span class="at">data =</span> df)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = FRAUD ~ FEM_NUM + BOARDSIZE + IDOUT_NUM + AGE_AVERAGE + 
+    ROA + DASS + Year + NKILM, family = binomial(link = "logit"), 
+    data = df)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.7183  -1.1359   0.0007   1.1303   1.6914  
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -2.496247   1.586334  -1.574    0.116    
+FEM_NUM     -0.046628   0.130557  -0.357    0.721    
+BOARDSIZE    0.014809   0.041592   0.356    0.722    
+IDOUT_NUM   -0.155239   0.101865  -1.524    0.128    
+AGE_AVERAGE  0.027700   0.020021   1.384    0.166    
+ROA          0.006146   0.011142   0.552    0.581    
+DASS         0.023332   0.005303   4.400 1.08e-05 ***
+Year2018     0.067475   0.227173   0.297    0.766    
+Year2019     0.016423   0.251814   0.065    0.948    
+Year2020     0.155939   0.335188   0.465    0.642    
+NKILM7       0.160140   1.122763   0.143    0.887    
+NKILM13     -0.178434   1.779676  -0.100    0.920    
+NKILM15      0.375091   1.789514   0.210    0.834    
+NKILM17     -0.047652   1.343342  -0.035    0.972    
+NKILM19     -0.204360   1.095608  -0.187    0.852    
+NKILM21     -0.229660   1.133057  -0.203    0.839    
+NKILM23     -0.094920   1.081662  -0.088    0.930    
+NKILM27     -0.318377   1.263798  -0.252    0.801    
+NKILM31      0.301304   1.175883   0.256    0.798    
+NKILM33     -0.087653   1.127659  -0.078    0.938    
+NKILM37      0.245728   1.452376   0.169    0.866    
+NKILM41     -0.259923   1.079542  -0.241    0.810    
+NKILM43     -0.260263   1.071541  -0.243    0.808    
+NKILM45     -0.256484   1.130123  -0.227    0.820    
+NKILM52     -0.039318   1.251053  -0.031    0.975    
+NKILM53     -0.320419   1.205465  -0.266    0.790    
+NKILM55     -0.709615   1.790063  -0.396    0.692    
+NKILM57     -0.254702   1.331814  -0.191    0.848    
+NKILM59     -0.528939   1.761947  -0.300    0.764    
+NKILM65     -0.018766   1.373955  -0.014    0.989    
+NKILM71      0.045949   1.070176   0.043    0.966    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 720.87  on 519  degrees of freedom
+Residual deviance: 696.01  on 489  degrees of freedom
+AIC: 758.01
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
 
 
 </section>
